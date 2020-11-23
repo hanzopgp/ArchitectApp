@@ -26,7 +26,7 @@ public class BacktrackSolver extends AbstractSolver{
 		if(pile.isEmpty()){
 			return map;
 		}else{
-			Variable v = (Variable) pile.poll();
+			Variable v = pile.poll();
 			for(Object o : v.getDomain()){
 				map.put(v,o);
 				if(isConsistent(map)){

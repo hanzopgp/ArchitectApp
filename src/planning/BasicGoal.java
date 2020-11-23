@@ -8,7 +8,7 @@ import java.util.Map;
 //But final qu'on souhaite
 public class BasicGoal implements Goal {
 
-    private Map<Variable, Object> etat;
+    private final Map<Variable, Object> etat;
 
     public BasicGoal(Map<Variable, Object> etat){
         this.etat = etat;

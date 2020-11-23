@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Rule implements Constraint{
 	
-	private boolean l1;
-	private boolean l2;
-	private BooleanVariable v1;
-	private BooleanVariable v2;
+	private final boolean l1;
+	private final boolean l2;
+	private final BooleanVariable v1;
+	private final BooleanVariable v2;
 	
 	public Rule(BooleanVariable v1, boolean l1, BooleanVariable v2, boolean l2){
 		this.l1 = l1;
@@ -15,6 +15,7 @@ public class Rule implements Constraint{
 		this.v1 = v1;
 		this.v2 = v2;		
 	}
+
 	@Override
 	public Set<Variable> getScope(){
 		HashSet<Variable> scope = new HashSet<>();
@@ -22,18 +23,13 @@ public class Rule implements Constraint{
 		scope.add(this.v2);
 		return scope;
 	}
+
 	@Override
 	public boolean isSatisfiedBy(Map<Variable, Object> tab){
 		boolean test1 = tab.containsKey(v1);
 		boolean test2 = tab.containsKey(v2);
 		if(test1 & test2){
-			boolean un = (l1 == test1 ? true : false);
-			boolean deux = (l2 == test2 ? true : false);
-			if(!un || deux){
-				return true;
-			}else{
-				return false;
-			}
+			return !l1 || l2;
 		}else{
 			throw new IllegalArgumentException("L'objet ne contient pas les variables");
 		}

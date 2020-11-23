@@ -7,7 +7,7 @@ import representation.BooleanVariable;
 
 public interface ItemsetMiner{
 	
-	public BooleanDatabase getDatabase();
+	BooleanDatabase getDatabase();
 	
-	public Set<Itemset> extract(float frequency);
+	Set<Itemset> extract(float frequency);
 }

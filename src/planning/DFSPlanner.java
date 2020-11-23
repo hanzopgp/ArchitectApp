@@ -6,9 +6,9 @@ import java.util.*;
 
 public class DFSPlanner implements Planner{
 
-    private Map<Variable, Object> etatInitial;
-    private Set<Action> actions;
-    private Goal but;
+    private final Map<Variable, Object> etatInitial;
+    private final Set<Action> actions;
+    private final Goal but;
 
     public DFSPlanner(Map<Variable, Object> etatInitial, Set<Action> actions, Goal but) {
         this.etatInitial = etatInitial;

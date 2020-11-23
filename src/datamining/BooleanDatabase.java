@@ -7,8 +7,8 @@ import representation.BooleanVariable;
 
 public class BooleanDatabase{
 	
-	private Set<BooleanVariable> items;
-	private List<Set<BooleanVariable>> transactions;
+	private final Set<BooleanVariable> items;
+	private final List<Set<BooleanVariable>> transactions;
 	
 	public BooleanDatabase(Set<BooleanVariable> items){
 		this.items = items;

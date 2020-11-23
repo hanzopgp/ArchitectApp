@@ -6,9 +6,9 @@ import representation.Variable;
 
 public class DijkstraPlanner implements Planner {
 
-    private Map<Variable, Object> EtatInitial;
-    private Set<Action> actions;
-    private Goal goal;
+    private final Map<Variable, Object> EtatInitial;
+    private final Set<Action> actions;
+    private final Goal goal;
 
     public DijkstraPlanner(Map<Variable, Object> EtatInitial, Set<Action> actions, Goal goal) {
         this.EtatInitial = EtatInitial;

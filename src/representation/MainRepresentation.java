@@ -3,6 +3,7 @@ package representation;
 import representationtests.*;
 
 public class MainRepresentation {
+
 	public static void main (String[] args){
 		boolean ok = true;
 		ok = ok && VariableTests.testEquals();
@@ -14,4 +15,5 @@ public class MainRepresentation {
 		//ok = ok && DifferenceConstraintTests.testIsSatisfiedBy();
 		System.out.println(ok ? "All tests passed" : "At least one test failed");
 	}
+
 }

@@ -5,7 +5,7 @@ import representation.*;
 
 public class ArcConsistency{
 	
-	private ArrayList<Constraint> constraints;
+	private final ArrayList<Constraint> constraints;
 	
 	public ArcConsistency(ArrayList<Constraint> constraints){
 		this.constraints = constraints;

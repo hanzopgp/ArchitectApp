@@ -5,9 +5,8 @@ import java.util.*;
 
 public interface Constraint{
 	
-	public Set<Variable> getScope();
+	Set<Variable> getScope();
 	
-	public boolean isSatisfiedBy(Map<Variable, Object> tab);
-
+	boolean isSatisfiedBy(Map<Variable, Object> tab);
 	
 }
