@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="dataminingtests">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/tests/dataminingtests.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
