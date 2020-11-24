@@ -22,6 +22,7 @@ public abstract class AbstractAssociationRuleMiner implements AssociationRuleMin
     public static float frequency(Set<BooleanVariable> variables, Set<Itemset> items){
         float frequency = 0;
         for(Itemset list : items){
+            System.out.println(list.getItems().containsAll(variables));
             if(list.getItems().containsAll(variables)){
                 frequency ++;
             }

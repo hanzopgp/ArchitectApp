@@ -5,6 +5,7 @@ import dataminingtests.AbstractItemsetMinerTests;
 import dataminingtests.AprioriTests;
 import dataminingtests.BruteForceAssociationRuleMinerTests;
 import dataminingtests.DatabaseTests;
+import examples.HouseDemo;
 import planningtests.AStarPlannerTests;
 import planningtests.BFSPlannerTests;
 import planningtests.BasicActionTests;
@@ -28,7 +29,6 @@ import solvertests.RandomValueHeuristicTests;
 public class MainTests {
 
     public static void main(String[] args) {
-
         boolean ok = true;
         System.out.println("Testing package \"representation\"...");
         ok = ok && VariableTests.testEquals();
@@ -73,6 +73,10 @@ public class MainTests {
         ok = ok && DatabaseTests.testItemTable();
         ok = ok && DatabaseTests.testPropositionalize();
         System.out.println(ok ? "All tests passed" : "At least one test failed");
+        System.out.println();
+        System.out.println("Exemple d'utilisation de la librairie : ");
+        HouseDemo houseDemo = new HouseDemo(5,5);
+        houseDemo.example();
     }
 
 }
