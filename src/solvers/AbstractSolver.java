@@ -17,9 +17,7 @@ public abstract class AbstractSolver implements Solver{
 		this.variables = variables;
 		this.constraints = constraints;
 	}
-	
-	
-	
+
 	public boolean isConsistent(Map<Variable, Object> tab){
 		boolean b = true;
 		for(Constraint c : constraints){

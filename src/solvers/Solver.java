@@ -6,6 +6,5 @@ import representation.*;
 public interface Solver{
 	
 	Map<Variable, Object> solve();
-	
-		
+
 }

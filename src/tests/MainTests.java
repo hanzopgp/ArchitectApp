@@ -6,6 +6,7 @@ import dataminingtests.AprioriTests;
 import dataminingtests.BruteForceAssociationRuleMinerTests;
 import dataminingtests.DatabaseTests;
 import examples.HouseDemo;
+import examples.HouseExample;
 import planningtests.AStarPlannerTests;
 import planningtests.BFSPlannerTests;
 import planningtests.BasicActionTests;
@@ -25,6 +26,10 @@ import solvertests.HeuristicMACSolverTests;
 import solvertests.MACSolverTests;
 import solvertests.NbConstraintsVariableHeuristicTests;
 import solvertests.RandomValueHeuristicTests;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainTests {
 
@@ -73,9 +78,18 @@ public class MainTests {
         ok = ok && DatabaseTests.testItemTable();
         ok = ok && DatabaseTests.testPropositionalize();
         System.out.println(ok ? "All tests passed" : "At least one test failed");
+
         System.out.println();
         System.out.println("Exemple d'utilisation de la librairie : ");
-        HouseDemo houseDemo = new HouseDemo(5,5);
+
+        int longueur = 5;
+        int largeur = 5;
+        Set<String> listPieceNormal = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
+        Set<String> listPieceEau = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
+
+        HouseExample houseExample = new HouseExample(longueur, largeur, listPieceNormal, listPieceEau);
+        HouseDemo houseDemo = new HouseDemo(houseExample);
+
         houseDemo.example();
     }
 
