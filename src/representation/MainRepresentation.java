@@ -10,9 +10,9 @@ public class MainRepresentation {
 		ok = ok && VariableTests.testHashCode();
 		ok = ok && BooleanVariableTests.testConstructor();
 		ok = ok && RuleTests.testGetScope();
-		//ok = ok && RuleTests.testIsSatisfiedBy();
+		ok = ok && RuleTests.testIsSatisfiedBy();
 		ok = ok && DifferenceConstraintTests.testGetScope();
-		//ok = ok && DifferenceConstraintTests.testIsSatisfiedBy();
+		ok = ok && DifferenceConstraintTests.testIsSatisfiedBy();
 		System.out.println(ok ? "All tests passed" : "At least one test failed");
 	}
 

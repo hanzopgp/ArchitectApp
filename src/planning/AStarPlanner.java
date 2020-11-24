@@ -73,7 +73,7 @@ public class AStarPlanner implements Planner{
 
 
     @Override
-    public Map<Variable, Object> getInitialState() {
+    public Map<Variable, Object> getInitialeState() {
         return this.initialState;
     }
 
