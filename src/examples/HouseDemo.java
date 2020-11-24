@@ -1,26 +1,30 @@
 package examples;
 
-import representation.BooleanVariable;
-import representation.Variable;
+import representation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class HouseDemo {
 
+    private final int nbState = 4; // des variables booléennes « dalle coulée », « dalle humide », « murs élevés », « toiture terminée »
+
     private final int longueur;
     private final int largeur;
     private final Variable[][] listVariable;
-    private final BooleanVariable[][] listBooleanVariable;
+    private final BooleanVariable[][][] listBooleanVariable;
     private final Set<Object> domaine;
+    private ArrayList<Constraint> listConstraint;
 
     public HouseDemo(int longueur, int largeur){
         this.longueur = longueur;
         this.largeur = largeur;
         this.listVariable = new Variable[longueur][largeur];
-        this.listBooleanVariable = new BooleanVariable[longueur][largeur];
+        this.listBooleanVariable = new BooleanVariable[longueur][largeur][this.nbState];
         this.domaine = new HashSet<>(Arrays.asList("sdb", "cuisine", "salon", "chambre1", "chambre2", "toilette"));
+        this.listConstraint = new ArrayList<>();
     }
 
     //Methodes Representation
@@ -45,21 +49,48 @@ public class HouseDemo {
     }
 
     public void buildHouseBooleanVariable(){
-        String[][] listPieceString = this.buildHouseString();
         for(int i = 0; i < this.longueur; i++){
             for(int j = 0; j < this.largeur; j++){
-                this.listBooleanVariable[i][j] = new BooleanVariable(listPieceString[i][j]);
+                for(int k = 0; k < 4; k++){
+                    this.listBooleanVariable[i][j][k] = new BooleanVariable(this.choseState(k));
+                }
             }
         }
     }
 
+    public String choseState(int n){
+        return switch (n) {
+            case 1 -> "dalle coulee";
+            case 2 -> "dalle humide";
+            case 3 -> "murs eleves";
+            case 4 -> "toiture terminee";
+            default -> "vide";
+        };
+    }
+
     public void addConstraints(){
-        //Classe Rule
+        for(int i = 0; i < this.longueur; i++) {
+            for (int j = 0; j < this.largeur; j++) {
+                for(int k = 0; k < this.nbState; k++){
+                    BooleanVariable boolVar1 = this.listBooleanVariable[i][j][k];
+                    BooleanVariable boolVar2 = this.listBooleanVariable[i][j][k]; //next?
+                    this.listConstraint.add(new Rule(boolVar1, true, boolVar2, false)); //Classe Rule
+                }
+                Variable var1 = this.listVariable[i][j];
+                Variable var2 = this.listVariable[i][j]; //next?
+                this.listConstraint.add(new DifferenceConstraint(var1, var2)); //Classe DifferenceConstraint
+                this.listConstraint.add(new BinaryExtensionConstraint(var1, var2)); //Classe BinaryExtensionConstraint
+            }
+        }
+    }
 
-        //Classe DifferenceConstraint
-
-        //Classe BinaryExtensionConstraint
-
+    public boolean checkIfSatisfied(){
+        for (Constraint constraint : this.listConstraint) {
+//            if (!(constraint.isSatisfiedBy())) {
+//                return false;
+//            }
+        }
+        return true;
     }
 
     //Methodes Solvers
@@ -74,13 +105,11 @@ public class HouseDemo {
         this.buildHouseVariable(); //Classe Variable
         this.buildHouseBooleanVariable(); //Classe BooleanVariable
         this.addConstraints(); //Classe Contraint
+        boolean isSatisfied = this.checkIfSatisfied();
+        System.out.println(isSatisfied);
 
         //Partie Solver
 
     }
 
 }
-
-//chaque pièce envisagée occupe au plus une position
-//deux pièces d'eau (salles de bains, cuisines, toilettes) doivent nécessairement être envisagées côte à côte (en (1,1) et (2,2) par exemple, mais pas en (1,1) et (1,3)),
-//on réalise nécessairement « dalle coulée », « dalle sèche » (représenté par non(« dalle humide »)),  « murs élevés » et « toiture terminée » dans cet ordre.
