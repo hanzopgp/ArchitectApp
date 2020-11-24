@@ -62,6 +62,11 @@ public class DijkstraPlanner implements Planner {
         }
     }
 
+    @Override
+    public Map<Variable, Object> getInitialeState() {
+        return this.initialState;
+    }
+
     public List<Action> get_dijkstra_plan(
         Map<Map<Variable, Object>, Map<Variable, Object>> father,
         Map<Map<Variable, Object>, Action> plan, 
@@ -72,18 +77,13 @@ public class DijkstraPlanner implements Planner {
         List<Action> sup_plan = new LinkedList<Action>();
         Comparator<Map<Variable, Object>> com = (state1, state2) -> distance.get(state1) - distance.get(state2);
         goal = Collections.min(goels, com);
-        while (goal != getInitialState()) {
+        while (goal != this.getInitialeState()) {
             sup_plan.add(plan.get(goal));
             goal = father.get(goal);
 
         }
         Collections.reverse(sup_plan);
         return sup_plan;
-    }
-
-    @Override
-    public Map<Variable, Object> getInitialState() {
-        return this.initialState;
     }
 
     @Override

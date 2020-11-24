@@ -1,7 +1,9 @@
 package planning;
+import dataminingtests.*;
 import planningtests.*;
 
-public class Main {
+public class MainPlanning {
+
     public static void main(String[] args){
         boolean ok = true;
         ok = ok && BasicActionTests.testIsApplicable();
@@ -14,9 +16,8 @@ public class Main {
         ok = ok && DijkstraPlannerTests.testPlan();
         System.out.println(ok ? "All tests passed" : "At least one test failed");
     }
+
 }
-
-
 
 
 

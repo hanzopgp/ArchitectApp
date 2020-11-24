@@ -20,6 +20,11 @@ public class BFSPlanner implements Planner{
         return bfs();
     }
 
+    @Override
+    public Map<Variable, Object> getInitialeState() {
+        return this.initialState;
+    }
+
     public List<Action> bfs(){
         Map<Map<Variable, Object>, Map<Variable, Object>> father = new HashMap<Map<Variable, Object>, Map<Variable, Object>>(); 
         Map<Map<Variable, Object>, Action> plan = new HashMap<Map<Variable, Object>, Action>();
@@ -66,12 +71,6 @@ public class BFSPlanner implements Planner{
         }
         Collections.reverse(bfs_plan);
         return bfs_plan;
-    }
-
-
-    @Override
-    public Map<Variable,Object> getInitialState(){
-        return this.initialState;
     }
 
     @Override
