@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class BasicAction implements Action {
 
-    private Map<Variable, Object> preconditions;
-    private Map<Variable, Object> effets;
-    private int cout;
+    private final Map<Variable, Object> preconditions;
+    private final Map<Variable, Object> effets;
+    private final int cout;
 
     public BasicAction(Map<Variable, Object> preconditions, Map<Variable, Object> effets, int cout) {
         this.preconditions = preconditions;

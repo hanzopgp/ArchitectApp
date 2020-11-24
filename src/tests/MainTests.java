@@ -30,7 +30,6 @@ public class MainTests {
     public static void main(String[] args) {
 
         boolean ok = true;
-
         System.out.println("Testing package \"representation\"...");
         ok = ok && VariableTests.testEquals();
         ok = ok && VariableTests.testHashCode();
@@ -41,7 +40,6 @@ public class MainTests {
         ok = ok && RuleTests.testIsSatisfiedBy();
         ok = ok && BinaryExtensionConstraintTests.testGetScope();
         ok = ok && BinaryExtensionConstraintTests.testIsSatisfiedBy();
-
         System.out.println("Testing package \"solvers\"...");
         ok = ok && AbstractSolverTests.testIsConsistent();
         ok = ok && BacktrackSolverTests.testSolve();
@@ -53,7 +51,6 @@ public class MainTests {
         ok = ok && NbConstraintsVariableHeuristicTests.testBest();
         ok = ok && DomainSizeVariableHeuristicTests.testBest();
         ok = ok && RandomValueHeuristicTests.testOrdering();
-
         System.out.println("Testing package \"planning\"...");
         ok = ok && BasicActionTests.testIsApplicable();
         ok = ok && BasicActionTests.testSuccessor();
@@ -63,7 +60,6 @@ public class MainTests {
         ok = ok && BFSPlannerTests.testPlan();
         ok = ok && DijkstraPlannerTests.testPlan();
         ok = ok && AStarPlannerTests.testPlan();
-
         System.out.println("Testing package \"datamining\"...");
         ok = ok && AbstractItemsetMinerTests.testFrequency();
         ok = ok && AprioriTests.testFrequentSingletons();
@@ -76,7 +72,6 @@ public class MainTests {
         ok = ok && BruteForceAssociationRuleMinerTests.testExtract();
         ok = ok && DatabaseTests.testItemTable();
         ok = ok && DatabaseTests.testPropositionalize();
-
         System.out.println(ok ? "All tests passed" : "At least one test failed");
     }
 

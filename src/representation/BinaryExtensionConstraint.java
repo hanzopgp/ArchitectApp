@@ -4,8 +4,8 @@ import java.util.*;
 
 public class BinaryExtensionConstraint implements Constraint{
 	
-	private Variable v1;
-	private Variable v2;
+	private final Variable v1;
+	private final Variable v2;
 	public List<Tuple> coupleAllowed;
 	
 	public BinaryExtensionConstraint(Variable v1, Variable v2){

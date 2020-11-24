@@ -5,7 +5,7 @@ import representation.*;
 import java.util.Map;
 
 public interface Action {
-    public boolean isApplicable(Map<Variable, Object> variables);
-    public Map<Variable, Object> successor(Map<Variable, Object> variables);
-    public int getCost();
+    boolean isApplicable(Map<Variable, Object> variables);
+    Map<Variable, Object> successor(Map<Variable, Object> variables);
+    int getCost();
 }

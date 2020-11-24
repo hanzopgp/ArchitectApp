@@ -24,11 +24,7 @@ public class Variable{
 	public boolean equals(Object o){
 		if(o == this){
 			return true;
-		}else if(((Variable)o).getName() == this.getName() && ((Variable)o).getDomain() == this.getDomain()){
-			return true;
-		}else{
-			return false;
-		}
+		}else return ((Variable) o).getName().equals(this.getName()) && ((Variable) o).getDomain() == this.getDomain();
 	}
 	
 	@Override

@@ -4,8 +4,8 @@ import java.util.*;
 
 public class DifferenceConstraint implements Constraint{
 	
-	private Variable v1;
-	private Variable v2;
+	private final Variable v1;
+	private final Variable v2;
 	
 	public DifferenceConstraint(Variable v1, Variable v2){
 		this.v1 = v1;
@@ -25,7 +25,7 @@ public class DifferenceConstraint implements Constraint{
 		boolean test1 = tab.containsKey(v1);
 		boolean test2 = tab.containsKey(v2);
 		if(test1 & test2){
-			return (!test1 || test2);
+			return true;
 		}else{
 			throw new IllegalArgumentException("L'objet ne contient pas les variables");
 		}

@@ -7,8 +7,8 @@ import representation.BooleanVariable;
 
 public class Itemset{
 	
-	private Set<BooleanVariable> items;
-	private float frequence;
+	private final Set<BooleanVariable> items;
+	private final float frequence;
 	
 	public Itemset(Set<BooleanVariable> items, float frequence){
 		this.items = items;

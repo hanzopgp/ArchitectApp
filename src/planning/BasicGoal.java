@@ -1,23 +1,25 @@
 package planning;
+import java.util.*;
+import representation.*;
 
-import representation.Variable;
+public class BasicGoal implements Goal{
 
-import java.util.Collection;
-import java.util.Map;
+    private Map<Variable, Object> goal;
 
-//But final qu'on souhaite
-public class BasicGoal implements Goal {
+    public BasicGoal(Map<Variable, Object> goal){
+        this.goal = goal;
+    }
 
-    private Map<Variable, Object> etat;
-
-    public BasicGoal(Map<Variable, Object> etat){
-        this.etat = etat;
+    public Map<Variable, Object> getGoal(){
+        return this.goal;
     }
 
     @Override
-    //on check si toute les variables passés en paramètres sont les même que
-    //les variables de notre état final.
-    public boolean isSatisfiedBy(Map<Variable, Object> variables){
-        return variables.entrySet().containsAll(etat.entrySet());
+    public boolean isSatisfiedBy(Map<Variable, Object> state){
+        if(state.entrySet().containsAll(this.goal.entrySet())){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
