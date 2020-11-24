@@ -2,6 +2,7 @@ package examples;
 
 import representation.*;
 
+import javax.lang.model.element.VariableElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -82,6 +83,34 @@ public class HouseDemo {
                 this.listConstraint.add(new BinaryExtensionConstraint(var1, var2)); //Classe BinaryExtensionConstraint
             }
         }
+    }
+
+    public ArrayList<Variable> getNeighbors(Variable var){
+        ArrayList<Variable> listNeighbors = new ArrayList<>();
+        for(int i = 0; i < this.longueur; i++) {
+            for (int j = 0; j < this.largeur; j++) {
+                if(this.listVariable[i][j] == var){
+                    Variable leftNeighbor = null, topNeighbor = null, rightNeighbor = null, botNeighbor = null;
+                    if(i > 0){
+                        leftNeighbor = this.listVariable[i-1][j];
+                    }
+                    if(j > 0){
+                        topNeighbor = this.listVariable[i][j-1];
+                    }
+                    if(i < this.longueur - 1){
+                        rightNeighbor = this.listVariable[i+1][j];
+                    }
+                    if(i < this.largeur - 1){
+                        botNeighbor = this.listVariable[i][j+1];
+                    }
+                    listNeighbors.add(leftNeighbor);
+                    listNeighbors.add(topNeighbor);
+                    listNeighbors.add(rightNeighbor);
+                    listNeighbors.add(botNeighbor);
+                }
+            }
+        }
+        return listNeighbors;
     }
 
     public boolean checkIfSatisfied(){
