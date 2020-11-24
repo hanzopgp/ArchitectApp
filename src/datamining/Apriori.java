@@ -22,27 +22,59 @@ public class Apriori extends AbstractItemsetMiner{
 		}
 		return liste;
 	}
-	
-	public static SortedSet<BooleanVariable> combine(SortedSet<BooleanVariable>l1, SortedSet<BooleanVariable>l2){
-		if(l1.size() > 0 && l1.size() == l2.size() && !(l1.last().equals(l2.last())) && l1.size() != 0){
-			Iterator<BooleanVariable> it1 = l1.iterator();
-			Iterator<BooleanVariable> it2 = l2.iterator();
-			while(it1.hasNext()){
-				BooleanVariable it1next = it1.next();
-				BooleanVariable it2next = it2.next();
-				if(!(it1next.equals(l1.last())) && !(it2next.equals(l2.last()))){
-					if(!(it1next.equals(it2next))){
-							return null;
+
+	@Override
+	public Set<Itemset> extract(float frequenceMin){
+		Set<Itemset> result = new HashSet<>();
+		Set<Itemset> source = new HashSet<>(this.frequentSingletons(frequenceMin));
+		result.addAll(source);
+		List<SortedSet<BooleanVariable>> items = new ArrayList<>();
+		for(Itemset x : source){
+			SortedSet<BooleanVariable> liste = new TreeSet<>(AbstractItemsetMiner.COMPARATOR);
+			liste.addAll(x.getItems());
+			items.add(liste);
+			result.add(x);
+		}
+		for(int i=2;i<=super.base.getItems().size();i++){
+			List<SortedSet<BooleanVariable>> item2 = new ArrayList<>();
+			for(int j=0;j<items.size();j++){
+				for(int k=j+1;k<items.size();k++){
+					SortedSet<BooleanVariable> tmp2 = this.combine(items.get(j), items.get(k));
+					//print test allsubsetfrequent
+					if(tmp2 != null && this.allSubsetsFrequent(tmp2, items)){
+						//print test
+						float frequence = frequency(tmp2);
+						if(frequence >= frequenceMin){
+							result.add(new Itemset(tmp2, frequence));
+							item2.add(tmp2);
+						}
 					}
-				}	
+				}
 			}
-			BooleanVariable l2last = l2.last();
-			l1.add(l2last);
-			return l1;
+			items = item2;
+		}
+		System.out.println(result);
+		return result;
+	}
+
+	public static SortedSet<BooleanVariable> combine(SortedSet<BooleanVariable>l1, SortedSet<BooleanVariable>l2){
+		SortedSet<BooleanVariable> result = new TreeSet<>(COMPARATOR);
+		if(l1.size() > 0 && l1.size() == l2.size()){
+			if(!(l1.last().equals(l2.last()))){
+				if(l1.subSet(l1.iterator().next(), l1.last()).equals(l2.subSet(l2.iterator().next(), l2.last()))){
+					result.addAll(l1);
+					result.addAll(l2);
+					return result;
+				}else{
+					return null;
+				}
+			}else{
+				return null;
+			}
 		}else{
 			return null;
 		}
-	}	
+	}
 
 	public static boolean allSubsetsFrequent(Set<BooleanVariable>list, Collection<SortedSet<BooleanVariable>>collectionList){
 		Set<BooleanVariable> listDel = new HashSet<>(list);

@@ -10,8 +10,8 @@ public class MainDatamining {
 		ok = ok && AprioriTests.testFrequentSingletons();
 		ok = ok && AprioriTests.testCombine();
 		ok = ok && AprioriTests.testAllSubsetsFrequent();
-		/*ok = ok && AprioriTests.testExtract();
-		ok = ok && AbstractAssociationRuleMinerTests.testFrequency();
+		ok = ok && AprioriTests.testExtract();
+		/*ok = ok && AbstractAssociationRuleMinerTests.testFrequency();
 		ok = ok && AbstractAssociationRuleMinerTests.testConfidence();
 		ok = ok && BruteForceAssociationRuleMinerTests.testAllCandidatePremises();
 		ok = ok && BruteForceAssociationRuleMinerTests.testExtract();

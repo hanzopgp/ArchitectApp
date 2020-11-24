@@ -2,6 +2,9 @@
   <library name="dataminingtests">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/src/tests/dataminingtests.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/tests/planningtests.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/tests/representationtests.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/tests/solvertests.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
