@@ -53,7 +53,7 @@ public class Apriori extends AbstractItemsetMiner{
 			}
 			items = item2;
 		}
-		System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 
