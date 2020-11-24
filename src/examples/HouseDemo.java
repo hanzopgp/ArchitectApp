@@ -6,18 +6,24 @@ import java.util.*;
 
 public class HouseDemo {
 
-    private final HouseExample houseExample;
+    public HouseDemo(){
 
-    public HouseDemo(HouseExample houseExample){
-        this.houseExample = houseExample;
     }
 
-    public void example(){
+    public static void main(String[] args){
+
+        //Creation de la maison de base
+        int longueur = 5;
+        int largeur = 5;
+        Set<String> listPieceNormal = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
+        Set<String> listPieceEau = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
+        HouseExample houseExample = new HouseExample(longueur, largeur, listPieceNormal, listPieceEau);
 
         //Partie representation
-        List<Variable> listVariable = this.houseExample.getVariables();
-        List<Constraint> listConstraint = this.houseExample.getConstraints();
+        List<Variable> listVariable = houseExample.getVariables();
+        List<Constraint> listConstraint = houseExample.getConstraints();
 
+        System.out.println(listVariable);
 
     }
 }
