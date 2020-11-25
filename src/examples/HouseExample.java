@@ -1,5 +1,6 @@
 package examples;
 
+import representation.BooleanVariable;
 import representation.Constraint;
 import representation.Variable;
 
@@ -9,9 +10,14 @@ public class HouseExample {
 
     private final int longueur;
     private final int largeur;
-    Set<String> listPieceNormal;
-    Set<String> listPieceEau;
-    Set<Object> domaine;
+    private Set<String> listPieceNormal;
+    private Set<String> listPieceEau;
+    private Set<Object> domaine;
+    private List<Variable> listVariable;
+    private List<BooleanVariable> listBooleanVariable;
+    private List<Constraint> listConstraint;
+    private Map<Variable, Object> mapVariable;
+
 
     public HouseExample(int longueur, int largeur, Set<String> listPieceNormal, Set<String> listPieceEau) {
         this.longueur = longueur;
@@ -22,9 +28,14 @@ public class HouseExample {
         this.domaine = new HashSet<>();
         this.domaine.addAll(listPieceNormal);
         this.domaine.addAll(listPieceEau);
+
+        this.listVariable = new ArrayList<>();
+        this.listBooleanVariable = new ArrayList<>();
+        this.listConstraint = new ArrayList<>();
+        this.mapVariable = new HashMap<>();
     }
 
-    public List<Variable> getVariables(){
+    public void makeVariables(){
         List<Variable> listVariable = new ArrayList<>();
         String[][] listPieceString = this.buildHouseString();
         for(int i = 0; i < this.longueur; i++){
@@ -32,11 +43,32 @@ public class HouseExample {
                 listVariable.add(new Variable(listPieceString[i][j], this.domaine));
             }
         }
-        return listVariable;
+        this.listVariable = listVariable;
     }
 
-    public List<Constraint> getConstraints(){
-        return null;
+    public void makeBooleanVariables(){
+        List<BooleanVariable> listBooleanVariable = new ArrayList<>();
+        String[][] listPieceString = this.buildHouseString();
+        for(int i = 0; i < this.longueur; i++){
+            for(int j = 0; j < this.largeur; j++){
+                listBooleanVariable.add(new BooleanVariable(listPieceString[i][j]));
+            }
+        }
+        this.listBooleanVariable = listBooleanVariable;
+    }
+
+    public void makeMapVariable(){
+        Map<Variable, Object> mapVariable = new HashMap<>();
+        for(Variable var : this.listVariable){
+            for(Object o : domaine){
+                mapVariable.put(var, o);
+            }
+        }
+        this.mapVariable = mapVariable;
+    }
+
+    public void addConstraint(Constraint constraint){
+        this.listConstraint.add(constraint);
     }
 
     public String[][] buildHouseString(){
@@ -47,6 +79,26 @@ public class HouseExample {
             }
         }
         return listPieceString;
+    }
+
+    public List<Constraint> getListConstraint(){
+        return this.listConstraint;
+    }
+
+    public List<Variable> getListVariable(){
+        return this.listVariable;
+    }
+
+    public List<BooleanVariable> getListBooleanVariable(){
+        return this.listBooleanVariable;
+    }
+
+    public Map<Variable, Object> getMapVariable(){
+        return this.mapVariable;
+    }
+
+    public Set<Object> getDomaine(){
+        return this.domaine;
     }
 
 }

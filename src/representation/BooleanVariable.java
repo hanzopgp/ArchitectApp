@@ -15,4 +15,10 @@ public class BooleanVariable extends Variable{
 	public Set<Object> getDomain(){
 		return domaine;
 	}
+
+	@Override
+	public String toString(){
+		return "--> " + this.name + ", domaine : " + domaine;
+	}
+
 }

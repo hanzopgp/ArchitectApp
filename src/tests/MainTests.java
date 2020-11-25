@@ -5,8 +5,6 @@ import dataminingtests.AbstractItemsetMinerTests;
 import dataminingtests.AprioriTests;
 import dataminingtests.BruteForceAssociationRuleMinerTests;
 import dataminingtests.DatabaseTests;
-import examples.HouseDemo;
-import examples.HouseExample;
 import planningtests.AStarPlannerTests;
 import planningtests.BFSPlannerTests;
 import planningtests.BasicActionTests;
