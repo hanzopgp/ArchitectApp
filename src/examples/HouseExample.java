@@ -67,6 +67,41 @@ public class HouseExample {
         this.mapVariable = mapVariable;
     }
 
+    public void printDomaine(){
+        System.out.println("============= DOMAINE =============");
+        for(Object o : this.domaine){
+            System.out.println("* " + o.toString());
+        }
+    }
+
+    public void printVariables(){
+        System.out.println("============= LISTE DES VARIABLES =============");
+        for(Variable variable : this.listVariable){
+            System.out.println(variable.toString());
+        }
+    }
+
+    public void printBooleanVariables(){
+        System.out.println("============= LISTE DES VARIABLES BOOLEENES =============");
+        for(BooleanVariable booleanVariable : this.listBooleanVariable){
+            System.out.println(booleanVariable.toString());
+        }
+    }
+
+    public void printMapVariable(){
+        System.out.println("============= LISTE DES VARIABLES + AFFECTATION =============");
+        for (Map.Entry<Variable, Object> entry : this.mapVariable.entrySet()) {
+            System.out.println(entry.getKey() + ", Affectation : " + entry.getValue());
+        }
+    }
+
+    public void printConstraints(){
+        System.out.println("============= LISTE DES CONTRAINTES =============");
+        for(Constraint constraint : this.listConstraint){
+            System.out.println(constraint.toString());
+        }
+    }
+
     public void addConstraint(Constraint constraint){
         this.listConstraint.add(constraint);
     }

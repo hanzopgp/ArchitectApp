@@ -25,35 +25,19 @@ public class HouseDemo {
         houseExample.makeBooleanVariables();
         houseExample.makeMapVariable();
 
-        System.out.println("============= DOMAINE =============");
-        System.out.println("--> " + houseExample.getDomaine());
+        houseExample.printDomaine();
+        houseExample.printVariables();
+        houseExample.printBooleanVariables();
+        houseExample.printMapVariable();
+        houseExample.printConstraints();
 
-        System.out.println("============= LISTE DES VARIABLES =============");
-        List<Variable> listVariable = houseExample.getListVariable();
-        for(Variable variable : listVariable){
-            System.out.println(variable.toString());
-        }
-
-//        System.out.println("============= LISTE DES VARIABLES BOOLEENES =============");
-//        List<BooleanVariable> listBooleanVariable = houseExample.getListBooleanVariable();
-//        for(BooleanVariable booleanVariable : listBooleanVariable){
-//            System.out.println(booleanVariable.toString());
-//        }
-
-//        System.out.println("============= LISTE DES VARIABLES + AFFECTATION =============");
-//        Map<Variable, Object> mapVar = houseExample.getMapVariable();
-//        for (Map.Entry<Variable, Object> entry : mapVar.entrySet()) {
-//            System.out.println(entry.getKey() + ", Affectation : " + entry.getValue());
-//        }
-//
-//        System.out.println("============= LISTE DES CONTRAINTES =============");
+        //Ajout des contraintes
 //        houseExample.addConstraint(new Rule());
 //        houseExample.addConstraint(new DifferenceConstraint());
 //        houseExample.addConstraint(new BinaryExtensionConstraint());
-//        List<Constraint> listConstraint = houseExample.getListConstraint();
-//        for(Constraint constraint : listConstraint){
-//            System.out.println(constraint.toString());
-//        }
+        houseExample.printConstraints();
+
+
 
     }
 }
