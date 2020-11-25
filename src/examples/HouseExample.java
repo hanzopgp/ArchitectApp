@@ -14,10 +14,12 @@ public class HouseExample {
     private Set<String> listPieceEau;
     private Set<Object> domaine;
     private List<Variable> listVariable;
-    private List<BooleanVariable> listBooleanVariable;
     private List<Constraint> listConstraint;
+    private BooleanVariable dalleCoulee;
+    private BooleanVariable dalleHumide;
+    private BooleanVariable mursEleves;
+    private BooleanVariable toitureTerminee;
     private Map<Variable, Object> mapVariable;
-
 
     public HouseExample(int longueur, int largeur, Set<String> listPieceNormal, Set<String> listPieceEau) {
         this.longueur = longueur;
@@ -30,9 +32,18 @@ public class HouseExample {
         this.domaine.addAll(listPieceEau);
 
         this.listVariable = new ArrayList<>();
-        this.listBooleanVariable = new ArrayList<>();
         this.listConstraint = new ArrayList<>();
         this.mapVariable = new HashMap<>();
+
+        this.makeAll();
+    }
+
+    //----------- Construction -----------
+
+    public void makeAll(){
+        this.makeVariables();
+        this.makeBooleanVariables();
+        this.makeMapVariable();
     }
 
     public void makeVariables(){
@@ -47,14 +58,10 @@ public class HouseExample {
     }
 
     public void makeBooleanVariables(){
-        List<BooleanVariable> listBooleanVariable = new ArrayList<>();
-        String[][] listPieceString = this.buildHouseString();
-        for(int i = 0; i < this.longueur; i++){
-            for(int j = 0; j < this.largeur; j++){
-                listBooleanVariable.add(new BooleanVariable(listPieceString[i][j]));
-            }
-        }
-        this.listBooleanVariable = listBooleanVariable;
+        this.dalleCoulee = new BooleanVariable("dalleCoulee");
+        this.dalleHumide = new BooleanVariable("dalleHumide");
+        this.mursEleves = new BooleanVariable("mursEleves");
+        this.toitureTerminee = new BooleanVariable("toitureTerminee");
     }
 
     public void makeMapVariable(){
@@ -67,7 +74,18 @@ public class HouseExample {
         this.mapVariable = mapVariable;
     }
 
+    //----------- Affichage -----------
+
+    public void printAll(){
+        this.printDomaine();
+        this.printVariables();
+        this.printBooleanVariables();
+        this.printMapVariable();
+        this.printConstraints();
+    }
+
     public void printDomaine(){
+        System.out.println();
         System.out.println("============= DOMAINE =============");
         for(Object o : this.domaine){
             System.out.println("* " + o.toString());
@@ -75,6 +93,7 @@ public class HouseExample {
     }
 
     public void printVariables(){
+        System.out.println();
         System.out.println("============= LISTE DES VARIABLES =============");
         for(Variable variable : this.listVariable){
             System.out.println(variable.toString());
@@ -82,13 +101,16 @@ public class HouseExample {
     }
 
     public void printBooleanVariables(){
+        System.out.println();
         System.out.println("============= LISTE DES VARIABLES BOOLEENES =============");
-        for(BooleanVariable booleanVariable : this.listBooleanVariable){
-            System.out.println(booleanVariable.toString());
-        }
+        System.out.println("* Dalle coulee : " + this.dalleCoulee.toString());
+        System.out.println("* Dalle humide : " + this.dalleHumide.toString());
+        System.out.println("* Murs eleves : " + this.mursEleves.toString());
+        System.out.println("* Toiture terminee : " + this.toitureTerminee.toString());
     }
 
     public void printMapVariable(){
+        System.out.println();
         System.out.println("============= LISTE DES VARIABLES + AFFECTATION =============");
         for (Map.Entry<Variable, Object> entry : this.mapVariable.entrySet()) {
             System.out.println(entry.getKey() + ", Affectation : " + entry.getValue());
@@ -96,11 +118,14 @@ public class HouseExample {
     }
 
     public void printConstraints(){
+        System.out.println();
         System.out.println("============= LISTE DES CONTRAINTES =============");
         for(Constraint constraint : this.listConstraint){
             System.out.println(constraint.toString());
         }
     }
+
+    //----------- Fonction utiles -----------
 
     public void addConstraint(Constraint constraint){
         this.listConstraint.add(constraint);
@@ -116,16 +141,14 @@ public class HouseExample {
         return listPieceString;
     }
 
+    //----------- Getter et Setter -----------
+
     public List<Constraint> getListConstraint(){
         return this.listConstraint;
     }
 
     public List<Variable> getListVariable(){
         return this.listVariable;
-    }
-
-    public List<BooleanVariable> getListBooleanVariable(){
-        return this.listBooleanVariable;
     }
 
     public Map<Variable, Object> getMapVariable(){

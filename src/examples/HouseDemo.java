@@ -1,45 +1,53 @@
 package examples;
 
 import representation.*;
-;
-import javax.lang.model.element.VariableElement;
+import solvers.*;
+import planning.*;
+import datamining.*;
+
 import java.util.*;
 
 public class HouseDemo {
 
-    public HouseDemo(){
-
-    }
-
     public static void main(String[] args){
 
+        //----------- Utilisation package solvers -----------
         //Creation de la maison de base
-        int longueur = 5;
-        int largeur = 5;
+        int longueur = 3;
+        int largeur = 4;
         Set<String> listPieceNormal = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
         Set<String> listPieceEau = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
         HouseExample houseExample = new HouseExample(longueur, largeur, listPieceNormal, listPieceEau);
-
-        //Partie representation
-        houseExample.makeVariables();
-        houseExample.makeBooleanVariables();
-        houseExample.makeMapVariable();
-
-        houseExample.printDomaine();
-        houseExample.printVariables();
-        houseExample.printBooleanVariables();
-        houseExample.printMapVariable();
-        houseExample.printConstraints();
 
         //Ajout des contraintes
 //        houseExample.addConstraint(new Rule());
 //        houseExample.addConstraint(new DifferenceConstraint());
 //        houseExample.addConstraint(new BinaryExtensionConstraint());
-        houseExample.printConstraints();
 
+        //Affichage etat de la maison
+        houseExample.printAll();
 
+        //----------- Utilisation package solvers -----------
+        Set<Variable> setVariable = HouseDemo.listToSetVariable(houseExample.getListVariable());
+        Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseExample.getListConstraint());
+        BacktrackSolver solver = new BacktrackSolver((Set<Variable>)setVariable, setConstraint);
+        Map<Variable, Object> mapSolved = solver.solve();
+        houseExample.printAll();
 
+        //----------- Utilisation package planning -----------
+
+        //----------- Utilisation package datamining -----------
     }
+
+    //----------- Fonction utiles -----------
+    public static Set<Variable> listToSetVariable(List<Variable> listVariable){
+        return new HashSet<>(listVariable);
+    }
+
+    public static Set<Constraint> listToSetConstraint(List<Constraint> listConstraint){
+        return new HashSet<>(listConstraint);
+    }
+
 }
 
 
