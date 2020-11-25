@@ -13,17 +13,22 @@ public class ArcConsistency{
 	
 	public static boolean filter(Variable var1, Set<Object> var1Domaine, Variable var2, Set<Object> var2Domaine, Constraint constraint){
 		boolean del = false;
+		Set<Object> tmp = new HashSet<>();
 		for(Object var1dom : var1Domaine){
 			Map<Variable, Object> map = new HashMap<Variable, Object>();
 			map.put(var1, var1dom);
 			for(Object var2dom : var2Domaine){
-				map.put(var1, var2dom);
+				map.put(var2, var2dom);
 				if(!constraint.isSatisfiedBy(map)){
-					var1Domaine.remove(var1dom);
+					tmp.add(var1dom);
+					//ne pas remove ici sinon CurrentModificationException
+					// -> voir sur le sujet ecampus !
+					//var1Domaine.remove(var1dom);
 					del = true;		
 				}
 			}
-		}			
+		}
+		var1Domaine.removeAll(tmp);
 		return del;
 	}
 	

@@ -10,7 +10,7 @@ public class MainPlanning {
         ok = ok && BasicActionTests.testSuccessor();
         ok = ok && BasicActionTests.testGetCost();
         ok = ok && BasicGoalTests.testIsSatisfiedBy();
-        //ok = ok && DFSPlannerTests.testPlan();
+        ok = ok && DFSPlannerTests.testPlan();
         ok = ok && BFSPlannerTests.testPlan();
         //ok = ok && AStarPlannerTests.testPlan()
         ok = ok && DijkstraPlannerTests.testPlan();

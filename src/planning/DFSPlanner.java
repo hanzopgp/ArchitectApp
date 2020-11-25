@@ -18,10 +18,10 @@ public class DFSPlanner implements Planner{
 
     @Override
     public List<Action> plan() {
-        return this.dfs(this.etatInitial, this.actions, new LinkedList<Action>(), this.but, new HashSet<Map<Variable, Object>>());
+        return this.dfs(this.etatInitial, new LinkedList<Action>(), new HashSet<Map<Variable, Object>>());
     }
 
-    public List<Action> dfs(Map<Variable, Object> etatInitial, Set<Action> actions, LinkedList<Action> plan, Goal but, Set<Map<Variable, Object>> closed){
+    public List<Action> dfs(Map<Variable, Object> etatInitial, LinkedList<Action> plan, Set<Map<Variable, Object>> closed){
         Map<Variable, Object> next = new HashMap<Variable, Object>();
         if(this.getGoal().isSatisfiedBy(etatInitial)){
             return plan;
@@ -32,12 +32,11 @@ public class DFSPlanner implements Planner{
                     if(!(closed.contains(next))){
                         closed.add(next);
                         plan.add(a);
-                        List<Action> subPlan = dfs(etatInitial, actions, plan, but, closed);
+                        List<Action> subPlan = dfs(next, plan, closed);
                         if(subPlan != null){
                             return subPlan;
                         }else{
                             plan.removeLast();
-                            return plan;
                         }
                     }
                 }

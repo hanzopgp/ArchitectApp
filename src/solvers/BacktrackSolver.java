@@ -15,7 +15,7 @@ public class BacktrackSolver extends AbstractSolver{
 	@Override
 	public Map<Variable, Object> solve(){
 		Map<Variable, Object> instanceP = new HashMap<Variable, Object>();
-		Queue<Variable> pile = new PriorityQueue<Variable>();
+		Deque<Variable> pile = new LinkedList<>();
 		for(Variable v : variables){
 			pile.add(v);
 		}
@@ -23,21 +23,25 @@ public class BacktrackSolver extends AbstractSolver{
 	}
 		
 	public Map<Variable, Object> sra(Map<Variable, Object> map, Queue<Variable> pile){
+		Variable v = null;
 		if(pile.isEmpty()){
 			return map;
 		}else{
-			Variable v = pile.poll();
+			v = pile.poll();
 			for(Object o : v.getDomain()){
 				map.put(v,o);
 				if(isConsistent(map)){
-					Map<Variable, Object> m = this.sra(map,pile);
-					if(m != null){
-						return m;
+					if(this.sra(map,pile) != null){
+
+						return this.sra(map,pile);
 					}
 				}
 			}
 		}
-		return map;
+		//  De même, pour l'appel récursif, il est quand même préférable de remettre
+		//  la variable dans la liste juste avant le return null ... ?????
+		pile.add(v); 
+		return null;
 	}
 
 }
