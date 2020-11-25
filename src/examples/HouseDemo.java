@@ -11,7 +11,8 @@ public class HouseDemo {
 
     public static void main(String[] args){
 
-        //----------- Utilisation package solvers -----------
+        //----------- Utilisation package representation -----------
+
         //Creation de la maison de base
         int longueur = 3;
         int largeur = 4;
@@ -20,18 +21,20 @@ public class HouseDemo {
         HouseExample houseExample = new HouseExample(longueur, largeur, listPieceNormal, listPieceEau);
 
         //Ajout des contraintes
-//        houseExample.addConstraint(new Rule());
-//        houseExample.addConstraint(new DifferenceConstraint());
-//        houseExample.addConstraint(new BinaryExtensionConstraint());
+//        houseExample.addConstraint(new Rule()); //Etat des pieces BooleanVariable
+//        houseExample.addConstraint(new DifferenceConstraint()); //Chaque piece est unique
+//        houseExample.addConstraint(new BinaryExtensionConstraint()); //Contraintes sur salles d'eau
 
         //Affichage etat de la maison
         houseExample.printAll();
 
         //----------- Utilisation package solvers -----------
+
         Set<Variable> setVariable = HouseDemo.listToSetVariable(houseExample.getListVariable());
         Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseExample.getListConstraint());
-        BacktrackSolver solver = new BacktrackSolver((Set<Variable>)setVariable, setConstraint);
+        BacktrackSolver solver = new BacktrackSolver(setVariable, setConstraint);
         Map<Variable, Object> mapSolved = solver.solve();
+
         houseExample.printAll();
 
         //----------- Utilisation package planning -----------
@@ -40,6 +43,7 @@ public class HouseDemo {
     }
 
     //----------- Fonction utiles -----------
+
     public static Set<Variable> listToSetVariable(List<Variable> listVariable){
         return new HashSet<>(listVariable);
     }
