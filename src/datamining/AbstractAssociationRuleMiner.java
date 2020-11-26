@@ -1,5 +1,6 @@
 package datamining;
 
+import dataminingtests.Item;
 import representation.BooleanVariable;
 
 import java.util.Set;
@@ -26,6 +27,19 @@ public abstract class AbstractAssociationRuleMiner implements AssociationRuleMin
                 frequency += list.getFrequency();
             }
         }
+        return frequency;
+    }
+
+    public static float confidence(Set<BooleanVariable> premise, Set<BooleanVariable> conclusion, Set<Itemset> frequent){
+        System.out.println(frequent);
+        System.out.println(conclusion);
+        float frequency = 0;
+        for(Itemset f : frequent){
+            if(f.getItems().equals(premise) || f.getItems().equals(conclusion)){
+                frequency+= f.getFrequency();
+            }
+        }
+        frequency /= frequent.size();
         return frequency;
     }
 
