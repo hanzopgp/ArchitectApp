@@ -23,12 +23,16 @@ public abstract class AbstractAssociationRuleMiner implements AssociationRuleMin
 
     public static float frequency(Set<BooleanVariable> variables, Set<Itemset> items){
         float frequency = 0;
-        for(Itemset list : items) {
-            if (list.getItems().equals(variables)) {
-                frequency += list.getFrequency();
+        if(items == null){
+            throw new IllegalArgumentException();
+        }else{
+            for(Itemset list : items) {
+                if (list.getItems().equals(variables)) {
+                    frequency = list.getFrequency();
+                }
             }
+            return frequency;
         }
-        return frequency;
     }
 
     public static float confidence(Set<BooleanVariable> premise, Set<BooleanVariable> conclusion, Set<Itemset> frequent){
@@ -42,20 +46,23 @@ public abstract class AbstractAssociationRuleMiner implements AssociationRuleMin
 
     public Set<AssociationRule> extract(float frequence, float confiance){
         Set<AssociationRule> result = new HashSet<>();
-        Apriori apriori = new Apriori(this.getDatabase());
-        Set<Itemset> list = apriori.frequentSingletons(frequence);
+        ItemsetMiner apriori = new Apriori(this.getDatabase());
+        Set<Itemset> list = apriori.extract(frequence);
         for(Itemset item : list){
-            Set<Set<BooleanVariable>> premises = BruteForceAssociationRuleMiner.allCandidatePremises(item.getItems());
-            for(Set<BooleanVariable> premise : premises){
-                Set<BooleanVariable> conclusion = new HashSet<>();
-                //Set<BooleanVariable> conclusion = item.getItems().removeAll(premise);
-                if(confidence(premise, conclusion, list) > confiance){
-                    AssociationRule rule = new AssociationRule(premise, conclusion, frequence, confiance);
-                    result.add(rule);
+            float itemFrequency = item.getFrequency();
+            if(itemFrequency >= frequence){
+                Set<Set<BooleanVariable>> premises = BruteForceAssociationRuleMiner.allCandidatePremises(item.getItems());
+                for(Set<BooleanVariable> premise : premises){
+                    Set<BooleanVariable> conclusion = new HashSet<>(item.getItems());
+                    conclusion.removeAll(premise);
+                    float itemConfidence = confidence(premise, conclusion, list);
+                    if(itemConfidence >= confiance){
+                        AssociationRule rule = new AssociationRule(premise, conclusion, itemFrequency, itemConfidence);
+                        result.add(rule);
+                    }
                 }
             }
         }
-
         return result;
     }
 }

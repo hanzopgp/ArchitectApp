@@ -27,7 +27,6 @@ public abstract class AbstractItemsetMiner implements ItemsetMiner{
 				result.add(item);
 			}
 		}
-
 		return result;
 	}
 	
