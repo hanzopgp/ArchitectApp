@@ -32,6 +32,7 @@ public class HouseDemo {
         Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseExample.getListConstraint());
         BacktrackSolver solver = new BacktrackSolver(setVariable, setConstraint);
         Map<Variable, Object> mapSolved = solver.solve();
+        System.out.println(mapSolved);
 
         houseExample.printAll();
 

@@ -1,10 +1,8 @@
 package examples;
 
-import representation.BooleanVariable;
-import representation.Constraint;
-import representation.Rule;
-import representation.Variable;
+import representation.*;
 
+import javax.lang.model.element.VariableElement;
 import java.util.*;
 
 public class HouseExample {
@@ -16,10 +14,12 @@ public class HouseExample {
     private Set<Object> domaine;
     private List<Variable> listVariable;
     private List<Constraint> listConstraint;
+
     private BooleanVariable dalleCoulee;
     private BooleanVariable dalleHumide;
     private BooleanVariable mursEleves;
     private BooleanVariable toitureTerminee;
+
     private BooleanVariable currentState;
     private Map<Variable, Object> mapVariable;
 
@@ -89,19 +89,28 @@ public class HouseExample {
 
     //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
     public void makeStateSuiteConstraint(){
-        this.addConstraint(new Rule(this.dalleCoulee, true, this.dalleHumide, false));
-        this.addConstraint(new Rule(this.dalleHumide, true, this.mursEleves, false));
-        this.addConstraint(new Rule(this.mursEleves, true, this.toitureTerminee, false));
+        this.addConstraint(new Rule(this.toitureTerminee, true, this.mursEleves, true));
+        this.addConstraint(new Rule(this.mursEleves, true, this.dalleCoulee, true));
+        this.addConstraint(new Rule(this.mursEleves, true, this.dalleHumide, false));
+        this.addConstraint(new Rule(this.dalleHumide, true, this.dalleCoulee, true));
     }
 
     //Contrainte une seule piece par case
     public void makeOnlyOnePieceConstraint(){
-
+        for(int i = 0; i < this.listVariable.size(); i++){
+            for(int j = i + 1; j < this.listVariable.size(); j++){
+                Variable v1 = this.listVariable.get(i);
+                Variable v2 = this.listVariable.get(j);
+                this.addConstraint(new DifferenceConstraint(v1, v2));
+            }
+        }
     }
 
     //Contrainte toutes les cases occupes
     public void makeEveryPieceUsedConstraint(){
-
+        for (Variable v : this.listVariable) {
+            this.addConstraint(new DifferenceConstraint(v, null));
+        }
     }
 
     //Contrainte pieces d'eau cote a cote
@@ -163,7 +172,7 @@ public class HouseExample {
         System.out.println();
         System.out.println("============= LISTE DES CONTRAINTES =============");
         for(Constraint constraint : this.listConstraint){
-            System.out.println(constraint.toString());
+            System.out.println(constraint);
         }
     }
 

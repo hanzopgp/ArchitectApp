@@ -13,6 +13,10 @@ public class BinaryExtensionConstraint implements Constraint{
 		this.v2 = v2;
 	}
 
+	public void addCoupleAllowed(Variable var1, Variable var2){
+		this.coupleAllowed.add(new Tuple(var1, var2));
+	}
+
 	@Override
 	public Set<Variable> getScope(){
 		HashSet<Variable> scope = new HashSet<>();

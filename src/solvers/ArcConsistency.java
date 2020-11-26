@@ -46,7 +46,7 @@ public class ArcConsistency{
 	
 	
 	/*public static void enforceArcConsistency(Map<Variable, Set<Object>>){
-		
+
 	}*/
 	
 	
