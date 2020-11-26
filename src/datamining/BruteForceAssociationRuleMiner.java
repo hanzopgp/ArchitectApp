@@ -1,6 +1,5 @@
-package datamining;
 
-import dataminingtests.Item;
+package datamining;
 import representation.BooleanVariable;
 
 import java.util.ArrayList;

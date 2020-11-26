@@ -2,6 +2,7 @@ package examples;
 
 import representation.BooleanVariable;
 import representation.Constraint;
+import representation.Rule;
 import representation.Variable;
 
 import java.util.*;
@@ -19,6 +20,7 @@ public class HouseExample {
     private BooleanVariable dalleHumide;
     private BooleanVariable mursEleves;
     private BooleanVariable toitureTerminee;
+    private BooleanVariable currentState;
     private Map<Variable, Object> mapVariable;
 
     public HouseExample(int longueur, int largeur, Set<String> listPieceNormal, Set<String> listPieceEau) {
@@ -44,6 +46,7 @@ public class HouseExample {
         this.makeVariables();
         this.makeBooleanVariables();
         this.makeMapVariable();
+        this.currentState = this.dalleCoulee;
     }
 
     public void makeVariables(){
@@ -74,14 +77,53 @@ public class HouseExample {
         this.mapVariable = mapVariable;
     }
 
+    //----------- Creation des contraintes -----------
+
+    //Ajout de toute les contraintes de l'exemple
+    public void makeAllConstraint(){
+        this.makeStateSuiteConstraint();
+        this.makeOnlyOnePieceConstraint();
+        this.makeEveryPieceUsedConstraint();
+        this.makeWaterPartConstraint();
+    }
+
+    //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
+    public void makeStateSuiteConstraint(){
+        this.addConstraint(new Rule(this.dalleCoulee, true, this.dalleHumide, false));
+        this.addConstraint(new Rule(this.dalleHumide, true, this.mursEleves, false));
+        this.addConstraint(new Rule(this.mursEleves, true, this.toitureTerminee, false));
+    }
+
+    //Contrainte une seule piece par case
+    public void makeOnlyOnePieceConstraint(){
+
+    }
+
+    //Contrainte toutes les cases occupes
+    public void makeEveryPieceUsedConstraint(){
+
+    }
+
+    //Contrainte pieces d'eau cote a cote
+    public void makeWaterPartConstraint(){
+
+    }
+
     //----------- Affichage -----------
 
     public void printAll(){
+        this.printCurrentState();
         this.printDomaine();
         this.printVariables();
         this.printBooleanVariables();
         this.printMapVariable();
         this.printConstraints();
+    }
+
+    public void printCurrentState(){
+        System.out.println();
+        System.out.println("============= ETAT ACTUEL =============");
+        System.out.println(this.currentState);
     }
 
     public void printDomaine(){
@@ -149,14 +191,6 @@ public class HouseExample {
 
     public List<Variable> getListVariable(){
         return this.listVariable;
-    }
-
-    public Map<Variable, Object> getMapVariable(){
-        return this.mapVariable;
-    }
-
-    public Set<Object> getDomaine(){
-        return this.domaine;
     }
 
 }

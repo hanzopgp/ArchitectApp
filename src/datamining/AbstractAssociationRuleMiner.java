@@ -1,6 +1,4 @@
 package datamining;
-
-import dataminingtests.Item;
 import representation.BooleanVariable;
 
 import java.util.HashSet;

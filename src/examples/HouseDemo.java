@@ -21,9 +21,7 @@ public class HouseDemo {
         HouseExample houseExample = new HouseExample(longueur, largeur, listPieceNormal, listPieceEau);
 
         //Ajout des contraintes
-//        houseExample.addConstraint(new Rule()); //Etat des pieces BooleanVariable
-//        houseExample.addConstraint(new DifferenceConstraint()); //Chaque piece est unique
-//        houseExample.addConstraint(new BinaryExtensionConstraint()); //Contraintes sur salles d'eau
+        houseExample.makeAllConstraint();
 
         //Affichage etat de la maison
         houseExample.printAll();
@@ -48,9 +46,7 @@ public class HouseDemo {
         return new HashSet<>(listVariable);
     }
 
-    public static Set<Constraint> listToSetConstraint(List<Constraint> listConstraint){
-        return new HashSet<>(listConstraint);
-    }
+    public static Set<Constraint> listToSetConstraint(List<Constraint> listConstraint){ return new HashSet<>(listConstraint); }
 
 }
 
