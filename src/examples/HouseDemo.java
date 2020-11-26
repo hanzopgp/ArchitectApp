@@ -14,7 +14,7 @@ public class HouseDemo {
         //----------- Utilisation package representation -----------
 
         //Creation de la maison de base
-        int longueur = 3;
+        int longueur = 4;
         int largeur = 4;
         Set<String> listPieceNormal = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
         Set<String> listPieceEau = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));

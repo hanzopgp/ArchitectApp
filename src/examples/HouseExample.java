@@ -115,7 +115,8 @@ public class HouseExample {
 
     //Contrainte pieces d'eau cote a cote
     public void makeWaterPartConstraint(){
-
+        ArrayList<Variable> neighbors = this.getNeighbors(this.listVariable.get(0));
+        System.out.println(neighbors);
     }
 
     //----------- Affichage -----------
@@ -182,6 +183,7 @@ public class HouseExample {
         this.listConstraint.add(constraint);
     }
 
+    //Creer les attributs "name" des Variables
     public String[][] buildHouseString(){
         String[][] listPieceString = new String[this.longueur][this.largeur];
         for(int i = 0; i < this.longueur; i++){
@@ -190,6 +192,54 @@ public class HouseExample {
             }
         }
         return listPieceString;
+    }
+
+    //Transforme la liste de Variable en un tableau 2D
+    public Variable[][] listTo2DArray(List<Variable> listVariable){
+        Variable[][] array = new Variable[this.longueur][this.largeur];
+        for(int i = 0; i < this.longueur; i++){
+            for(int j = 0; j < this.largeur; j++){
+                array[i][j] = listVariable.get((j * this.longueur) + i);
+            }
+        }
+        return array;
+    }
+
+    //Renvoie la liste des voisins d'une case donnee
+    public ArrayList<Variable> getNeighbors(Variable var){
+        ArrayList<Variable> neighbors = new ArrayList<>();
+        Variable[][] arrayVariable = this.listTo2DArray(this.listVariable);
+        for(int i = 0; i < this.longueur; i++) {
+            for (int j = 0; j < this.largeur; j++) {
+                if(arrayVariable[i][j] == var){
+                    if(i > 0 && j > 0){
+                        neighbors.add(arrayVariable[i-1][j-1]);
+                    }
+                    if(i > 0){
+                        neighbors.add(arrayVariable[i-1][j]);
+                    }
+                    if(i > 0 && j < this.largeur - 1){
+                        neighbors.add(arrayVariable[i-1][j+1]);
+                    }
+                    if(j > 0){
+                        neighbors.add(arrayVariable[i][j-1]);
+                    }
+                    if(j < this.largeur - 1){
+                        neighbors.add(arrayVariable[i][j+1]);
+                    }
+                    if(i < this.longueur - 1 && j > 0){
+                        neighbors.add(arrayVariable[i+1][j-1]);
+                    }
+                    if(i < this.longueur - 1){
+                        neighbors.add(arrayVariable[i+1][j]);
+                    }
+                    if(i < this.longueur - 1 && j < this.largeur - 1){
+                        neighbors.add(arrayVariable[i+1][j+1]);
+                    }
+                }
+            }
+        }
+        return neighbors;
     }
 
     //----------- Getter et Setter -----------
