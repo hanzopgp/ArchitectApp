@@ -47,6 +47,14 @@ public class HouseDemo {
         return new HashSet<>(listVariable);
     }
 
+    public static Set<String> objectSetToStringSet(Set<Object> setObject){
+        Set<String> setString = new HashSet<>();
+        for(Object o : setObject){
+            setString.add((String) o);
+        }
+        return setString;
+    }
+
     public static Set<Constraint> listToSetConstraint(List<Constraint> listConstraint){ return new HashSet<>(listConstraint); }
 
 }

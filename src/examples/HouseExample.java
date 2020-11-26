@@ -115,8 +115,25 @@ public class HouseExample {
 
     //Contrainte pieces d'eau cote a cote
     public void makeWaterPartConstraint(){
-        ArrayList<Variable> neighbors = this.getNeighbors(this.listVariable.get(0));
-        System.out.println(neighbors);
+        for(Variable v1 : this.listVariable){
+            ArrayList<Variable> neighbors = this.getNeighbors(v1);
+            for(Variable v2 : neighbors){
+                BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //Contrainte sur chaque variables et chacun de ses voisins
+                Set<String> domaineV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
+                for(String elementDomaineV1 : domaineV1){
+                    if(this.listPieceEau.contains(elementDomaineV1)){
+                        for(String pieceGeneral : HouseDemo.objectSetToStringSet(this.domaine)){
+                            constraint.addCoupleAllowed(elementDomaineV1, pieceGeneral);
+                        }
+                    }else if(this.listPieceNormal.contains(elementDomaineV1)){
+                        for(String pieceNormal : this.listPieceNormal){
+                            constraint.addCoupleAllowed(elementDomaineV1, pieceNormal);
+                        }
+                    }
+                }
+                this.addConstraint(constraint);
+            }
+        }
     }
 
     //----------- Affichage -----------

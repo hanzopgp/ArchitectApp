@@ -11,9 +11,10 @@ public class BinaryExtensionConstraint implements Constraint{
 	public BinaryExtensionConstraint(Variable v1, Variable v2){
 		this.v1 = v1;
 		this.v2 = v2;
+		this.coupleAllowed = new ArrayList<>();
 	}
 
-	public void addCoupleAllowed(Variable var1, Variable var2){
+	public void addCoupleAllowed(Object var1, Object var2){
 		this.coupleAllowed.add(new Tuple(var1, var2));
 	}
 
