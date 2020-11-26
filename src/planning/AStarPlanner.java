@@ -24,7 +24,7 @@ public class AStarPlanner implements Planner{
 
     @Override
     public List<Action> plan(){
-    /*
+
         Map<Map<Variable, Object>, Action> plan = new HashMap<Map<Variable, Object>, Action>();
         Map<Map<Variable, Object>, Map<Variable, Object>> father = new HashMap<Map<Variable, Object>, Map<Variable, Object>>();
         Map<Map<Variable, Object>, Integer> distance = new HashMap<Map<Variable, Object>, Integer>();
@@ -33,7 +33,7 @@ public class AStarPlanner implements Planner{
         Map<Variable, Object> instanciation = new HashMap<Variable, Object>();
         Comparator<Map<Variable, Object>> com = (state1, state2) -> value.get(state1) - value.get(state2);
         Map<Variable, Object> next = new HashMap<Variable, Object>();
-        
+
         open.add(initialState);
         father.put(this.initialState, null);
         distance.put(initialState, 0);
@@ -62,7 +62,6 @@ public class AStarPlanner implements Planner{
                 }
             }
         }
-        return null;*/
         return null;
     }
 

@@ -31,6 +31,11 @@ public class Variable{
 	public int hashCode(){
 		return this.name.hashCode();
 	}
+
+	@Override
+	public String toString(){
+		return "--> Piece : " + this.name + ", Domaine : " + this.domaine;
+	}
 	
 	
 }
