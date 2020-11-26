@@ -25,7 +25,7 @@ public class AStarPlanner implements Planner{
     @Override
     public List<Action> plan(){
 
-        Map<Map<Variable, Object>, Action> plan = new HashMap<Map<Variable, Object>, Action>();
+    /*    Map<Map<Variable, Object>, Action> plan = new HashMap<Map<Variable, Object>, Action>();
         Map<Map<Variable, Object>, Map<Variable, Object>> father = new HashMap<Map<Variable, Object>, Map<Variable, Object>>();
         Map<Map<Variable, Object>, Integer> distance = new HashMap<Map<Variable, Object>, Integer>();
         Map<Map<Variable, Object>, Integer> value = new HashMap<Map<Variable, Object>, Integer>();
@@ -61,7 +61,7 @@ public class AStarPlanner implements Planner{
                     }
                 }
             }
-        }
+        }*/
         return null;
     }
 
