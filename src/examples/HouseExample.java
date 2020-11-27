@@ -2,7 +2,6 @@ package examples;
 
 import representation.*;
 
-import javax.lang.model.element.VariableElement;
 import java.util.*;
 
 public class HouseExample {
@@ -20,7 +19,6 @@ public class HouseExample {
     private BooleanVariable mursEleves;
     private BooleanVariable toitureTerminee;
 
-    private BooleanVariable currentState;
     private Map<Variable, Object> mapVariable;
 
     public HouseExample(int longueur, int largeur, Set<String> listPieceNormal, Set<String> listPieceEau) {
@@ -46,7 +44,6 @@ public class HouseExample {
         this.makeVariables();
         this.makeBooleanVariables();
         this.makeMapVariable();
-        this.currentState = this.dalleCoulee;
     }
 
     public void makeVariables(){
@@ -65,6 +62,11 @@ public class HouseExample {
         this.dalleHumide = new BooleanVariable("dalleHumide");
         this.mursEleves = new BooleanVariable("mursEleves");
         this.toitureTerminee = new BooleanVariable("toitureTerminee");
+
+        this.listVariable.add(this.dalleCoulee);
+        this.listVariable.add(this.dalleHumide);
+        this.listVariable.add(this.mursEleves);
+        this.listVariable.add(this.toitureTerminee);
     }
 
     public void makeMapVariable(){
@@ -83,8 +85,9 @@ public class HouseExample {
     public void makeAllConstraint(){
         this.makeStateSuiteConstraint();
         this.makeOnlyOnePieceConstraint();
-        this.makeEveryPieceUsedConstraint();
+        //this.makeEveryPieceUsedConstraint();
         this.makeWaterPartConstraint();
+        //this.makeOnlyOneLivingRoomConstraint();
     }
 
     //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
@@ -113,27 +116,48 @@ public class HouseExample {
         }
     }
 
+    //Constrainte un seul salon
+    public void makeOnlyOneLivingRoomConstraint(){
+        for(int i = 0; i < this.listVariable.size(); i++){
+            for(int j = i + 1; j < this.listVariable.size(); j++){
+                Variable v1 = this.listVariable.get(i);
+                Variable v2 = this.listVariable.get(j);
+                Set<String> domaineV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
+                Set<String> domaineV2 = HouseDemo.objectSetToStringSet(v2.getDomain());
+                if (domaineV1.contains("salon") || domaineV2.contains("salon")) {
+                    this.addConstraint(new DifferenceConstraint(v1, v2));
+                }
+            }
+        }
+    }
+
     //Contrainte pieces d'eau cote a cote
     public void makeWaterPartConstraint(){
-        ArrayList<Variable> neighbors = this.getNeighbors(this.listVariable.get(0));
-        System.out.println(neighbors);
+        for(Variable v1 : this.listVariable){
+            ArrayList<Variable> neighbors = this.getNeighbors(v1);
+            for(Variable v2 : neighbors){
+                BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //Contrainte sur chaque variables et chacun de ses voisins
+                Set<String> domaineV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
+                for(String elementDomaineV1 : domaineV1){
+                    if(this.listPieceEau.contains(elementDomaineV1)){
+                        for(String pieceGeneral : HouseDemo.objectSetToStringSet(this.domaine)){
+                            constraint.addCoupleAllowed(elementDomaineV1, pieceGeneral);
+                        }
+                    }
+                }
+                this.addConstraint(constraint);
+            }
+        }
     }
 
     //----------- Affichage -----------
 
     public void printAll(){
-        this.printCurrentState();
         this.printDomaine();
         this.printVariables();
         this.printBooleanVariables();
         this.printMapVariable();
         this.printConstraints();
-    }
-
-    public void printCurrentState(){
-        System.out.println();
-        System.out.println("============= ETAT ACTUEL =============");
-        System.out.println(this.currentState);
     }
 
     public void printDomaine(){
@@ -173,7 +197,7 @@ public class HouseExample {
         System.out.println();
         System.out.println("============= LISTE DES CONTRAINTES =============");
         for(Constraint constraint : this.listConstraint){
-            System.out.println(constraint);
+            System.out.println("ID : " + constraint + ", Scope : " + constraint.getScope());
         }
     }
 
