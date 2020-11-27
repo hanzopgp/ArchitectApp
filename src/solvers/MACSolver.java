@@ -1,3 +1,4 @@
+
 package solvers;
 
 import representation.Constraint;
@@ -39,3 +40,5 @@ public class MACSolver extends AbstractSolver {
         return null;
     }
 }
+
+

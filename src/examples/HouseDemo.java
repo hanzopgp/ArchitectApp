@@ -2,12 +2,17 @@ package examples;
 
 import representation.*;
 import solvers.*;
-import planning.*;
-import datamining.*;
 
 import java.util.*;
 
 public class HouseDemo {
+
+    public static int WIDTH = 4;
+    public static int HEIGHT = 3;
+    public static Set<String> LIST_PIECE_NORMAL = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
+    public static Set<String> LIST_PIECE_EAU = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
+    public static int PLANNING_COST = 5;
+
 
     public static void main(String[] args){
 
@@ -15,34 +20,53 @@ public class HouseDemo {
 
         //Creation de la maison de base
         System.out.println("######################## CONSTRUCTION DE LA MAISON ########################");
-        int longueur = 4;
-        int largeur = 3;
-        Set<String> listPieceNormal = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
-        Set<String> listPieceEau = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
-        HouseExample houseExample = new HouseExample(longueur, largeur, listPieceNormal, listPieceEau);
+
+        HouseRepresentation houseRepresentation = new HouseRepresentation(WIDTH, HEIGHT, LIST_PIECE_NORMAL, LIST_PIECE_EAU);
 
         //Ajout des contraintes
-        houseExample.makeAllConstraint();
+        houseRepresentation.makeAllConstraint();
 
         //Affichage etat de la maison
-        houseExample.printAll();
+        houseRepresentation.printAll();
 
         //----------- Utilisation package solvers -----------
 
         System.out.println("######################## RESOLUTION ########################");
-        Set<Variable> setVariable = HouseDemo.listToSetVariable(houseExample.getListVariable());
-        Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseExample.getListConstraint());
-        BacktrackSolver solver = new BacktrackSolver(setVariable, setConstraint);
-        Map<Variable, Object> mapSolved = solver.solve();
-        System.out.println("mapSolver : " + mapSolved);
 
-        //houseExample.printAll();
+        Set<Variable> setVariable = HouseDemo.listToSetVariable(houseRepresentation.getListVariable());
+        Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseRepresentation.getListConstraint());
+        HouseSolvers houseSolvers = new HouseSolvers(setVariable, setConstraint);
+
+        //Backtrack solver
+        houseSolvers.solveWithBacktrack();
+        //Mac solver avec heuristique
+        //houseSolvers.solveWithMacAndHeuristic();
+        //Mac solver sans heuristique
+        //houseSolvers.solveWithMac();
+
+        if(houseSolvers.getMapSolved() == null){
+            System.out.println("Erreur lors de la resolution ! ");
+            System.exit(1);
+        }
+
+        //Affichage du resultat
+        houseSolvers.printResults();
 
         //----------- Utilisation package planning -----------
 
+        System.out.println("######################## PLANNING ########################");
 
+        //Planning avec algorithm A*
+        HousePlanning housePlanning = new HousePlanning(houseRepresentation, houseSolvers.getMapSolved());
+        housePlanning.planAStar();
+
+        //Affichage du resultat
+        housePlanning.printResults();
 
         //----------- Utilisation package datamining -----------
+
+        System.out.println("######################## DATAMINING ########################");
+
     }
 
     //----------- Fonction utiles -----------

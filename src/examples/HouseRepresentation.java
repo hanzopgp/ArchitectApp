@@ -4,7 +4,7 @@ import representation.*;
 
 import java.util.*;
 
-public class HouseExample {
+public class HouseRepresentation {
 
     private final int longueur;
     private final int largeur;
@@ -21,7 +21,7 @@ public class HouseExample {
 
     private Map<Variable, Object> mapVariable;
 
-    public HouseExample(int longueur, int largeur, Set<String> listPieceNormal, Set<String> listPieceEau) {
+    public HouseRepresentation(int longueur, int largeur, Set<String> listPieceNormal, Set<String> listPieceEau) {
         this.longueur = longueur;
         this.largeur = largeur;
         this.listPieceNormal = listPieceNormal;
@@ -122,7 +122,7 @@ public class HouseExample {
         }
     }
 
-    //Constrainte un seul salon
+    //Constrainte un seul salon, une seule cuisine
     public void makeOnlyOneLivingRoomConstraint(){
         for(int i = 0; i < this.listVariable.size(); i++){
             for(int j = i + 1; j < this.listVariable.size(); j++){
@@ -130,10 +130,10 @@ public class HouseExample {
                 Variable v2 = this.listVariable.get(j);
                 Set<String> domaineV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
                 Set<String> domaineV2 = HouseDemo.objectSetToStringSet(v2.getDomain());
-                if (domaineV1.contains("salon") || domaineV2.contains("salon")) {
+                if (domaineV1.contains("salon")) {
                     this.addConstraint(new DifferenceConstraint(v1, v2));
                 }
-                if (domaineV1.contains("cuisine") || domaineV2.contains("cuisine")) {
+                if (domaineV1.contains("cuisine")) {
                     this.addConstraint(new DifferenceConstraint(v1, v2));
                 }
             }
@@ -303,4 +303,23 @@ public class HouseExample {
         return this.listVariable;
     }
 
+    public BooleanVariable getDalleCoulee() {
+        return dalleCoulee;
+    }
+
+    public BooleanVariable getDalleHumide() {
+        return dalleHumide;
+    }
+
+    public BooleanVariable getMursEleves() {
+        return mursEleves;
+    }
+
+    public BooleanVariable getToitureTerminee() {
+        return toitureTerminee;
+    }
+
+    public Set<Object> getDomaine() {
+        return domaine;
+    }
 }
