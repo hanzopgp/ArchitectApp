@@ -38,11 +38,11 @@ public class MainTests {
         ok = ok && RuleTests.testGetScope();
         ok = ok && RuleTests.testIsSatisfiedBy();
         ok = ok && BinaryExtensionConstraintTests.testGetScope();
-        //ok = ok && BinaryExtensionConstraintTests.testIsSatisfiedBy(); /* NOT GOOD */
+        ok = ok && BinaryExtensionConstraintTests.testIsSatisfiedBy(); 
         System.out.println("Testing package \"solvers\"...");
         ok = ok && AbstractSolverTests.testIsConsistent();
-        //ok = ok && BacktrackSolverTests.testSolve();                   /* NOT GOOD */
-        //ok = ok && ArcConsistencyTests.testFilter();                   /* NOT GOOD */
+        ok = ok && BacktrackSolverTests.testSolve();
+        ok = ok && ArcConsistencyTests.testFilter();
         //ok = ok && ArcConsistencyTests.testEnforce();                  /* NOT GOOD */
         //ok = ok && ArcConsistencyTests.testEnforceArcConsistency();    /* NOT GOOD */
         //ok = ok && MACSolverTests.testSolve();                         /* NOT GOOD */
