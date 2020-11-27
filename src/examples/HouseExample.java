@@ -141,7 +141,7 @@ public class HouseExample {
                 for(String elementDomaineV1 : domaineV1){
                     if(this.listPieceEau.contains(elementDomaineV1)){
                         for(String pieceGeneral : HouseDemo.objectSetToStringSet(this.domaine)){
-                            constraint.addCoupleAllowed(elementDomaineV1, pieceGeneral);
+                            constraint.addTuple(elementDomaineV1, pieceGeneral);
                         }
                     }
                 }

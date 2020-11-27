@@ -22,8 +22,20 @@ public class AStarPlanner implements Planner{
     }
 
 
-    public List<Action> aStar(){
+    public List<Action> get_bfs_plan(Map<Map<Variable,Object>,Map<Variable,Object>> father,
+                                     Map<Map<Variable,Object>,Action> plan,
+                                     Map<Variable, Object> goal2){
+        List<Action> bfs_plan = new LinkedList<Action>();
+        while(goal2 != this.initialState){
+          bfs_plan.add(plan.get(goal2));
+          goal2 = father.get(goal2);
+        }
+        Collections.reverse(bfs_plan);
+        return bfs_plan;
+    }
 
+    @Override
+    public List<Action> plan(){
         Map<Map<Variable, Object>, Action> plan = new HashMap<Map<Variable, Object>, Action>();
         Map<Map<Variable, Object>, Map<Variable, Object>> father = new HashMap<Map<Variable, Object>, Map<Variable, Object>>();
         Map<Map<Variable, Object>, Double> distance = new HashMap<>();
@@ -35,7 +47,7 @@ public class AStarPlanner implements Planner{
         Map<Variable, Object> instanciation = new HashMap<Variable, Object>();
         //Comparator<Map<Variable, Object>> com = (state1, state2) -> value.get(state1) - value.get(state2);
         Map<Variable, Object> next = new HashMap<Variable, Object>();
-        
+
         open.add(initialState);
         father.put(this.initialState, null);
         distance.put(initialState, 0.0);
@@ -68,34 +80,14 @@ public class AStarPlanner implements Planner{
         return null;
     }
 
-
-    public List<Action> get_bfs_plan(Map<Map<Variable,Object>,Map<Variable,Object>> father,
-                                     Map<Map<Variable,Object>,Action> plan,
-                                     Map<Variable, Object> goal2){
-        List<Action> bfs_plan = new LinkedList<Action>();
-        while(goal2 != this.initialState){
-          bfs_plan.add(plan.get(goal2));
-          goal2 = father.get(goal2);
-        }
-        Collections.reverse(bfs_plan);
-        return bfs_plan;
-    }
-
     @Override
-    public List<Action> plan(){
-        return this.aStar();
+    public Map<Variable, Object> getInitialeState() {
+        return this.initialState;
     }
-
 
 
     public Heuristic getHeuristic(){
         return this.heuristic;
-    }
-
-
-    @Override
-    public Map<Variable, Object> getInitialState() {
-        return this.initialState;
     }
 
     @Override

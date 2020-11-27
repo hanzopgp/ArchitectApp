@@ -58,7 +58,7 @@ public class MainTests {
         ok = ok && DFSPlannerTests.testPlan();
         ok = ok && BFSPlannerTests.testPlan();
         ok = ok && DijkstraPlannerTests.testPlan();
-        //ok = ok && AStarPlannerTests.testPlan();
+        ok = ok && AStarPlannerTests.testPlan();
         System.out.println("Testing package \"datamining\"...");
         ok = ok && AbstractItemsetMinerTests.testFrequency();
         ok = ok && AprioriTests.testFrequentSingletons();
@@ -73,5 +73,4 @@ public class MainTests {
         //ok = ok && DatabaseTests.testPropositionalize();                /* NOT GOOD */
         System.out.println(ok ? "All tests passed" : "At least one test failed");
     }
-
 }
