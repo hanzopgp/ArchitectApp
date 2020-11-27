@@ -303,4 +303,23 @@ public class HouseRepresentation {
         return this.listVariable;
     }
 
+    public BooleanVariable getDalleCoulee() {
+        return dalleCoulee;
+    }
+
+    public BooleanVariable getDalleHumide() {
+        return dalleHumide;
+    }
+
+    public BooleanVariable getMursEleves() {
+        return mursEleves;
+    }
+
+    public BooleanVariable getToitureTerminee() {
+        return toitureTerminee;
+    }
+
+    public Set<Object> getDomaine() {
+        return domaine;
+    }
 }

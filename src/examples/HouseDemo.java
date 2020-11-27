@@ -7,17 +7,21 @@ import java.util.*;
 
 public class HouseDemo {
 
+    public static int WIDTH = 4;
+    public static int HEIGHT = 3;
+    public static Set<String> LIST_PIECE_NORMAL = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
+    public static Set<String> LIST_PIECE_EAU = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
+    public static int PLANNING_COST = 5;
+
+
     public static void main(String[] args){
 
         //----------- Utilisation package representation -----------
 
         //Creation de la maison de base
         System.out.println("######################## CONSTRUCTION DE LA MAISON ########################");
-        int longueur = 4;
-        int largeur = 3;
-        Set<String> listPieceNormal = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
-        Set<String> listPieceEau = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
-        HouseRepresentation houseRepresentation = new HouseRepresentation(longueur, largeur, listPieceNormal, listPieceEau);
+
+        HouseRepresentation houseRepresentation = new HouseRepresentation(WIDTH, HEIGHT, LIST_PIECE_NORMAL, LIST_PIECE_EAU);
 
         //Ajout des contraintes
         houseRepresentation.makeAllConstraint();
@@ -35,21 +39,34 @@ public class HouseDemo {
 
         //Backtrack solver
         houseSolvers.solveWithBacktrack();
-
         //Mac solver avec heuristique
         //houseSolvers.solveWithMacAndHeuristic();
-
         //Mac solver sans heuristique
         //houseSolvers.solveWithMac();
+
+        if(houseSolvers.getMapSolved() == null){
+            System.out.println("Erreur lors de la resolution ! ");
+            System.exit(1);
+        }
 
         //Affichage du resultat
         houseSolvers.printResults();
 
         //----------- Utilisation package planning -----------
 
+        System.out.println("######################## PLANNING ########################");
 
+        //Planning avec algorithm A*
+        HousePlanning housePlanning = new HousePlanning(houseRepresentation, houseSolvers.getMapSolved());
+        housePlanning.planAStar();
+
+        //Affichage du resultat
+        housePlanning.printResults();
 
         //----------- Utilisation package datamining -----------
+
+        System.out.println("######################## DATAMINING ########################");
+
     }
 
     //----------- Fonction utiles -----------
