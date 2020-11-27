@@ -58,6 +58,6 @@ public class HouseSolvers {
     }
 
     public Map<Variable, Object> getMapSolved() {
-        return mapSolved;
+        return this.mapSolved;
     }
 }

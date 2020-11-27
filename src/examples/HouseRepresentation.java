@@ -33,7 +33,6 @@ public class HouseRepresentation {
 
         this.listVariable = new ArrayList<>();
         this.listConstraint = new ArrayList<>();
-        this.mapVariable = new HashMap<>();
 
         this.makeAll();
     }
@@ -43,7 +42,6 @@ public class HouseRepresentation {
     public void makeAll(){
         this.makeVariables();
         this.makeBooleanVariables();
-        this.makeMapVariable();
     }
 
     public void makeVariables(){
@@ -69,26 +67,15 @@ public class HouseRepresentation {
         this.listVariable.add(this.toitureTerminee);
     }
 
-    public void makeMapVariable(){
-        Map<Variable, Object> mapVariable = new HashMap<>();
-        for(Variable var : this.listVariable){
-            for(Object o : domaine){
-                mapVariable.put(var, o);
-            }
-        }
-        this.mapVariable = mapVariable;
-    }
-
     //----------- Creation des contraintes -----------
 
     //Ajout de toute les contraintes de l'exemple
     public void makeAllConstraint(){
-        this.makeStateSuiteConstraint();
+        //this.makeStateSuiteConstraint();
         //this.makeOnlyOnePieceConstraint();
         //this.makeEveryPieceUsedConstraint();
-        this.makeEachPieceUsedConstraint();
         //this.makeWaterPartConstraint();
-        this.makeOnlyOneLivingRoomConstraint();
+        //this.makeOnlyOneLivingRoomConstraint();
     }
 
     //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
@@ -105,20 +92,17 @@ public class HouseRepresentation {
             for(int j = i + 1; j < this.listVariable.size(); j++){
                 Variable v1 = this.listVariable.get(i);
                 Variable v2 = this.listVariable.get(j);
-                this.addConstraint(new DifferenceConstraint(v1, v2));
+                if(!(v1 instanceof BooleanVariable) && !(v2 instanceof BooleanVariable)){
+                    this.addConstraint(new DifferenceConstraint(v1, v2));
+                }
             }
         }
-    }
-
-    //Contrainte tous les types de pieces donnes utilise
-    public void makeEachPieceUsedConstraint(){
-
     }
 
     //Contrainte toutes les cases occupes
     public void makeEveryPieceUsedConstraint(){
         for (Variable v : this.listVariable) {
-            this.addConstraint(new DifferenceConstraint(v, null));
+            this.addConstraint(new DifferenceConstraint(v, v));
         }
     }
 
@@ -129,10 +113,11 @@ public class HouseRepresentation {
                 Variable v1 = this.listVariable.get(i);
                 Variable v2 = this.listVariable.get(j);
                 Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
-                if (domainV1.contains("salon")) {
+                Set<String> domainV2 = HouseDemo.objectSetToStringSet(v2.getDomain());
+                if (domainV1.contains("salon") && domainV2.contains("salon")) {
                     this.addConstraint(new DifferenceConstraint(v1, v2));
                 }
-                if (domainV1.contains("cuisine")) {
+                if (domainV1.contains("cuisine") && domainV2.contains("cuisine")) {
                     this.addConstraint(new DifferenceConstraint(v1, v2));
                 }
             }
@@ -144,22 +129,24 @@ public class HouseRepresentation {
         for(Variable v1 : this.listVariable){ //Pour chaque piece de la maison
             List<Variable> notNeighbors = this.getNotNeighbors(v1); //On recupere la liste des voisins de v1, la piece courante
             for(Variable v2 : notNeighbors){
-                BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //On cree une contrainte liant la case courante et chacune des cases non-voisines
-                Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain()); //On recupere le domaine de la variable courante
-                for(String elementDomainV1 : domainV1){
-                    if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
-                        for(String pieceNormal : this.listPieceNormal){
-                            constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
+                if(!(v1 instanceof BooleanVariable) && !(v2 instanceof BooleanVariable)){
+                    BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //On cree une contrainte liant la case courante et chacune des cases non-voisines
+                    Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain()); //On recupere le domaine de la variable courante
+                    for(String elementDomainV1 : domainV1){
+                        if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
+                            for(String pieceNormal : this.listPieceNormal){
+                                constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
+                            }
                         }
-                    }
-                    else if(this.listPieceNormal.contains(elementDomainV1)){ //Mais si c'est une piece normale
-                        for(String pieceGeneral : HouseDemo.objectSetToStringSet(this.domaine)){
-                            constraint.addTuple(elementDomainV1, pieceGeneral); //Alors on autorise tout type de piece
+                        else if(this.listPieceNormal.contains(elementDomainV1)){ //Mais si c'est une piece normale
+                            for(String pieceGeneral : HouseDemo.objectSetToStringSet(this.domaine)){
+                                constraint.addTuple(elementDomainV1, pieceGeneral); //Alors on autorise tout type de piece
+                            }
                         }
+                        //Pas besoin de reflechir aux pieces voisines car les pieces voisines de v1 sont les pieces non-voisines d'autres pieces
                     }
-                    //Pas besoin de reflechir aux pieces voisines car les pieces voisines de v1 sont les pieces non-voisines d'autres pieces
+                    this.addConstraint(constraint);
                 }
-                this.addConstraint(constraint);
             }
         }
     }
