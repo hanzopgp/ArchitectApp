@@ -43,7 +43,7 @@ public class MainTests {
         ok = ok && AbstractSolverTests.testIsConsistent();
         ok = ok && BacktrackSolverTests.testSolve();
         ok = ok && ArcConsistencyTests.testFilter();
-        //ok = ok && ArcConsistencyTests.testEnforce();                  /* NOT GOOD */
+        ok = ok && ArcConsistencyTests.testEnforce();                  /* NOT GOOD */
         //ok = ok && ArcConsistencyTests.testEnforceArcConsistency();    /* NOT GOOD */
         //ok = ok && MACSolverTests.testSolve();                         /* NOT GOOD */
         //ok = ok && HeuristicMACSolverTests.testSolve();                /* NOT GOOD */

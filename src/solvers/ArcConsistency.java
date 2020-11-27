@@ -32,15 +32,28 @@ public class ArcConsistency{
 	}
 	
 	public static boolean enforce(Constraint c, Map<Variable, Set<Object>> mapDom){
-		List<Variable> variables = new ArrayList<Variable>(mapDom.keySet());
-		List<Set<Object>> domaines = new ArrayList<Set<Object>>(mapDom.values());
-		boolean res = false;
-		for(int i =0; i < variables.size()-1; i++){
-			for(int j =0; j < domaines.size()-1; j++){
-				res = filter(variables.get(i),domaines.get(j), variables.get(i+1), domaines.get(j+1),c);
+
+		Iterator<Variable> constraintIterator = c.getScope().iterator();
+		//inutile de continuer si l'iterator est vide
+		if(!constraintIterator.hasNext()){
+			return false;
+		}else{
+			//on récupère la première variable de la contrainte
+			Variable v1 = constraintIterator.next();
+			if(!mapDom.keySet().contains(v1)){
+				return false;
+			}else{
+				//on récupère la deuxième variable de la contrainte
+				Variable v2 = constraintIterator.next();
+				if(!mapDom.keySet().contains(v2)){
+					return false;
+				}else{
+					boolean res = filter(v1, mapDom.get(v1), v2, mapDom.get(v2), c);
+					boolean res2 = filter(v2, mapDom.get(v2), v1, mapDom.get(v1), c);
+					return res || res2;
+				}
 			}
 		}
-		return res;
 	}
 	
 	
