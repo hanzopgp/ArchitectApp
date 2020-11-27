@@ -109,6 +109,11 @@ public class HouseExample {
         }
     }
 
+    //Contrainte tous les types de pieces donnes utilise
+    public void makeEachPieceUsedConstraint(){
+
+    }
+
     //Contrainte toutes les cases occupes
     public void makeEveryPieceUsedConstraint(){
         for (Variable v : this.listVariable) {
@@ -134,14 +139,26 @@ public class HouseExample {
     //Contrainte pieces d'eau cote a cote
     public void makeWaterPartConstraint(){
         for(Variable v1 : this.listVariable){
-            ArrayList<Variable> neighbors = this.getNeighbors(v1);
-            for(Variable v2 : neighbors){
-                BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //Contrainte sur chaque variables et chacun de ses voisins
-                Set<String> domaineV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
-                for(String elementDomaineV1 : domaineV1){
-                    if(this.listPieceEau.contains(elementDomaineV1)){
+            ArrayList<Variable> neighbors = this.getNeighbors(v1); //On recupere la liste des voisins de v1, la piece courante
+            ArrayList<Variable> notNeighbors = new ArrayList<>();
+            for(Variable v : neighbors){
+                if(!this.listVariable.contains(v)){
+                    notNeighbors.add(v); //On fabrique la liste des cases non-voisines de v1
+                }
+            }
+            for(Variable v2 : notNeighbors){
+                BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //On cree une contrainte liant la case courante et chacune des cases non-voisines
+                Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain()); //On recupere le domaine de la variable courante
+                for(String elementDomainV1 : domainV1){
+                    if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
+                        for(String pieceNormal : this.listPieceNormal){
+                            constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
+                        }
+                    }
+                    //JE SAIS PAS SI LE ELSE EST UTILE
+                    else if(this.listPieceNormal.contains(elementDomainV1)){ //Mais si c'est une piece normale
                         for(String pieceGeneral : HouseDemo.objectSetToStringSet(this.domaine)){
-                            constraint.addTuple(elementDomaineV1, pieceGeneral);
+                            constraint.addTuple(elementDomainV1, pieceGeneral); //Alors on autorise tout type de piece
                         }
                     }
                 }

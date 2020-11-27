@@ -25,7 +25,7 @@ public class HouseDemo {
         houseExample.makeAllConstraint();
 
         //Affichage etat de la maison
-        //houseExample.printAll();
+        houseExample.printAll();
 
         //----------- Utilisation package solvers -----------
 
