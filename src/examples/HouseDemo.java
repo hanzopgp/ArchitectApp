@@ -2,8 +2,6 @@ package examples;
 
 import representation.*;
 import solvers.*;
-import planning.*;
-import datamining.*;
 
 import java.util.*;
 
@@ -19,24 +17,33 @@ public class HouseDemo {
         int largeur = 3;
         Set<String> listPieceNormal = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
         Set<String> listPieceEau = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
-        HouseExample houseExample = new HouseExample(longueur, largeur, listPieceNormal, listPieceEau);
+        HouseRepresentation houseRepresentation = new HouseRepresentation(longueur, largeur, listPieceNormal, listPieceEau);
 
         //Ajout des contraintes
-        houseExample.makeAllConstraint();
+        houseRepresentation.makeAllConstraint();
 
         //Affichage etat de la maison
-        houseExample.printAll();
+        houseRepresentation.printAll();
 
         //----------- Utilisation package solvers -----------
 
         System.out.println("######################## RESOLUTION ########################");
-        Set<Variable> setVariable = HouseDemo.listToSetVariable(houseExample.getListVariable());
-        Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseExample.getListConstraint());
-        BacktrackSolver solver = new BacktrackSolver(setVariable, setConstraint);
-        Map<Variable, Object> mapSolved = solver.solve();
-        System.out.println("mapSolver : " + mapSolved);
 
-        //houseExample.printAll();
+        Set<Variable> setVariable = HouseDemo.listToSetVariable(houseRepresentation.getListVariable());
+        Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseRepresentation.getListConstraint());
+        HouseSolvers houseSolvers = new HouseSolvers(setVariable, setConstraint);
+
+        //Backtrack solver
+        houseSolvers.solveWithBacktrack();
+
+        //Mac solver avec heuristique
+        //houseSolvers.solveWithMacAndHeuristic();
+
+        //Mac solver sans heuristique
+        //houseSolvers.solveWithMac();
+
+        //Affichage du resultat
+        houseSolvers.printResults();
 
         //----------- Utilisation package planning -----------
 
