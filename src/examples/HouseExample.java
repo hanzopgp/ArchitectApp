@@ -13,6 +13,7 @@ public class HouseExample {
     private Set<Object> domaine;
     private List<Variable> listVariable;
     private List<Constraint> listConstraint;
+    private List<BooleanVariable> listBooleanVariable;
 
     private BooleanVariable dalleCoulee;
     private BooleanVariable dalleHumide;
@@ -34,6 +35,7 @@ public class HouseExample {
         this.listVariable = new ArrayList<>();
         this.listConstraint = new ArrayList<>();
         this.mapVariable = new HashMap<>();
+        this.listBooleanVariable = new ArrayList<>();
 
         this.makeAll();
     }
@@ -63,10 +65,15 @@ public class HouseExample {
         this.mursEleves = new BooleanVariable("mursEleves");
         this.toitureTerminee = new BooleanVariable("toitureTerminee");
 
-        this.listVariable.add(this.dalleCoulee);
-        this.listVariable.add(this.dalleHumide);
-        this.listVariable.add(this.mursEleves);
-        this.listVariable.add(this.toitureTerminee);
+        this.listBooleanVariable.add(this.dalleCoulee);
+        this.listBooleanVariable.add(this.dalleHumide);
+        this.listBooleanVariable.add(this.mursEleves);
+        this.listBooleanVariable.add(this.toitureTerminee);
+
+//        this.listVariable.add(this.dalleCoulee);
+//        this.listVariable.add(this.dalleHumide);
+//        this.listVariable.add(this.mursEleves);
+//        this.listVariable.add(this.toitureTerminee);
     }
 
     public void makeMapVariable(){
@@ -140,14 +147,15 @@ public class HouseExample {
     public void makeWaterPartConstraint(){
         for(Variable v1 : this.listVariable){
             ArrayList<Variable> neighbors = this.getNeighbors(v1); //On recupere la liste des voisins de v1, la piece courante
-            ArrayList<Variable> notNeighbors = new ArrayList<>();
+            ArrayList<Variable> notNeighbors = new ArrayList<>(this.listVariable);
             for(Variable v : neighbors){
-                if(!this.listVariable.contains(v)){
-                    notNeighbors.add(v); //On fabrique la liste des cases non-voisines de v1
+                if(this.listVariable.contains(v)){
+                    notNeighbors.remove(v); //On fabrique la liste des cases non-voisines de v1
                 }
             }
             for(Variable v2 : notNeighbors){
                 BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //On cree une contrainte liant la case courante et chacune des cases non-voisines
+                System.out.println(v1.getDomain());
                 Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain()); //On recupere le domaine de la variable courante
                 for(String elementDomainV1 : domainV1){
                     if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
@@ -216,6 +224,7 @@ public class HouseExample {
         for(Constraint constraint : this.listConstraint){
             System.out.println("ID : " + constraint + ", Scope : " + constraint.getScope());
         }
+        System.out.println("--> Nombre de contraintes sur cette maison : " + this.listConstraint.size());
     }
 
     //----------- Fonction utiles -----------
@@ -281,6 +290,17 @@ public class HouseExample {
             }
         }
         return neighbors;
+    }
+
+    public List<Variable> getNotNeighbors(Variable var){
+        ArrayList<Variable> neighbors = this.getNeighbors(var);
+        List<Variable> notNeighbors = new ArrayList<>(this.listVariable);
+        for(Variable v : neighbors){
+            if(this.listVariable.contains(v)){
+                notNeighbors.remove(v);
+            }
+        }
+        return notNeighbors;
     }
 
     //----------- Getter et Setter -----------

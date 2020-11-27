@@ -29,12 +29,12 @@ public class HouseDemo {
 
         //----------- Utilisation package solvers -----------
 
-        System.out.println("######################## RESOLUTION ########################");
-        Set<Variable> setVariable = HouseDemo.listToSetVariable(houseExample.getListVariable());
-        Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseExample.getListConstraint());
-        BacktrackSolver solver = new BacktrackSolver(setVariable, setConstraint);
-        Map<Variable, Object> mapSolved = solver.solve();
-        System.out.println("mapSolver : " + mapSolved);
+//        System.out.println("######################## RESOLUTION ########################");
+//        Set<Variable> setVariable = HouseDemo.listToSetVariable(houseExample.getListVariable());
+//        Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseExample.getListConstraint());
+//        BacktrackSolver solver = new BacktrackSolver(setVariable, setConstraint);
+//        Map<Variable, Object> mapSolved = solver.solve();
+//        System.out.println("mapSolver : " + mapSolved);
 
         //houseExample.printAll();
 
