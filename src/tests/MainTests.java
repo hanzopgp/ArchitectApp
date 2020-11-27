@@ -69,7 +69,7 @@ public class MainTests {
         ok = ok && AbstractAssociationRuleMinerTests.testConfidence();
         ok = ok && BruteForceAssociationRuleMinerTests.testAllCandidatePremises();
         ok = ok && BruteForceAssociationRuleMinerTests.testExtract();
-        //ok = ok && DatabaseTests.testItemTable();                       /* NOT GOOD */
+        ok = ok && DatabaseTests.testItemTable();
         //ok = ok && DatabaseTests.testPropositionalize();                /* NOT GOOD */
         System.out.println(ok ? "All tests passed" : "At least one test failed");
     }
