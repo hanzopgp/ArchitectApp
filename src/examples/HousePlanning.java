@@ -94,8 +94,8 @@ public class HousePlanning {
             }
         };
 
-        //Creation du planner en utilisant l'algorithme A*
-        Planner planner = new AStarPlanner(start, actions, but, heuristic);
+        //Utilisation du A*
+        new AStarPlanner(start, actions, but, heuristic);
 
         //Affection des resultats
         this.listAction = actions;

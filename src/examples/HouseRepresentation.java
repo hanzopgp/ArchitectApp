@@ -84,10 +84,10 @@ public class HouseRepresentation {
     //Ajout de toute les contraintes de l'exemple
     public void makeAllConstraint(){
         this.makeStateSuiteConstraint();
-        this.makeOnlyOnePieceConstraint();
+        //this.makeOnlyOnePieceConstraint();
         //this.makeEveryPieceUsedConstraint();
-        //this.makeEachPieceUsedConstraint();
-        this.makeWaterPartConstraint();
+        this.makeEachPieceUsedConstraint();
+        //this.makeWaterPartConstraint();
         this.makeOnlyOneLivingRoomConstraint();
     }
 
@@ -128,12 +128,11 @@ public class HouseRepresentation {
             for(int j = i + 1; j < this.listVariable.size(); j++){
                 Variable v1 = this.listVariable.get(i);
                 Variable v2 = this.listVariable.get(j);
-                Set<String> domaineV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
-                Set<String> domaineV2 = HouseDemo.objectSetToStringSet(v2.getDomain());
-                if (domaineV1.contains("salon")) {
+                Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
+                if (domainV1.contains("salon")) {
                     this.addConstraint(new DifferenceConstraint(v1, v2));
                 }
-                if (domaineV1.contains("cuisine")) {
+                if (domainV1.contains("cuisine")) {
                     this.addConstraint(new DifferenceConstraint(v1, v2));
                 }
             }

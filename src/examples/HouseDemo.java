@@ -27,7 +27,7 @@ public class HouseDemo {
         houseRepresentation.makeAllConstraint();
 
         //Affichage etat de la maison
-        houseRepresentation.printAll();
+        //houseRepresentation.printAll();
 
         //----------- Utilisation package solvers -----------
 
@@ -66,6 +66,8 @@ public class HouseDemo {
         //----------- Utilisation package datamining -----------
 
         System.out.println("######################## DATAMINING ########################");
+
+        HouseDatamining houseDatamining = new HouseDatamining();
 
     }
 
