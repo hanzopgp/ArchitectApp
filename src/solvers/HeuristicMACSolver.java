@@ -1,4 +1,4 @@
-/*package solvers;
+package solvers;
 import  representation.*;
 import solvers.ValueHeuristic;
 import solvers.VariableHeuristic;
@@ -16,7 +16,7 @@ public class HeuristicMACSolver extends AbstractSolver{
         this.valueHeuristic = valueHeuristic;
     }
 
-    @Override 
+    @Override
     public Map<Variable, Object> solve(){
         Map<Variable, Set<Object>> domaines = new HashMap<>();
         LinkedList<Variable> variables = new LinkedList<>();
@@ -59,6 +59,9 @@ public class HeuristicMACSolver extends AbstractSolver{
                             Set<Object> tmpDomaines = new HashSet<>();
                             tmpDomaines.add(o);
                             domainesCopies.put(v, tmpDomaines);
+                            if (instanciation.keySet().containsAll(this.variables)) {
+                                return instanciation;
+                            }
                             Map<Variable, Object> newInstanciation = new HashMap<>();
                             newInstanciation = this.macHeuristic(instanciation, variables, domainesCopies);
                             // Solution trouvée
@@ -84,4 +87,4 @@ public class HeuristicMACSolver extends AbstractSolver{
         return this.valueHeuristic;
     }
 
-}*/
+}
