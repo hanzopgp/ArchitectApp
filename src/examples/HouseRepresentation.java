@@ -8,9 +8,9 @@ public class HouseRepresentation {
 
     private final int longueur;
     private final int largeur;
-    private Set<String> listPieceNormal;
-    private Set<String> listPieceEau;
-    private Set<Object> domaine;
+    private List<String> listPieceNormal;
+    private List<String> listPieceEau;
+    private List<Object> domaine;
     private List<Variable> listVariable;
     private List<Constraint> listConstraint;
 
@@ -21,16 +21,14 @@ public class HouseRepresentation {
 
     private Map<Variable, Object> mapVariable;
 
-    public HouseRepresentation(int longueur, int largeur, Set<String> listPieceNormal, Set<String> listPieceEau) {
+    public HouseRepresentation(int longueur, int largeur, List<String> listPieceNormal, List<String> listPieceEau) {
         this.longueur = longueur;
         this.largeur = largeur;
+
         this.listPieceNormal = listPieceNormal;
         this.listPieceEau = listPieceEau;
 
-        this.domaine = new HashSet<>();
-        this.domaine.addAll(listPieceNormal);
-        this.domaine.addAll(listPieceEau);
-
+        this.domaine = new ArrayList<>();
         this.listVariable = new ArrayList<>();
         this.listConstraint = new ArrayList<>();
 
@@ -40,6 +38,8 @@ public class HouseRepresentation {
     //----------- Construction -----------
 
     public void makeAll(){
+        this.makeListPiece();
+        this.makeDomain();
         this.makeVariables();
         this.makeBooleanVariables();
     }
@@ -49,10 +49,28 @@ public class HouseRepresentation {
         String[][] listPieceString = this.buildHouseString();
         for(int i = 0; i < this.longueur; i++){
             for(int j = 0; j < this.largeur; j++){
-                listVariable.add(new Variable(listPieceString[i][j], this.domaine));
+                listVariable.add(new Variable(listPieceString[i][j], HouseDemo.listToSetObject(this.domaine)));
             }
         }
         this.listVariable = listVariable;
+    }
+
+    //Suivant la taille de la maison on adapte le nombre de piece d'eau et de piece seche, puis on creer le domaine
+    public void makeListPiece(){
+        while(this.listPieceEau.size() + 1 > ((this.longueur*this.largeur)/2)){
+            this.listPieceEau.remove(this.listPieceEau.get(this.listPieceEau.size() - 1));
+        }
+        while(this.listPieceNormal.size() - 1 > (((this.longueur*this.largeur)/2) + 1)){
+            this.listPieceNormal.remove(this.listPieceNormal.get(this.listPieceNormal.size() - 1));
+        }
+        this.domaine.addAll(listPieceNormal);
+        this.domaine.addAll(listPieceEau);
+    }
+
+    public void makeDomain(){
+        while(this.domaine.size() > (this.longueur*this.largeur)){
+            this.domaine.remove(this.domaine.get(this.domaine.size() - 1));
+        }
     }
 
     public void makeBooleanVariables(){
@@ -71,11 +89,9 @@ public class HouseRepresentation {
 
     //Ajout de toute les contraintes de l'exemple
     public void makeAllConstraint(){
-        //this.makeStateSuiteConstraint();
         this.makeOnlyOnePieceConstraint();
-        //this.makeEveryPieceUsedConstraint();
-        //this.makeWaterPartConstraint();
-        //this.makeOnlyOneLivingRoomConstraint();
+        this.makeStateSuiteConstraint();
+        this.makeWaterPartConstraint();
     }
 
     //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
@@ -88,43 +104,22 @@ public class HouseRepresentation {
 
     //Contrainte une seule piece par case
     public void makeOnlyOnePieceConstraint(){
-        for(int i = 0; i < HouseDemo.WIDTH; i++){
-            for(int j = 0; j < HouseDemo.HEIGHT; j++){
+        for(int i = 0; i < this.longueur * this.largeur; i++){
+            for(int j = 0; j < this.largeur * this.longueur; j++){
                 if(i != j){
-                    System.out.println(i+","+j);
                     Variable v1 = this.listVariable.get(i);
                     Variable v2 = this.listVariable.get(j);
                     this.addConstraint(new DifferenceConstraint(v1, v2));
-                    this.addConstraint(new DifferenceConstraint(v2, v1));
                 }
-            }
-        }
-    }
 
-    //Contrainte toutes les cases occupes
-    public void makeEveryPieceUsedConstraint(){
-    }
-
-    //Constrainte un seul salon, une seule cuisine
-    public void makeOnlyOneLivingRoomConstraint(){
-        for(int i = 0; i < HouseDemo.WIDTH; i++){
-            for(int j = i + 1; j < HouseDemo.WIDTH; j++){
-                Variable v1 = this.listVariable.get(i);
-                Variable v2 = this.listVariable.get(j);
-                Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain());
-                Set<String> domainV2 = HouseDemo.objectSetToStringSet(v2.getDomain());
-                if (domainV1.contains("salon") && domainV2.contains("salon")) {
-                    this.addConstraint(new DifferenceConstraint(v1, v2));
-                }
-                if (domainV1.contains("cuisine") && domainV2.contains("cuisine")) {
-                    this.addConstraint(new DifferenceConstraint(v1, v2));
-                }
             }
         }
     }
 
     //Contrainte pieces d'eau cote a cote
     public void makeWaterPartConstraint(){
+        System.out.println(this.listPieceNormal.size());
+        System.out.println(this.listPieceEau.size());
         for(Variable v1 : this.listVariable){ //Pour chaque piece de la maison
             List<Variable> notNeighbors = this.getNotNeighbors(v1); //On recupere la liste des voisins de v1, la piece courante
             for(Variable v2 : notNeighbors){
@@ -134,11 +129,25 @@ public class HouseRepresentation {
                     for(String elementDomainV1 : domainV1){
                         if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
                             for(String pieceNormal : this.listPieceNormal){
+                                System.out.println();
+                                System.out.println("Contraintes sur : ");
+                                System.out.println("v1 (pieceeau) : " + v1);
+                                System.out.println("v2 : " + v2);
+                                System.out.println("Couples autorises : ");
+                                System.out.println("elementDomainV1 : " + elementDomainV1);
+                                System.out.println("pieceNormal : "  + pieceNormal);
                                 constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
                             }
                         }
                         else if(this.listPieceNormal.contains(elementDomainV1)){ //Mais si c'est une piece normale
-                            for(String pieceGeneral : HouseDemo.objectSetToStringSet(this.domaine)){
+                            for(String pieceGeneral : HouseDemo.objectSetToStringSet(HouseDemo.listToSetObject(this.domaine))){
+                                System.out.println();
+                                System.out.println("Contraintes sur : ");
+                                System.out.println("v1 (pieceseche) : " + v1);
+                                System.out.println("v2 : " + v2);
+                                System.out.println("Couples autorises : ");
+                                System.out.println("elementDomainV1 : " + elementDomainV1);
+                                System.out.println("pieceNormal : "  + pieceGeneral);
                                 constraint.addTuple(elementDomainV1, pieceGeneral); //Alors on autorise tout type de piece
                             }
                         }
@@ -288,23 +297,13 @@ public class HouseRepresentation {
         return this.listVariable;
     }
 
-    public BooleanVariable getDalleCoulee() {
-        return dalleCoulee;
-    }
+    public BooleanVariable getDalleCoulee() { return dalleCoulee; }
 
-    public BooleanVariable getDalleHumide() {
-        return dalleHumide;
-    }
+    public BooleanVariable getDalleHumide() { return dalleHumide; }
 
-    public BooleanVariable getMursEleves() {
-        return mursEleves;
-    }
+    public BooleanVariable getMursEleves() { return mursEleves; }
 
-    public BooleanVariable getToitureTerminee() {
-        return toitureTerminee;
-    }
+    public BooleanVariable getToitureTerminee() { return toitureTerminee; }
 
-    public Set<Object> getDomaine() {
-        return domaine;
-    }
+    public Set<Object> getDomaine() { return HouseDemo.listToSetObject(domaine); }
 }
