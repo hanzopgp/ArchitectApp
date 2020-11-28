@@ -72,7 +72,7 @@ public class HouseRepresentation {
     //Ajout de toute les contraintes de l'exemple
     public void makeAllConstraint(){
         //this.makeStateSuiteConstraint();
-        //this.makeOnlyOnePieceConstraint();
+        this.makeOnlyOnePieceConstraint();
         //this.makeEveryPieceUsedConstraint();
         //this.makeWaterPartConstraint();
         //this.makeOnlyOneLivingRoomConstraint();
@@ -88,12 +88,14 @@ public class HouseRepresentation {
 
     //Contrainte une seule piece par case
     public void makeOnlyOnePieceConstraint(){
-        for(int i = 0; i < this.listVariable.size(); i++){
-            for(int j = i + 1; j < this.listVariable.size(); j++){
-                Variable v1 = this.listVariable.get(i);
-                Variable v2 = this.listVariable.get(j);
-                if(!(v1 instanceof BooleanVariable) && !(v2 instanceof BooleanVariable)){
+        for(int i = 0; i < HouseDemo.WIDTH; i++){
+            for(int j = 0; j < HouseDemo.HEIGHT; j++){
+                if(i != j){
+                    System.out.println(i+","+j);
+                    Variable v1 = this.listVariable.get(i);
+                    Variable v2 = this.listVariable.get(j);
                     this.addConstraint(new DifferenceConstraint(v1, v2));
+                    this.addConstraint(new DifferenceConstraint(v2, v1));
                 }
             }
         }
@@ -101,15 +103,12 @@ public class HouseRepresentation {
 
     //Contrainte toutes les cases occupes
     public void makeEveryPieceUsedConstraint(){
-        for (Variable v : this.listVariable) {
-            this.addConstraint(new DifferenceConstraint(v, v));
-        }
     }
 
     //Constrainte un seul salon, une seule cuisine
     public void makeOnlyOneLivingRoomConstraint(){
-        for(int i = 0; i < this.listVariable.size(); i++){
-            for(int j = i + 1; j < this.listVariable.size(); j++){
+        for(int i = 0; i < HouseDemo.WIDTH; i++){
+            for(int j = i + 1; j < HouseDemo.WIDTH; j++){
                 Variable v1 = this.listVariable.get(i);
                 Variable v2 = this.listVariable.get(j);
                 Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain());

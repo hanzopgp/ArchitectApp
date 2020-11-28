@@ -119,6 +119,7 @@ public class HousePlanning {
         System.out.println("* Planning avec A*");
         System.out.println("* Temps mit par le planner : " + this.timeTaken);
         System.out.println("* Cout total : " + this.getTotalActionCost());
+        System.out.println("* Nombre d'action : " + this.listAction.size());
     }
 
 }

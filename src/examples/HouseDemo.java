@@ -61,7 +61,7 @@ public class HouseDemo {
         housePlanning.planAStar();
 
         //Affichage du resultat
-        housePlanning.printResults();
+        //housePlanning.printResults();
 
         //----------- Utilisation package datamining -----------
 
