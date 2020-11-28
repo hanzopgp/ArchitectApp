@@ -34,7 +34,6 @@ public class BacktrackSolver extends AbstractSolver{
 					return newMap;
 				}
 				Queue<Variable> newPile = new LinkedList<>(pile);
-				newPile.remove(0);
 				newMap = this.sra(newMap, newPile);
 				if(newMap != null){
 					return newMap;
