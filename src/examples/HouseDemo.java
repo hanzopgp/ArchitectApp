@@ -71,7 +71,7 @@ public class HouseDemo {
 
         System.out.println("######################## DATAMINING ########################");
 
-        HouseDatamining houseDatamining = new HouseDatamining();
+        HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation);
 
     }
 
