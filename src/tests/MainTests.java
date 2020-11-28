@@ -38,18 +38,18 @@ public class MainTests {
         ok = ok && RuleTests.testGetScope();
         ok = ok && RuleTests.testIsSatisfiedBy();
         ok = ok && BinaryExtensionConstraintTests.testGetScope();
-        ok = ok && BinaryExtensionConstraintTests.testIsSatisfiedBy(); 
+        ok = ok && BinaryExtensionConstraintTests.testIsSatisfiedBy();
         System.out.println("Testing package \"solvers\"...");
         ok = ok && AbstractSolverTests.testIsConsistent();
         ok = ok && BacktrackSolverTests.testSolve();
         ok = ok && ArcConsistencyTests.testFilter();
-        ok = ok && ArcConsistencyTests.testEnforce();                  /* NOT GOOD */
+        ok = ok && ArcConsistencyTests.testEnforce();
         //ok = ok && ArcConsistencyTests.testEnforceArcConsistency();    /* NOT GOOD */
         //ok = ok && MACSolverTests.testSolve();                         /* NOT GOOD */
         //ok = ok && HeuristicMACSolverTests.testSolve();                /* NOT GOOD */
-        ok = ok && NbConstraintsVariableHeuristicTests.testBest();     /* NOT GOOD */
-        ok = ok && DomainSizeVariableHeuristicTests.testBest();        /* NOT GOOD */
-        ok = ok && RandomValueHeuristicTests.testOrdering();           /* NOT GOOD */
+        ok = ok && NbConstraintsVariableHeuristicTests.testBest();
+        ok = ok && DomainSizeVariableHeuristicTests.testBest();
+        ok = ok && RandomValueHeuristicTests.testOrdering();
         System.out.println("Testing package \"planning\"...");
         ok = ok && BasicActionTests.testIsApplicable();
         ok = ok && BasicActionTests.testSuccessor();
@@ -70,7 +70,7 @@ public class MainTests {
         ok = ok && BruteForceAssociationRuleMinerTests.testAllCandidatePremises();
         ok = ok && BruteForceAssociationRuleMinerTests.testExtract();
         ok = ok && DatabaseTests.testItemTable();
-        //ok = ok && DatabaseTests.testPropositionalize();                /* NOT GOOD */
+        ok = ok && DatabaseTests.testPropositionalize();                /* NOT GOOD */
         System.out.println(ok ? "All tests passed" : "At least one test failed");
     }
 }

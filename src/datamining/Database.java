@@ -12,6 +12,7 @@ public class Database {
 
     public Database(Set<Variable> variables) {
         this.variables = variables;
+        this.instances = new ArrayList<>();
     }
 
     public void add(Map<Variable, Object> value){
@@ -48,12 +49,46 @@ public class Database {
 
 
     public BooleanDatabase propositionalize(){
-        Set<BooleanVariable> data = new HashSet<>();
         Map<Variable, Map<Object, BooleanVariable>> items = this.itemTable();
+        Set<BooleanVariable> booleanVariables = new HashSet<>();
 
-        Set<Variable> variables = items.keySet();
+        //Aide pour boucler sur la map :
+        // https://www.codingame.com/playgrounds/6162/6-ways-to-iterate-or-loop-a-map-in-java
+        for(Map.Entry<Variable, Map<Object, BooleanVariable>> entry : items.entrySet()){
+            //on boucle dans chaque map de la map items pour récupérer toutes les variables et les transformer
+            //en BooleanVariable
+            for(Map.Entry<Object, BooleanVariable> mapOfEntry : entry.getValue().entrySet()){
+                BooleanVariable booleanVariable = mapOfEntry.getValue();
+                //on peut récupérer des variables null
+                if(booleanVariable != null){
+                    booleanVariables.add(booleanVariable);
+                }
 
-        return null;
+            }
+        }
+
+        //On créé une instance de BooleanDatabase en récupérant une partie de ses données finales
+        //L'autre partie correspond aux Variable actuellement stockés dans Database que l'on va transformer
+        //en BooleanVariable
+        BooleanDatabase booleanDatabase = new BooleanDatabase(booleanVariables);
+
+
+        for(Map<Variable, Object> instanceItem : this.instances){
+            Set<BooleanVariable> tmpBooleanVariables = new HashSet<>();
+            //Pour chaque item de notre Database actuelle, on la transforme en item d'une BooleanDatabase :
+            for(Map.Entry<Variable, Object> mapInstance : instanceItem.entrySet()){
+                //on récupère la valeur de la clé associé à "items" grace à la Variable stocké dans la clé de
+                //l'instance de Database qu'on traite, et ensuite la valeur récupérée étant une map on récupère
+                //la valeur de la clé associé à la clé de la map récupéré précédemment. La valeur étant une BooleanVariable,
+                //on vérifie comme à la ligne 63 qu'elle n'est pas nulle.
+                if(items.get(mapInstance.getKey()).get(mapInstance.getValue()) != null){
+                    BooleanVariable v = items.get(mapInstance.getKey()).get(mapInstance.getValue());
+                    tmpBooleanVariables.add(v);
+                }
+            }
+            booleanDatabase.add(tmpBooleanVariables);
+        }
+        return booleanDatabase;
     }
 
 
