@@ -12,47 +12,62 @@ public class MACSolver extends AbstractSolver{
     @Override 
     public Map<Variable, Object> solve(){
         Map<Variable, Set<Object>> domaines = new HashMap<>();
+        LinkedList<Variable> variables = new LinkedList<>();
         for(Variable v : this.variables){
             domaines.put(v, new HashSet<>(v.getDomain()));
+            variables.add(v);
         }
-        return macSolve(domaines, new HashMap<>());
+        Map<Variable, Object> newInstanciation = new HashMap<>();
+        return macSolve(newInstanciation, variables, domaines);
     }
 
 
-    public Map<Variable, Object> macSolve(Map<Variable, Set<Object>> domaines, Map<Variable, Object> instanciation){
-        List<Variable> notInstanciation = new ArrayList<>();
-        Map<Variable, Set<Object>> domainesCopies = new HashMap<>(domaines);
-        Map<Variable, Object> secondInstanciation = new HashMap<>(instanciation);
-        ArcConsistency arcConsistency = new ArcConsistency(constraints);
-        boolean res = arcConsistency.enforceArcConsistency(domainesCopies);
-        if(res == false){
-            return null;
-        }
-        
-        if(notInstanciation.size() == 0 && this.isConsistent(instanciation)){
+    public Map<Variable, Object> macSolve(Map<Variable, Object> instanciation, LinkedList<Variable> variables, Map<Variable, Set<Object>> domaines) {
+        if(variables.isEmpty()){
             return instanciation;
-        }
+        }else{
+            Map<Variable, Set<Object>> domainesCopie = new HashMap<>();
 
-        for(Variable v : this.variables){
-            if(instanciation.containsKey(v) == false){
-                notInstanciation.add(v);
+            ArcConsistency arcConsistency = new ArcConsistency(this.constraints);
+            boolean res = arcConsistency.enforceArcConsistency(domainesCopie);
+
+            if(!res){
+                return null;
             }
-        }        
-        
-        for(Object dom : domainesCopies.get(notInstanciation.get(0))){
-            secondInstanciation.put(notInstanciation.get(0), dom);
-            if(this.isConsistent(secondInstanciation)){
-                if(secondInstanciation.keySet().containsAll(this.variables)){
-                    return secondInstanciation;
-                }
-                secondInstanciation = macSolve(domainesCopies, secondInstanciation);
-                if(secondInstanciation != null){
-                    return secondInstanciation;
+
+            //SI toutes les variables sont instanciées
+            for(Variable v : variables) {
+                for (Map.Entry<Variable, Set<Object>> entry : domaines.entrySet()) {
+                    if (entry.getKey().equals(v)) {
+                        Set<Object> objet = new HashSet<>(entry.getValue());
+                        domainesCopie.put(v, objet);
+                    }
                 }
             }
+
+
+            //on récupère la première variable de notre liste
+            Variable v = variables.poll();
+            for(Map.Entry<Variable, Set<Object>> entry : domainesCopie.entrySet()){
+                if(entry.getKey().equals(v)){
+                    for(Object o : entry.getValue()){
+                        instanciation.put(v, o);
+                        if(this.isConsistent(instanciation)){
+                            Set<Object> tmpDomaines = new HashSet<>();
+                            tmpDomaines.add(o);
+                            domainesCopie.put(v, tmpDomaines);
+                            Map<Variable, Object> newInstanciation = new HashMap<>();
+                            newInstanciation = this.macSolve(instanciation, variables, domainesCopie);
+                            if(newInstanciation != null){ //Solution trouvé
+                                return newInstanciation;
+                            }
+                        }
+                        instanciation.remove(v);
+                    }
+                }
+            }
+            variables.add(v);
         }
         return null;
     }
-
-
 }

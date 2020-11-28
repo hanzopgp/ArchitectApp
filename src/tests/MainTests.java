@@ -44,8 +44,8 @@ public class MainTests {
         ok = ok && BacktrackSolverTests.testSolve();
         ok = ok && ArcConsistencyTests.testFilter();
         ok = ok && ArcConsistencyTests.testEnforce();
-        //ok = ok && ArcConsistencyTests.testEnforceArcConsistency();    /* NOT GOOD */
-        //ok = ok && MACSolverTests.testSolve();                         /* NOT GOOD */
+        ok = ok && ArcConsistencyTests.testEnforceArcConsistency();
+        ok = ok && MACSolverTests.testSolve();                         /* NOT GOOD */
         //ok = ok && HeuristicMACSolverTests.testSolve();                /* NOT GOOD */
         ok = ok && NbConstraintsVariableHeuristicTests.testBest();
         ok = ok && DomainSizeVariableHeuristicTests.testBest();
