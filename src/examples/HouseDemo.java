@@ -1,16 +1,15 @@
 package examples;
 
 import representation.*;
-import solvers.*;
 
 import java.util.*;
 
 public class HouseDemo {
 
-    public static int WIDTH = 4;
+    public static int WIDTH = 2;
     public static int HEIGHT = 3;
-    public static Set<String> LIST_PIECE_NORMAL = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2", "chambre3", "chambre4"));
-    public static Set<String> LIST_PIECE_EAU = new HashSet<>(Arrays.asList("sdb", "sdb2", "sdb3", "cuisine", "toilette", "toilette2"));
+    public static List<String> LIST_PIECE_NORMAL = new ArrayList<>(Arrays.asList("salon", "chambre1", "chambre2", "salledejeu", "chambre3", "chambre4", "chambre5"));
+    public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3"));
     public static int PLANNING_COST = 5;
 
 
@@ -26,7 +25,7 @@ public class HouseDemo {
         //Ajout des contraintes
         houseRepresentation.makeAllConstraint();
 
-        //Affichage etat de la maison
+        //Affichage de la maison de base
         //houseRepresentation.printAll();
 
         //----------- Utilisation package solvers -----------
@@ -37,6 +36,11 @@ public class HouseDemo {
         Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseRepresentation.getListConstraint());
         HouseSolvers houseSolvers = new HouseSolvers(setVariable, setConstraint);
 
+        if((WIDTH * HEIGHT) > (LIST_PIECE_EAU.size() + LIST_PIECE_NORMAL.size())){
+            System.out.println("Pas assez de pieces disponible pour votre maison");
+            System.exit(1);
+        }
+
         //Backtrack solver
         houseSolvers.solveWithBacktrack();
         //Mac solver avec heuristique
@@ -45,7 +49,7 @@ public class HouseDemo {
         //houseSolvers.solveWithMac();
 
         if(houseSolvers.getMapSolved() == null){
-            System.out.println("Erreur lors de la resolution ! ");
+            System.out.println("Pas de solution trouvee ! ");
             System.exit(1);
         }
 
@@ -77,6 +81,10 @@ public class HouseDemo {
         return new HashSet<>(listVariable);
     }
 
+    public static Set<Constraint> listToSetConstraint(List<Constraint> listConstraint){ return new HashSet<>(listConstraint); }
+
+    public static Set<Object> listToSetObject(List<Object> listObject){ return new HashSet<>(listObject); }
+
     public static Set<String> objectSetToStringSet(Set<Object> setObject){
         Set<String> setString = new HashSet<>();
         for(Object o : setObject){
@@ -86,7 +94,5 @@ public class HouseDemo {
         }
         return setString;
     }
-
-    public static Set<Constraint> listToSetConstraint(List<Constraint> listConstraint){ return new HashSet<>(listConstraint); }
 
 }
