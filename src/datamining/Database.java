@@ -77,9 +77,10 @@ public class Database {
             Set<BooleanVariable> tmpBooleanVariables = new HashSet<>();
             //Pour chaque item de notre Database actuelle, on la transforme en item d'une BooleanDatabase :
             for(Map.Entry<Variable, Object> mapInstance : instanceItem.entrySet()){
-                //on récupère la valeur de la clé associé à "items" grace à la Variable stocké dans la clé de
-                //l'instance de Database qu'on traite, et ensuite la valeur récupérée étant une map on récupère
-                //la valeur de la clé associé à la clé de la map récupéré précédemment. La valeur étant une BooleanVariable.
+                // on récupère la valeur de la clé associé à "items" grace à la Variable contenu dans mapInstance.getKey(),
+                // ce qui renvoie --> Map<Object, BooleanVariable>
+                // mapInstance->getValue() renvoie Object, et on récupère la valeur associé à cet objet,
+                // donc une BooleanVariable
                 if(items.get(mapInstance.getKey()).get(mapInstance.getValue()) instanceof BooleanVariable){
                     BooleanVariable v = items.get(mapInstance.getKey()).get(mapInstance.getValue());
                     tmpBooleanVariables.add(v);

@@ -5,9 +5,10 @@ import representation.*;
 
 public class ArcConsistency{
 	
-	private final ArrayList<Constraint> constraints;
+	private final Set<Constraint> constraints;
 	
-	public ArcConsistency(ArrayList<Constraint> constraints){
+	public ArcConsistency(Set<Constraint> constraints){
+
 		this.constraints = constraints;
 	}
 	
@@ -40,12 +41,12 @@ public class ArcConsistency{
 		}else{
 			//on récupère la première variable de la contrainte
 			Variable v1 = constraintIterator.next();
-			if(!mapDom.keySet().contains(v1)){
+			if(!mapDom.containsKey(v1)){
 				return false;
 			}else{
 				//on récupère la deuxième variable de la contrainte
 				Variable v2 = constraintIterator.next();
-				if(!mapDom.keySet().contains(v2)){
+				if(!mapDom.containsKey(v2)){
 					return false;
 				}else{
 					boolean res = filter(v1, mapDom.get(v1), v2, mapDom.get(v2), c);
@@ -56,10 +57,22 @@ public class ArcConsistency{
 		}
 	}
 
+
 	public boolean enforceArcConsistency(Map<Variable, Set<Object>> mapDom){
-		System.out.println("alo");
-		return false;
+		for(Constraint c : this.getConstraints()){
+			enforce(c, mapDom);
+		}
+
+		//retourne true si et seulement si tous les domaines sont non vides à la fin du traitement
+		for(Set<Object> varDomaine : mapDom.values()){
+			if(varDomaine.size() == 0){
+				return false;
+			}
+		}
+		return true;
 	}
-	
-	
+
+	public Set<Constraint> getConstraints() {
+		return constraints;
+	}
 }
