@@ -27,12 +27,15 @@ public class BacktrackSolver extends AbstractSolver{
 			Map<Variable, Object> newMap = new HashMap<>(map);
 			newMap.put(v, o);
 			if(isConsistent(newMap)){
+				System.out.println("size : " + newMap.size());
 				if(newMap.keySet().containsAll(this.variables)){
 					return newMap;
 				}
 				Queue<Variable> newPile = new LinkedList<>(pile);
+				//newPile.remove(v);
 				newMap = this.sra(newMap, newPile);
 				if(newMap != null){
+					System.out.println("hi");
 					return newMap;
 				}
 			}
