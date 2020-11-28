@@ -11,11 +11,8 @@ public class BacktrackSolver extends AbstractSolver{
 
 	@Override
 	public Map<Variable, Object> solve(){
-		Map<Variable, Object> instanceP = new HashMap<Variable, Object>();
-		Queue<Variable> pile = new LinkedList<>();
-		for(Variable v : this.variables){
-			pile.add(v);
-		}
+		Map<Variable, Object> instanceP = new HashMap<>();
+		Queue<Variable> pile = new LinkedList<>(this.variables);
 		return sra(instanceP, pile);
 	}
 

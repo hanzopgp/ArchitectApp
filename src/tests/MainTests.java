@@ -47,9 +47,9 @@ public class MainTests {
         //ok = ok && ArcConsistencyTests.testEnforceArcConsistency();    /* NOT GOOD */
         //ok = ok && MACSolverTests.testSolve();                         /* NOT GOOD */
         //ok = ok && HeuristicMACSolverTests.testSolve();                /* NOT GOOD */
-        //ok = ok && NbConstraintsVariableHeuristicTests.testBest();     /* NOT GOOD */
-        //ok = ok && DomainSizeVariableHeuristicTests.testBest();        /* NOT GOOD */
-        //ok = ok && RandomValueHeuristicTests.testOrdering();           /* NOT GOOD */
+        ok = ok && NbConstraintsVariableHeuristicTests.testBest();     /* NOT GOOD */
+        ok = ok && DomainSizeVariableHeuristicTests.testBest();        /* NOT GOOD */
+        ok = ok && RandomValueHeuristicTests.testOrdering();           /* NOT GOOD */
         System.out.println("Testing package \"planning\"...");
         ok = ok && BasicActionTests.testIsApplicable();
         ok = ok && BasicActionTests.testSuccessor();

@@ -94,8 +94,8 @@ public class HousePlanning {
             }
         };
 
-        //Creation du planner en utilisant l'algorithme A*
-        Planner planner = new AStarPlanner(start, actions, but, heuristic);
+        //Utilisation du A*
+        new AStarPlanner(start, actions, but, heuristic);
 
         //Affection des resultats
         this.listAction = actions;
@@ -119,6 +119,7 @@ public class HousePlanning {
         System.out.println("* Planning avec A*");
         System.out.println("* Temps mit par le planner : " + this.timeTaken);
         System.out.println("* Cout total : " + this.getTotalActionCost());
+        System.out.println("* Nombre d'action : " + this.listAction.size());
     }
 
 }

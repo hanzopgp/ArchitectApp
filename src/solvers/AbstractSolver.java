@@ -10,8 +10,6 @@ public abstract class AbstractSolver implements Solver{
 	
 	public AbstractSolver(Set<Variable> variables, Set<Constraint> constraints){
 		for(Constraint c : constraints){
-//			System.out.println("v : " + variables);
-//			System.out.println("scope : " + c.getScope());
 			if(!variables.containsAll(c.getScope())){
 				throw new IllegalArgumentException("Fail");
 			}

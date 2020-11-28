@@ -9,8 +9,8 @@ public class HouseDemo {
 
     public static int WIDTH = 4;
     public static int HEIGHT = 3;
-    public static Set<String> LIST_PIECE_NORMAL = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2"));
-    public static Set<String> LIST_PIECE_EAU = new HashSet<>(Arrays.asList("sdb", "cuisine", "toilette"));
+    public static Set<String> LIST_PIECE_NORMAL = new HashSet<>(Arrays.asList("salon", "chambre1", "chambre2", "chambre3", "chambre4"));
+    public static Set<String> LIST_PIECE_EAU = new HashSet<>(Arrays.asList("sdb", "sdb2", "sdb3", "cuisine", "toilette", "toilette2"));
     public static int PLANNING_COST = 5;
 
 
@@ -27,7 +27,7 @@ public class HouseDemo {
         houseRepresentation.makeAllConstraint();
 
         //Affichage etat de la maison
-        houseRepresentation.printAll();
+        //houseRepresentation.printAll();
 
         //----------- Utilisation package solvers -----------
 
@@ -61,11 +61,13 @@ public class HouseDemo {
         housePlanning.planAStar();
 
         //Affichage du resultat
-        housePlanning.printResults();
+        //housePlanning.printResults();
 
         //----------- Utilisation package datamining -----------
 
         System.out.println("######################## DATAMINING ########################");
+
+        HouseDatamining houseDatamining = new HouseDatamining();
 
     }
 

@@ -55,11 +55,11 @@ public class ArcConsistency{
 			}
 		}
 	}
-	
-	
-	/*public static void enforceArcConsistency(Map<Variable, Set<Object>>){
 
-	}*/
+	public boolean enforceArcConsistency(Map<Variable, Set<Object>> mapDom){
+		System.out.println("alo");
+		return false;
+	}
 	
 	
 }
