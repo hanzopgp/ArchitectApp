@@ -79,9 +79,8 @@ public class Database {
             for(Map.Entry<Variable, Object> mapInstance : instanceItem.entrySet()){
                 //on récupère la valeur de la clé associé à "items" grace à la Variable stocké dans la clé de
                 //l'instance de Database qu'on traite, et ensuite la valeur récupérée étant une map on récupère
-                //la valeur de la clé associé à la clé de la map récupéré précédemment. La valeur étant une BooleanVariable,
-                //on vérifie comme à la ligne 63 qu'elle n'est pas nulle.
-                if(items.get(mapInstance.getKey()).get(mapInstance.getValue()) != null){
+                //la valeur de la clé associé à la clé de la map récupéré précédemment. La valeur étant une BooleanVariable.
+                if(items.get(mapInstance.getKey()).get(mapInstance.getValue()) instanceof BooleanVariable){
                     BooleanVariable v = items.get(mapInstance.getKey()).get(mapInstance.getValue());
                     tmpBooleanVariables.add(v);
                 }
