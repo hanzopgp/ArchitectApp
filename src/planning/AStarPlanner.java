@@ -7,6 +7,11 @@ import planning.Goal;
 import planning.Heuristic;
 import representation.*;
 
+
+/**
+ * Cette classe représente un planificateur utilisant l'algorithme A*.
+ * Cette algorithme se termine dès qu'il a atteint l'un des noeuds solutions. 
+ */
 public class AStarPlanner implements Planner{
 
     private Map<Variable, Object> initialState;
@@ -14,6 +19,12 @@ public class AStarPlanner implements Planner{
     private Goal goal;
     private Heuristic heuristic;
 
+    /**
+     * @param initialState -> état initial
+     * @param actions -> actions qui pourront être testée
+     * @param goal -> but à obtenir
+     * @param heuristic -> heuristic
+     */
     public AStarPlanner(Map<Variable, Object> initialState, Set<Action> actions, Goal goal, Heuristic heuristic){
         this.initialState = initialState;
         this.actions = actions;
@@ -22,6 +33,16 @@ public class AStarPlanner implements Planner{
     }
 
 
+    /**
+     * Méthode récursive permettant de calculer un plan à partir des structures
+     * produites par la recherche.
+     * La méthode sera appelée où l'on aura atteint le but.
+     * 
+     * @param father -> possède le father des états visités
+     * @param plan -> les étapes faites précédement = plan actuel
+     * @param goal2 -> but suivant à valider
+     * @return -> reconstruction du plan
+     */
     public List<Action> get_bfs_plan(Map<Map<Variable,Object>,Map<Variable,Object>> father,
                                      Map<Map<Variable,Object>,Action> plan,
                                      Map<Variable, Object> goal2){
@@ -34,6 +55,12 @@ public class AStarPlanner implements Planner{
         return bfs_plan;
     }
 
+
+    /**
+     * Algorithme retournant la solution la plus rapide : A*
+     * 
+     * @return -> plan obtenu
+     */
     @Override
     public List<Action> plan(){
         Map<Map<Variable, Object>, Action> plan = new HashMap<Map<Variable, Object>, Action>();
@@ -53,7 +80,9 @@ public class AStarPlanner implements Planner{
         distance.put(initialState, 0.0);
         value.put(this.initialState, Float.valueOf(this.heuristic.estimate(this.initialState)).doubleValue());
 
+        /** tant que tous les états n'ont pas été ouvert **/
         while(!open.isEmpty()){
+            /** donne à instanciation l'élément le plus petit **/
             //instanciation = Collections.min(open, com);
             instanciation = open.poll();
             if(this.getGoal().isSatisfiedBy(instanciation)){
@@ -61,11 +90,14 @@ public class AStarPlanner implements Planner{
             }else{
                 open.remove(instanciation);
                 for(Action act : this.actions){
+                    /** test l'action **/
                     if(act.isApplicable(instanciation)){
                         next = act.successor(instanciation);
+                    /** test la liste des ouverts et des états déjà exploré **/
                         if(!distance.containsKey(next)){
                             distance.put(next, Double.MAX_VALUE);
                         }
+                    /** regarde si le coût calculé est inférieur à celui retenu précédemment **/
                         if(distance.get(next) > distance.get(instanciation) + act.getCost()){
                             distance.put(next, distance.get(instanciation) + act.getCost());
                             value.put(next, distance.get(next) + this.heuristic.estimate(next));
@@ -77,6 +109,7 @@ public class AStarPlanner implements Planner{
                 }
             }
         }
+        /** pas d'action possible pour le plan **/
         return null;
     }
 
@@ -145,4 +178,3 @@ public class AStarPlanner implements Planner{
         }
         return null;
     }*/
-
