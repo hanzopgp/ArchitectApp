@@ -46,7 +46,7 @@ public class MainTests {
         ok = ok && ArcConsistencyTests.testEnforce();
         ok = ok && ArcConsistencyTests.testEnforceArcConsistency();
         ok = ok && MACSolverTests.testSolve();                         /* NOT GOOD */
-        //ok = ok && HeuristicMACSolverTests.testSolve();                /* NOT GOOD */
+        ok = ok && HeuristicMACSolverTests.testSolve();                /* NOT GOOD */
         ok = ok && NbConstraintsVariableHeuristicTests.testBest();
         ok = ok && DomainSizeVariableHeuristicTests.testBest();
         ok = ok && RandomValueHeuristicTests.testOrdering();
