@@ -76,11 +76,9 @@ public class HouseDemo {
         System.out.println("######################## DATAMINING ########################");
 
         //Creation de la base de donnee
-//        MapSolvedGenerator mapSolvedGenerator = new MapSolvedGenerator(setVariable, setConstraint);
-//        System.out.println(mapSolvedGenerator.getListSolvedMap().size());
-//        System.out.println(mapSolvedGenerator.getListSolvedMap().get(0));
-//        System.out.println(mapSolvedGenerator.getListSolvedMap().get(1));
-
+        MapSolvedGenerator mapSolvedGenerator = new MapSolvedGenerator(setVariable, setConstraint);
+        System.out.println(mapSolvedGenerator.getListSolvedMap().size());
+        System.out.println(mapSolvedGenerator.getListSolvedMap().get(0).equals(mapSolvedGenerator.getListSolvedMap().get(1)));
 
         //Recuperation des informations
         HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation);
@@ -113,22 +111,11 @@ public class HouseDemo {
 
     public static boolean mapIsInListMap(Map<Variable, Object> map1, List<Map<Variable, Object>> listMap){
         for(Map<Variable, Object> map2 : listMap){
-            if(mapAreEqual(map1, map2)){
+            if(map1.equals(map2)){
                 return true;
             }
         }
         return false;
-    }
-
-    public static boolean mapAreEqual(Map<Variable, Object> map1, Map<Variable, Object> map2){
-        for (Map.Entry<Variable, Object> entry1 : map1.entrySet()) {
-            for (Map.Entry<Variable, Object> entry2 : map2.entrySet()) {
-                if(!entry1.equals(entry2)){
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
 }
