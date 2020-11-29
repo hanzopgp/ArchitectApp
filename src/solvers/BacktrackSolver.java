@@ -43,7 +43,10 @@ public class BacktrackSolver extends AbstractSolver{
 			Map<Variable, Object> newMap = new HashMap<>(map);
 			newMap.put(v, o);
 			if(isConsistent(newMap)){
-				//System.out.println("size : " + newMap.size());
+				//System.out.println("diff : "  + (this.variables.size()-newMap.size()));
+//				if((this.variables.size()-newMap.size()) == 1){
+//					System.out.println("newMap : " + newMap);
+//				}
 				if(newMap.keySet().containsAll(this.variables)){
 					return newMap;
 				}

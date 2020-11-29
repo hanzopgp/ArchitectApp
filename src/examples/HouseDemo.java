@@ -6,8 +6,8 @@ import java.util.*;
 
 public class HouseDemo {
 
-    public static int WIDTH = 3; //maximum WIDTH*HEIGHT : 12
-    public static int HEIGHT = 4;
+    public static int WIDTH = 4; //maximum WIDTH*HEIGHT : 12
+    public static int HEIGHT = 3;
     public static List<String> LIST_PIECE_NORMAL = new ArrayList<>(Arrays.asList("salon", "chambre1", "chambre2", "salledejeu", "chambre3", "chambre4", "chambre5"));
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3"));
     public static int PLANNING_COST = 5;
