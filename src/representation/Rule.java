@@ -2,13 +2,23 @@ package representation;
 
 import java.util.*;
 
+/**
+ * Cette classe correspond à une règle impliquant v1 avec v2
+ */
 public class Rule implements Constraint{
 	
 	private final boolean l1;
 	private final boolean l2;
 	private final BooleanVariable v1;
 	private final BooleanVariable v2;
-	
+
+	/**
+	 * Constructeur
+	 * @param v1 - première variable
+	 * @param l1 - valeur de la première variable
+	 * @param v2 - deuxième variable
+	 * @param l2 - valeur de la deuxième variable
+	 */
 	public Rule(BooleanVariable v1, boolean l1, BooleanVariable v2, boolean l2){
 		this.l1 = l1;
 		this.l2 = l2;

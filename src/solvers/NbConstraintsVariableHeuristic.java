@@ -5,12 +5,22 @@ import representation.Variable;
 
 import java.util.*;
 
+/**
+ * Cette classe permet de trouver la variable qui satisfait le plus de contraintes
+ */
 public class NbConstraintsVariableHeuristic implements  VariableHeuristic{
 
     private Set<Variable> listVariables;
     private Set<Constraint> listContraintes;
     private boolean most;
 
+    /**
+     * Constructeur
+     * @param listVariables - Ensemble de variables
+     * @param listContraintes - Ensemble de contraintes
+     * @param most - booléen indiquant si on préfère que les variables apparaissant
+     *               dans le plus de contraintes (true) ou dans le moins de contraintes (false)
+     */
     public NbConstraintsVariableHeuristic(Set<Variable> listVariables, Set<Constraint> listContraintes, boolean most){
         this.listVariables = listVariables;
         this.listContraintes = listContraintes;

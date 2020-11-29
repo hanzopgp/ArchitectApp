@@ -1,10 +1,20 @@
 package solvers;
 import java.util.*;
 import representation.*;
-import solvers.ArcConsistency;
 
+/**
+ * Cette classe correspond à un solveur dont le fonctionnement permet de
+ * vérifier si un ensemble de domaines de variable est dit "arc-cohérent" avec
+ * les contraintes de l'instance MACSolver, afin de faciliter la recherche d'une
+ * solution.
+ */
 public class MACSolver extends AbstractSolver{
 
+    /**
+     * Constructeur
+     * @param variables - Ensemble de variables
+     * @param constraints - Ensemble de contraintes
+     */
     public MACSolver(Set<Variable> variables, Set<Constraint> constraints){
         super(variables, constraints);
     }
@@ -12,16 +22,20 @@ public class MACSolver extends AbstractSolver{
     @Override 
     public Map<Variable, Object> solve(){
         Map<Variable, Set<Object>> domaines = new HashMap<>();
-        LinkedList<Variable> variables = new LinkedList<>();
         for(Variable v : this.variables){
             domaines.put(v, new HashSet<>(v.getDomain()));
-            variables.add(v);
         }
-        Map<Variable, Object> newInstanciation = new HashMap<>();
-        return macSolve(newInstanciation, variables, domaines);
+        return macSolve(new HashMap<Variable, Object>(), new LinkedList<>(this.variables), domaines);
     }
 
 
+    /**
+     * Fonction récursive permettant la résolution du problème
+     * @param instanciation - Instanciation
+     * @param variables - Liste de variables de l'instance actuelle
+     * @param domaines - Domaines
+     * @return
+     */
     public Map<Variable, Object> macSolve(Map<Variable, Object> instanciation, LinkedList<Variable> variables, Map<Variable, Set<Object>> domaines) {
         if(variables.isEmpty()){
             return instanciation;

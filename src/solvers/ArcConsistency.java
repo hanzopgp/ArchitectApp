@@ -3,15 +3,33 @@ package solvers;
 import java.util.*;
 import representation.*;
 
+/**
+ * Cette classe correspond à un ensemble dit "arc-cohérent" sur plusieurs
+ * contraintes.
+ */
 public class ArcConsistency{
 	
 	private final Set<Constraint> constraints;
-	
+
+	/**
+	 * Constructeur
+	 * @param constraints - Ensemble de contraintes
+	 */
 	public ArcConsistency(Set<Constraint> constraints){
 
 		this.constraints = constraints;
 	}
-	
+
+	/**
+	 * Fonction qui permet de supprimer les variables qui ne satisfassent pas
+	 * la contrainte actuelle
+	 * @param var1 - Première variable
+	 * @param var1Domaine - Domaine de la première variable
+	 * @param var2 - Deuxième variable
+	 * @param var2Domaine - Domaine de la deuxième variable
+	 * @param constraint - Contrainte que var1 et var2 doivent satisfaire
+	 * @return
+	 */
 	public static boolean filter(Variable var1, Set<Object> var1Domaine, Variable var2, Set<Object> var2Domaine, Constraint constraint){
 		Set<Object> tmp = new HashSet<>();
 		for(Object var1dom : var1Domaine){
@@ -31,7 +49,14 @@ public class ArcConsistency{
 		var1Domaine.removeAll(tmp);
 		return tmp.size() != 0;
 	}
-	
+
+	/**
+	 * Cette méthode permet de rendre les domaines passés en paramètres "arc-cohérents"
+	 * avec la contrainte en paramètre
+	 * @param c - Contrainte
+	 * @param mapDom - Domaines
+	 * @return
+	 */
 	public static boolean enforce(Constraint c, Map<Variable, Set<Object>> mapDom){
 
 		Iterator<Variable> constraintIterator = c.getScope().iterator();
@@ -57,7 +82,13 @@ public class ArcConsistency{
 		}
 	}
 
-
+	/**
+	 * Cette méthode agit de la même sorte que enforce(), mais elle permet de rendre
+	 * les domaines passés en paramètres "arc-cohérents" avec les contraintes contenues
+	 * dans cette classe.
+	 * @param mapDom - Domaines
+	 * @return
+	 */
 	public boolean enforceArcConsistency(Map<Variable, Set<Object>> mapDom){
 		for(Constraint c : this.getConstraints()){
 			enforce(c, mapDom);
@@ -72,6 +103,10 @@ public class ArcConsistency{
 		return true;
 	}
 
+	/**
+	 * Getter des contraintes
+	 * @return
+	 */
 	public Set<Constraint> getConstraints() {
 		return constraints;
 	}
