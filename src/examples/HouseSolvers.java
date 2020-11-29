@@ -3,6 +3,7 @@ package examples;
 import representation.Constraint;
 import representation.Variable;
 import solvers.BacktrackSolver;
+import solvers.MACSolver;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,15 +40,15 @@ public class HouseSolvers {
 //        long end = System.currentTimeMillis();
 //        this.timeTaken = end - start;
 //    }
-//
-//    public void solveWithMac(){
-//        long start = System.currentTimeMillis();
-//        MacSolver macSolver = new MacSolver(setVariable, setConstraint);
-//        this.mapSolved = macSolver.solve();
-//        this.solverUsed = "Mac solver";
-//        long end = System.currentTimeMillis();
-//        this.timeTaken = end - start;
-//    }
+
+    public void solveWithMac(){
+        long start = System.currentTimeMillis();
+        MACSolver macSolver = new MACSolver(setVariable, setConstraint);
+        this.mapSolved = macSolver.solve();
+        this.solverUsed = "Mac solver";
+        long end = System.currentTimeMillis();
+        this.timeTaken = end - start;
+    }
 
     public void printResults(){
         for (Map.Entry<Variable, Object> entry : this.mapSolved.entrySet()) {
@@ -59,6 +60,7 @@ public class HouseSolvers {
     }
 
     public void printHouse(){
+        System.out.println("Plan de la maison : ");
         int cpt = 0;
         for (Map.Entry<Variable, Object> entry : this.mapSolved.entrySet()) {
             if(!(entry.getValue().equals(false)) && !(entry.getValue().equals(true))){

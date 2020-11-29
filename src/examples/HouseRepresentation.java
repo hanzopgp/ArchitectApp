@@ -57,11 +57,20 @@ public class HouseRepresentation {
 
     //Suivant la taille de la maison on adapte le nombre de piece d'eau et de piece seche, puis on creer le domaine
     public void makeListPiece(){
-        while(this.listPieceEau.size() + 1 > ((this.longueur*this.largeur)/2)){
-            this.listPieceEau.remove(this.listPieceEau.get(this.listPieceEau.size() - 1));
-        }
-        while(this.listPieceNormal.size() - 1 > (((this.longueur*this.largeur)/2) + 1)){
-            this.listPieceNormal.remove(this.listPieceNormal.get(this.listPieceNormal.size() - 1));
+        if(this.longueur*this.largeur%2==0){
+            while(this.listPieceEau.size() + 1 > ((this.longueur*this.largeur)/2)){
+                this.listPieceEau.remove(this.listPieceEau.get(this.listPieceEau.size() - 1));
+            }
+            while(this.listPieceNormal.size() > (((this.longueur*this.largeur)/2) + 1)){
+                this.listPieceNormal.remove(this.listPieceNormal.get(this.listPieceNormal.size() - 1));
+            }
+        }else{
+            while(this.listPieceEau.size() + 1 > ((this.longueur*this.largeur)/2)){
+                this.listPieceEau.remove(this.listPieceEau.get(this.listPieceEau.size() - 1));
+            }
+            while(this.listPieceNormal.size() - 1 > (((this.longueur*this.largeur)/2) + 1)){
+                this.listPieceNormal.remove(this.listPieceNormal.get(this.listPieceNormal.size() - 1));
+            }
         }
         this.domaine.addAll(listPieceNormal);
         this.domaine.addAll(listPieceEau);
@@ -118,44 +127,60 @@ public class HouseRepresentation {
 
     //Contrainte pieces d'eau cote a cote
     public void makeWaterPartConstraint(){
-        System.out.println(this.listPieceNormal.size());
-        System.out.println(this.listPieceEau.size());
-        for(Variable v1 : this.listVariable){ //Pour chaque piece de la maison
-            List<Variable> notNeighbors = this.getNotNeighbors(v1); //On recupere la liste des voisins de v1, la piece courante
+//        System.out.println(this.listPieceNormal.size());
+//        System.out.println(this.listPieceEau.size());
+        List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
+        tmpListVariable.removeIf(tmpV -> tmpV instanceof BooleanVariable);
+        for(Variable v1 : tmpListVariable){ //Pour chaque piece de la maison
+            List<Variable> notNeighbors = this.getNotNeighbors(v1); //On recupere la liste des voisins de v1, la piece
             for(Variable v2 : notNeighbors){
-                if(!(v1 instanceof BooleanVariable) && !(v2 instanceof BooleanVariable)){
-                    BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //On cree une contrainte liant la case courante et chacune des cases non-voisines
-                    Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain()); //On recupere le domaine de la variable courante
-                    for(String elementDomainV1 : domainV1){
-                        if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
-                            for(String pieceNormal : this.listPieceNormal){
-                                System.out.println();
-                                System.out.println("Contraintes sur : ");
-                                System.out.println("v1 (pieceeau) : " + v1);
-                                System.out.println("v2 : " + v2);
-                                System.out.println("Couples autorises : ");
-                                System.out.println("elementDomainV1 : " + elementDomainV1);
-                                System.out.println("pieceNormal : "  + pieceNormal);
-                                constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
-                            }
+                BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //On cree une contrainte liant la case courante et chacune des cases non-voisines
+                Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain()); //On recupere le domaine de la variable courante
+                for(String elementDomainV1 : domainV1){
+                    if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
+                        for(String pieceNormal : this.listPieceNormal){
+//                                System.out.println();
+//                                System.out.println("Contraintes sur : ");
+//                                System.out.println("v1 (pieceeau) : " + v1);
+//                                System.out.println("v2 : " + v2);
+//                                System.out.println("Couples autorises : ");
+//                                System.out.println("elementDomainV1 : " + elementDomainV1);
+//                                System.out.println("pieceNormal : "  + pieceNormal);
+                            constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
                         }
-                        else if(this.listPieceNormal.contains(elementDomainV1)){ //Mais si c'est une piece normale
-                            for(String pieceGeneral : HouseDemo.objectSetToStringSet(HouseDemo.listToSetObject(this.domaine))){
-                                System.out.println();
-                                System.out.println("Contraintes sur : ");
-                                System.out.println("v1 (pieceseche) : " + v1);
-                                System.out.println("v2 : " + v2);
-                                System.out.println("Couples autorises : ");
-                                System.out.println("elementDomainV1 : " + elementDomainV1);
-                                System.out.println("pieceNormal : "  + pieceGeneral);
-                                constraint.addTuple(elementDomainV1, pieceGeneral); //Alors on autorise tout type de piece
-                            }
-                        }
-                        //Pas besoin de reflechir aux pieces voisines car les pieces voisines de v1 sont les pieces non-voisines d'autres pieces
                     }
-                    this.addConstraint(constraint);
+                    else if(this.listPieceNormal.contains(elementDomainV1)){ //Mais si c'est une piece normale
+                        for(String pieceGeneral : HouseDemo.objectSetToStringSet(HouseDemo.listToSetObject(this.domaine))){
+//                                System.out.println();
+//                                System.out.println("Contraintes sur : ");
+//                                System.out.println("v1 (seche) : " + v1);
+//                                System.out.println("v2 : " + v2);
+//                                System.out.println("Couples autorises : ");
+//                                System.out.println("elementDomainV1 : " + elementDomainV1);
+//                                System.out.println("pieceNormal : "  + pieceGeneral);
+                            constraint.addTuple(elementDomainV1, pieceGeneral); //Alors on autorise tout type de piece
+
+                        }
+                    }
+                    //Pas besoin de reflechir aux pieces voisines car les pieces voisines de v1 sont les pieces non-voisines d'autres pieces
                 }
+                this.addConstraint(constraint);
             }
+//            for(Variable v3 : tmpListVariable){
+//                List<Variable> neighbors = this.getNeighbors(v3);
+//                for(Variable v4 : neighbors){
+//                    if(!(v3 instanceof BooleanVariable) && !(v4 instanceof BooleanVariable)) {
+//                        BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v3, v4);
+//                        Set<String> domainV3 = HouseDemo.objectSetToStringSet(v3.getDomain());
+//                        for(String elementDomainV1 : domainV3){
+//                            for(String pieceGeneral : HouseDemo.objectSetToStringSet(HouseDemo.listToSetObject(this.domaine))){
+//                                constraint.addTuple(elementDomainV1, pieceGeneral);
+//                            }
+//                        }
+//                        this.addConstraint(constraint);
+//                    }
+//                }
+//            }
         }
     }
 
@@ -233,7 +258,7 @@ public class HouseRepresentation {
         Variable[][] array = new Variable[this.longueur][this.largeur];
         for(int i = 0; i < this.longueur; i++){
             for(int j = 0; j < this.largeur; j++){
-                array[i][j] = listVariable.get((j * this.longueur) + i);
+                array[i][j] = listVariable.get((i * this.largeur) + j);
             }
         }
         return array;
@@ -242,34 +267,36 @@ public class HouseRepresentation {
     //Renvoie la liste des voisins d'une case donnee
     public ArrayList<Variable> getNeighbors(Variable var){
         ArrayList<Variable> neighbors = new ArrayList<>();
-        Variable[][] arrayVariable = this.listTo2DArray(this.listVariable);
+        List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
+        tmpListVariable.removeIf(tmpV -> tmpV instanceof BooleanVariable);
+        Variable[][] arrayVariable = this.listTo2DArray(tmpListVariable);
         for(int i = 0; i < this.longueur; i++) {
             for (int j = 0; j < this.largeur; j++) {
                 if(arrayVariable[i][j] == var){
-                    if(i > 0 && j > 0){
-                        neighbors.add(arrayVariable[i-1][j-1]);
-                    }
+//                    if(i > 0 && j > 0){
+//                        neighbors.add(arrayVariable[i-1][j-1]);
+//                    }
                     if(i > 0){
                         neighbors.add(arrayVariable[i-1][j]);
                     }
-                    if(i > 0 && j < this.largeur - 1){
-                        neighbors.add(arrayVariable[i-1][j+1]);
-                    }
+//                    if(i > 0 && j < this.largeur - 1){
+//                        neighbors.add(arrayVariable[i-1][j+1]);
+//                    }
                     if(j > 0){
                         neighbors.add(arrayVariable[i][j-1]);
                     }
                     if(j < this.largeur - 1){
                         neighbors.add(arrayVariable[i][j+1]);
                     }
-                    if(i < this.longueur - 1 && j > 0){
-                        neighbors.add(arrayVariable[i+1][j-1]);
-                    }
+//                    if(i < this.longueur - 1 && j > 0){
+//                        neighbors.add(arrayVariable[i+1][j-1]);
+//                    }
                     if(i < this.longueur - 1){
                         neighbors.add(arrayVariable[i+1][j]);
                     }
-                    if(i < this.longueur - 1 && j < this.largeur - 1){
-                        neighbors.add(arrayVariable[i+1][j+1]);
-                    }
+//                    if(i < this.longueur - 1 && j < this.largeur - 1){
+//                        neighbors.add(arrayVariable[i+1][j+1]);
+//                    }
                 }
             }
         }
@@ -278,12 +305,15 @@ public class HouseRepresentation {
 
     public List<Variable> getNotNeighbors(Variable var){
         ArrayList<Variable> neighbors = this.getNeighbors(var);
-        List<Variable> notNeighbors = new ArrayList<>(this.listVariable);
+        List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
+        tmpListVariable.removeIf(tmpV -> tmpV instanceof BooleanVariable);
+        List<Variable> notNeighbors = new ArrayList<>(tmpListVariable);
         for(Variable v : neighbors){
-            if(this.listVariable.contains(v)){
+            if(tmpListVariable.contains(v)){
                 notNeighbors.remove(v);
             }
         }
+        notNeighbors.remove(var);
         return notNeighbors;
     }
 
