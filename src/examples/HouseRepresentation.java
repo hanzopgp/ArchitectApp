@@ -99,7 +99,7 @@ public class HouseRepresentation {
     //Ajout de toute les contraintes de l'exemple
     public void makeAllConstraint(){
         this.makeOnlyOnePieceConstraint();
-        //this.makeStateSuiteConstraint();
+        this.makeStateSuiteConstraint();
         this.makeWaterPartConstraint();
     }
 
@@ -133,14 +133,12 @@ public class HouseRepresentation {
         tmpListVariable.removeIf(tmpV -> tmpV instanceof BooleanVariable);
         for(Variable v1 : tmpListVariable){ //Pour chaque piece de la maison
             List<Variable> notNeighbors = this.getNotNeighbors(v1); //On recupere la liste des voisins de v1, la piece
-            System.out.println(notNeighbors.size());
             for(Variable v2 : notNeighbors){
                 BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //On cree une contrainte liant la case courante et chacune des cases non-voisines
                 Set<String> domainV1 = HouseDemo.objectSetToStringSet(v1.getDomain()); //On recupere le domaine de la variable courante
                 for(String elementDomainV1 : domainV1){
                     if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
                         for(String pieceNormal : this.listPieceNormal){
-                            if(!elementDomainV1.equals(pieceNormal)) {
 //                                System.out.println();
 //                                System.out.println("Contraintes sur : ");
 //                                System.out.println("v1 (pieceeau) : " + v1);
@@ -148,22 +146,20 @@ public class HouseRepresentation {
 //                                System.out.println("Couples autorises : ");
 //                                System.out.println("elementDomainV1 : " + elementDomainV1);
 //                                System.out.println("pieceNormal : "  + pieceNormal);
-                                constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
-                            }
+                            constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
                         }
                     }
                     else if(this.listPieceNormal.contains(elementDomainV1)){ //Mais si c'est une piece normale
                         for(String pieceGeneral : HouseDemo.objectSetToStringSet(HouseDemo.listToSetObject(this.domaine))){
-                            if(!elementDomainV1.equals(pieceGeneral)){
 //                                System.out.println();
 //                                System.out.println("Contraintes sur : ");
-//                                System.out.println("v1 (pieceeau) : " + v1);
+//                                System.out.println("v1 (seche) : " + v1);
 //                                System.out.println("v2 : " + v2);
 //                                System.out.println("Couples autorises : ");
 //                                System.out.println("elementDomainV1 : " + elementDomainV1);
 //                                System.out.println("pieceNormal : "  + pieceGeneral);
-                                constraint.addTuple(elementDomainV1, pieceGeneral); //Alors on autorise tout type de piece
-                            }
+                            constraint.addTuple(elementDomainV1, pieceGeneral); //Alors on autorise tout type de piece
+
                         }
                     }
                     //Pas besoin de reflechir aux pieces voisines car les pieces voisines de v1 sont les pieces non-voisines d'autres pieces
@@ -262,7 +258,7 @@ public class HouseRepresentation {
         Variable[][] array = new Variable[this.longueur][this.largeur];
         for(int i = 0; i < this.longueur; i++){
             for(int j = 0; j < this.largeur; j++){
-                array[i][j] = listVariable.get((j * this.longueur) + i);
+                array[i][j] = listVariable.get((i * this.largeur) + j);
             }
         }
         return array;
