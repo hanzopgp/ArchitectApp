@@ -60,15 +60,15 @@ public class MainTests {
         ok = ok && DijkstraPlannerTests.testPlan();
         ok = ok && AStarPlannerTests.testPlan();
         System.out.println("Testing package \"datamining\"...");
-        ok = ok && AbstractItemsetMinerTests.testFrequency();
-        ok = ok && AprioriTests.testFrequentSingletons();
-        ok = ok && AprioriTests.testCombine();
-        ok = ok && AprioriTests.testAllSubsetsFrequent();
-        ok = ok && AprioriTests.testExtract();
-        ok = ok && AbstractAssociationRuleMinerTests.testFrequency();
-        ok = ok && AbstractAssociationRuleMinerTests.testConfidence();
-        ok = ok && BruteForceAssociationRuleMinerTests.testAllCandidatePremises();
-        ok = ok && BruteForceAssociationRuleMinerTests.testExtract();
+        ok = ok && AbstractItemsetMinerTests.testFrequency(); //
+        ok = ok && AprioriTests.testFrequentSingletons(); //
+        ok = ok && AprioriTests.testCombine(); //
+        ok = ok && AprioriTests.testAllSubsetsFrequent(); //
+        ok = ok && AprioriTests.testExtract(); //
+        ok = ok && AbstractAssociationRuleMinerTests.testFrequency(); //
+        ok = ok && AbstractAssociationRuleMinerTests.testConfidence(); //
+        ok = ok && BruteForceAssociationRuleMinerTests.testAllCandidatePremises(); //
+        ok = ok && BruteForceAssociationRuleMinerTests.testExtract(); //
         ok = ok && DatabaseTests.testItemTable();
         ok = ok && DatabaseTests.testPropositionalize();
         System.out.println(ok ? "All tests passed" : "At least one test failed");

@@ -5,20 +5,35 @@ import representation.Variable;
 
 import java.util.*;
 
+/**
+ * Classe qui correspond à un ensemble de variables non booléennes
+ */
 public class Database {
 
     private Set<Variable> variables;
     private List<Map<Variable, Object>> instances;
 
+    /**
+     * Constructeur
+     * @param variables - Ensemble de variables non booléennes
+     */
     public Database(Set<Variable> variables) {
         this.variables = variables;
         this.instances = new ArrayList<>();
     }
 
+    /**
+     * Permet d'ajouter une instance à la database
+     * @param value
+     */
     public void add(Map<Variable, Object> value){
         this.instances.add(value);
     }
 
+    /**
+     * Permet de transformer une instance en liste d'items.
+     * @return
+     */
     public Map<Variable, Map<Object, BooleanVariable>> itemTable(){
         Map<Variable, Map<Object, BooleanVariable>> result = new HashMap<>();
         //on parcours les variables de la database
@@ -47,7 +62,10 @@ public class Database {
         return result;
     }
 
-
+    /**
+     * Permet de transformer une liste d'item en une BooleanDatabase
+     * @return
+     */
     public BooleanDatabase propositionalize(){
         Map<Variable, Map<Object, BooleanVariable>> items = this.itemTable();
         Set<BooleanVariable> booleanVariables = new HashSet<>();
@@ -63,7 +81,6 @@ public class Database {
                 if(booleanVariable != null){
                     booleanVariables.add(booleanVariable);
                 }
-
             }
         }
 
@@ -94,15 +111,19 @@ public class Database {
 
     /*======= GETTERS =========*/
 
+    /**
+     * Getter des instances
+     * @return Retourne les instances
+     */
     public List<Map<Variable, Object>> getInstances(){
         return this.instances;
     }
 
+    /**
+     * Getter des variables
+     * @return Retourne les variables
+     */
     public Set<Variable> getVariables() {
         return variables;
-    }
-
-    public void setVariables(Set<Variable> variables) {
-        this.variables = variables;
     }
 }

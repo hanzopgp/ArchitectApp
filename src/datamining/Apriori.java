@@ -3,13 +3,26 @@ package datamining;
 import java.util.*;
 import representation.BooleanVariable;
 
-
+/**
+ * Extracteur de données fonctionnant sur le principe
+ * de l'algorithme Apriori
+ */
 public class Apriori extends AbstractItemsetMiner{
-	
+
+	/**
+	 * Constructeur
+	 * @param base - Base de données
+	 */
 	public Apriori(BooleanDatabase base){
 		super(base);		
 	}
-	
+
+	/**
+	 * Renvoie uniquement les Itemset dont la fréquence d'apparition est supérieure
+	 * ou égale à la fréquence minimale passée en paramètre
+	 * @param frequency - Fréquence minimale à dépasser
+	 * @return Ensemble d'Itemset
+	 */
 	public Set<Itemset> frequentSingletons(float frequency){
 		Set<Itemset> liste = new HashSet<Itemset>();
 		for(BooleanVariable base : this.base.getItems()){
@@ -57,6 +70,14 @@ public class Apriori extends AbstractItemsetMiner{
 		return result;
 	}
 
+	/**
+	 * Assemble deux ensembles de variables booléennes en une seule. Elles doivent cependant
+	 * avoir la même taille, et l'avant dernier élément de chacun des deux ensemble doivent être
+	 * égaux.
+	 * @param l1 - Premier ensemble à combiner
+	 * @param l2 - Deuxième ensemble à combiner
+	 * @return
+	 */
 	public static SortedSet<BooleanVariable> combine(SortedSet<BooleanVariable>l1, SortedSet<BooleanVariable>l2){
 		SortedSet<BooleanVariable> result = new TreeSet<>(COMPARATOR);
 		if(l1.size() > 0 && l1.size() == l2.size()){
@@ -76,6 +97,13 @@ public class Apriori extends AbstractItemsetMiner{
 		}
 	}
 
+	/**
+	 * Retourne un booléen indiquant si l'ensemble de variable passé en paramètre
+	 * est contenu dans la Collection d'ensembles
+	 * @param list - Ensemble de variables booléennes
+	 * @param collectionList - Collection d'ensembles de variables
+	 * @return
+	 */
 	public static boolean allSubsetsFrequent(Set<BooleanVariable>list, Collection<SortedSet<BooleanVariable>>collectionList){
 		Set<BooleanVariable> listDel = new HashSet<>(list);
 		for(BooleanVariable variable : listDel){
