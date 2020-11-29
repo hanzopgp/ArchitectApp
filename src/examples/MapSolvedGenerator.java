@@ -19,8 +19,8 @@ public class MapSolvedGenerator {
         for(int i = 0; i < HouseDemo.NB_HOUSE_DATAMINING; i++){
             Map<Variable, Object> item = backtrackSolver.solve();
             backtrackSolver.addForbiddenItem(item);
-            backtrackSolver.solve();
         }
+        backtrackSolver.setSimulation(false);
         this.listSolvedMap = backtrackSolver.getListForbiddenMap();
     }
 

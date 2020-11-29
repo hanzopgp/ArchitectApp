@@ -49,7 +49,9 @@ public class BacktrackSolver extends AbstractSolver{
 			newMap.put(v, o);
 			if(isConsistent(newMap)){
 				if(this.simulation){
+					System.out.println(this.listForbiddenMap.size());
 					if(newMap.keySet().containsAll(this.variables) && !HouseDemo.mapIsInListMap(map, this.listForbiddenMap)){
+						System.out.println("poke");
 						return newMap;
 					}
 				}else{
