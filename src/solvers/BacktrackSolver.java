@@ -1,6 +1,8 @@
 package solvers;
 
 import java.util.*;
+
+import examples.HouseDemo;
 import representation.*;
 
 /**
@@ -9,6 +11,9 @@ import representation.*;
  * avec de nouvelles variables
  */
 public class BacktrackSolver extends AbstractSolver{
+
+	private List<Map<Variable, Object>> listForbiddenMap;
+	private boolean simulation = false;
 
 	/**
 	 * Constructeur
@@ -43,12 +48,14 @@ public class BacktrackSolver extends AbstractSolver{
 			Map<Variable, Object> newMap = new HashMap<>(map);
 			newMap.put(v, o);
 			if(isConsistent(newMap)){
-				//System.out.println("diff : "  + (this.variables.size()-newMap.size()));
-//				if((this.variables.size()-newMap.size()) == 1){
-//					System.out.println("newMap : " + newMap);
-//				}
-				if(newMap.keySet().containsAll(this.variables)){
-					return newMap;
+				if(this.simulation){
+					if(newMap.keySet().containsAll(this.variables) && !HouseDemo.mapIsInListMap(map, this.listForbiddenMap)){
+						return newMap;
+					}
+				}else{
+					if(newMap.keySet().containsAll(this.variables)){
+						return newMap;
+					}
 				}
 				Queue<Variable> newPile = new LinkedList<>(pile);
 				//newPile.remove(v);
@@ -60,5 +67,22 @@ public class BacktrackSolver extends AbstractSolver{
 		}
 		return null;
 	}
+
+	public void addForbiddenItem(Map<Variable, Object> item){
+		this.listForbiddenMap.add(item);
+	}
+
+	public void setSimulation(boolean simulation) {
+		this.simulation = simulation;
+	}
+
+	public void initListForbiddenMap(){
+		this.listForbiddenMap = new ArrayList<>();
+	}
+
+	public List<Map<Variable, Object>> getListForbiddenMap(){
+		return this.listForbiddenMap;
+	}
+
 
 }

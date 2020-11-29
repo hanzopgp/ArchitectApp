@@ -10,9 +10,10 @@ public class HouseDemo {
     public static int HEIGHT = 3;
     public static List<String> LIST_PIECE_NORMAL = new ArrayList<>(Arrays.asList("salon", "chambre1", "chambre2", "salledejeu", "chambre3", "chambre4", "chambre5"));
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3"));
+    public static List<String> LIST_CHAMBRE = new ArrayList<>(Arrays.asList("chambre1", "chambre2", "chambre3", "chambre4",  "chambre5"));
     public static int PLANNING_COST = 5;
     public static String SOLVERTYPE = "backtrack"; //"backtrack", "mac", "macheuristic"
-
+    public static int NB_HOUSE_DATAMINING = 10;
 
     public static void main(String[] args){
 
@@ -21,7 +22,7 @@ public class HouseDemo {
         //Creation de la maison de base
         System.out.println("######################## CONSTRUCTION DE LA MAISON ########################");
 
-        HouseRepresentation houseRepresentation = new HouseRepresentation(WIDTH, HEIGHT, LIST_PIECE_NORMAL, LIST_PIECE_EAU);
+        HouseRepresentation houseRepresentation = new HouseRepresentation(WIDTH, HEIGHT, LIST_PIECE_NORMAL, LIST_PIECE_EAU, LIST_CHAMBRE);
 
         //Ajout des contraintes
         houseRepresentation.makeAllConstraint();
@@ -57,7 +58,7 @@ public class HouseDemo {
         }
 
         //Affichage du resultat
-        houseSolvers.printResults();
+        //houseSolvers.printResults();
 
         //----------- Utilisation package planning -----------
 
@@ -73,6 +74,13 @@ public class HouseDemo {
         //----------- Utilisation package datamining -----------
 
         System.out.println("######################## DATAMINING ########################");
+
+        //Creation de la base de donnee
+//        MapSolvedGenerator mapSolvedGenerator = new MapSolvedGenerator(setVariable, setConstraint);
+//        System.out.println(mapSolvedGenerator.getListSolvedMap().size());
+//        System.out.println(mapSolvedGenerator.getListSolvedMap().get(0));
+//        System.out.println(mapSolvedGenerator.getListSolvedMap().get(1));
+
 
         //Recuperation des informations
         HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation);
@@ -101,6 +109,26 @@ public class HouseDemo {
             }
         }
         return setString;
+    }
+
+    public static boolean mapIsInListMap(Map<Variable, Object> map1, List<Map<Variable, Object>> listMap){
+        for(Map<Variable, Object> map2 : listMap){
+            if(mapAreEqual(map1, map2)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean mapAreEqual(Map<Variable, Object> map1, Map<Variable, Object> map2){
+        for (Map.Entry<Variable, Object> entry1 : map1.entrySet()) {
+            for (Map.Entry<Variable, Object> entry2 : map2.entrySet()) {
+                if(!entry1.equals(entry2)){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

@@ -10,6 +10,7 @@ public class HouseRepresentation {
     private final int largeur;
     private List<String> listPieceNormal;
     private List<String> listPieceEau;
+    private List<String> listChambre;
     private List<Object> domaine;
     private List<Variable> listVariable;
     private List<Constraint> listConstraint;
@@ -21,12 +22,13 @@ public class HouseRepresentation {
 
     private Map<Variable, Object> mapVariable;
 
-    public HouseRepresentation(int longueur, int largeur, List<String> listPieceNormal, List<String> listPieceEau) {
+    public HouseRepresentation(int longueur, int largeur, List<String> listPieceNormal, List<String> listPieceEau, List<String> listChambre ) {
         this.longueur = longueur;
         this.largeur = largeur;
 
         this.listPieceNormal = listPieceNormal;
         this.listPieceEau = listPieceEau;
+        this.listChambre = listChambre;
 
         this.domaine = new ArrayList<>();
         this.listVariable = new ArrayList<>();
@@ -100,7 +102,7 @@ public class HouseRepresentation {
     public void makeAllConstraint(){
         this.makeOnlyOnePieceConstraint();
         this.makeStateSuiteConstraint();
-        this.makeWaterPartConstraint();
+        //this.makeWaterPartConstraint();
     }
 
     //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
@@ -109,6 +111,10 @@ public class HouseRepresentation {
         this.addConstraint(new Rule(this.dalleHumide, true, this.dalleCoulee, true));
         this.addConstraint(new Rule(this.dalleHumide, true, this.mursEleves, false));
         this.addConstraint(new Rule(this.mursEleves, false, this.toitureTerminee, false));
+
+        this.addConstraint(new Rule(mursEleves, true, dalleCoulee, true));
+        this.addConstraint(new Rule(mursEleves, true, dalleHumide, false));
+        this.addConstraint(new Rule(toitureTerminee, true, mursEleves, true));
 
 //        this.addConstraint(new Rule(this.toitureTerminee, true, this.mursEleves, true));
 //        this.addConstraint(new Rule(this.mursEleves, true, this.dalleCoulee, true));
@@ -158,7 +164,6 @@ public class HouseRepresentation {
         this.printDomaine();
         this.printVariables();
         this.printBooleanVariables();
-        this.printMapVariable();
         this.printConstraints();
     }
 
