@@ -6,11 +6,12 @@ import java.util.*;
 
 public class HouseDemo {
 
-    public static int WIDTH = 3;
-    public static int HEIGHT = 3;
+    public static int WIDTH = 3; //maximum WIDTH*HEIGHT : 12
+    public static int HEIGHT = 2;
     public static List<String> LIST_PIECE_NORMAL = new ArrayList<>(Arrays.asList("salon", "chambre1", "chambre2", "salledejeu", "chambre3", "chambre4", "chambre5"));
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3"));
     public static int PLANNING_COST = 5;
+    public static String SOLVERTYPE = "backtrack"; //"backtrack", "mac", "macheuristic"
 
 
     public static void main(String[] args){
@@ -36,18 +37,20 @@ public class HouseDemo {
         Set<Constraint> setConstraint = HouseDemo.listToSetConstraint(houseRepresentation.getListConstraint());
         HouseSolvers houseSolvers = new HouseSolvers(setVariable, setConstraint);
 
+        //Stop le programme si il y a trop de piece pour pas assez d'element de domaine
         if((WIDTH * HEIGHT) > (LIST_PIECE_EAU.size() + LIST_PIECE_NORMAL.size())){
             System.out.println("Pas assez de pieces disponible pour votre maison");
             System.exit(1);
         }
 
-        //Backtrack solver
-        houseSolvers.solveWithBacktrack();
-        //Mac solver avec heuristique
-        //houseSolvers.solveWithMacAndHeuristic();
-        //Mac solver sans heuristique
-        //houseSolvers.solveWithMac();
+        //Choix du solver utilise
+        switch (SOLVERTYPE) {
+            case "backtrack" -> houseSolvers.solveWithBacktrack();
+            case "mac" -> houseSolvers.solveWithMac();
+            case "macheuristic" -> houseSolvers.solveWithMacAndHeuristic();
+        }
 
+        //Stoper le programme si pas de resolution possible
         if(houseSolvers.getMapSolved() == null){
             System.out.println("Pas de solution trouvee ! ");
             System.exit(1);
@@ -71,7 +74,12 @@ public class HouseDemo {
 
         System.out.println("######################## DATAMINING ########################");
 
+        //Recuperation des informations
         HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation);
+        houseDatamining.mine();
+
+        //Affichage du resultat
+        houseDatamining.printResults();
 
     }
 

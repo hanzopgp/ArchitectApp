@@ -54,7 +54,6 @@ public class BacktrackSolver extends AbstractSolver{
 					return newMap;
 				}
 			}
-
 		}
 		return null;
 	}

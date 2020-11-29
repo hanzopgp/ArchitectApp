@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class HouseDatamining {
 
-    private HouseRepresentation houseRepresentation;
+    private final HouseRepresentation houseRepresentation;
 
     public HouseDatamining(HouseRepresentation houseRepresentation){
         this.houseRepresentation = houseRepresentation;
@@ -25,7 +25,7 @@ public class HouseDatamining {
         BooleanVariable mursEleves = this.houseRepresentation.getMursEleves();
         BooleanVariable toitureTerminee = this.houseRepresentation.getToitureTerminee();
 
-        // on crée les différences instances pour la BD
+        // on cree les differentes instances pour la BD
         database.add(new HashMap<>());
         Map<Variable, Object> instance = new HashMap<>();
         instance.put(dalleCoulee, true);
@@ -38,6 +38,10 @@ public class HouseDatamining {
         database.add(new HashMap<>(instance));
         instance.put(toitureTerminee, true);
         database.add(new HashMap<>(instance));
+
+    }
+
+    public void printResults(){
 
     }
 
