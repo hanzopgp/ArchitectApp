@@ -1,5 +1,6 @@
 package planning;
 
+import java.math.BigInteger;
 import java.util.*;
 
 import planning.Action;
@@ -18,6 +19,7 @@ public class AStarPlanner implements Planner{
     private final Set<Action> actions;
     private final Goal goal;
     private final Heuristic heuristic;
+    private BigInteger nbNodes = BigInteger.ZERO;
 
     /**
      * @param initialState -> etat initial
@@ -82,6 +84,7 @@ public class AStarPlanner implements Planner{
 
         /** tant que tous les etats n'ont pas ete ouvert **/
         while(!open.isEmpty()){
+            this.nbNodes = this.nbNodes.add(BigInteger.ONE);
             /** donne a instanciation l'element le plus petit **/
             //instanciation = Collections.min(open, com);
             instanciation = open.poll();
@@ -133,6 +136,9 @@ public class AStarPlanner implements Planner{
         return this.goal;
     }
 
+    public BigInteger getNbNodes() {
+        return this.nbNodes;
+    }
 }
 
 

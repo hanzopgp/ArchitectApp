@@ -12,10 +12,11 @@ public class HouseDemo {
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb+toilette", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3", "toilette3"));
     public static int PLANNING_COST = 5;
     public static String SOLVERTYPE = "backtrack"; //"backtrack", "mac", "macheuristic"
+    public static String PLANNERTYPE = "astar"; //"astar", "dijkstra", "bfs", "dfs"
     public static int NB_HOUSE_DATAMINING = 5000;
     public static float MIN_FREQUENCY = 0.7f;
     public static float MIN_CONFIDENCE = 0.7f;
-    public static boolean FULL_DISPLAY = true;
+    public static boolean FULL_DISPLAY = false;
 
     public static void main(String[] args){
 
@@ -135,8 +136,15 @@ public class HouseDemo {
         System.out.println("1 - Backtrack");
         System.out.println("2 - MAC");
         System.out.println("3 - MacHeuristic");
-        String strSolverType = scannerString(new Scanner(System.in), "Vous devez entrer un nom de solver !");
-        SOLVERTYPE = choseSolverType(strSolverType);
+        int intSolverType = scannerIntLimit(new Scanner(System.in), 1, 3);
+        SOLVERTYPE = choseSolverType(intSolverType);
+        System.out.println("Entrez le numero du planner a utiliser : ");
+        System.out.println("1 - A*");
+        System.out.println("2 - Dijkstra");
+        System.out.println("3 - BFS");
+        System.out.println("4 - DFS");
+        int intPlannerType = scannerIntLimit(new Scanner(System.in), 1, 4);
+        PLANNERTYPE = chosePlannerType(intPlannerType);
         System.out.println("Voulez vous l'affichage complet ? : ");
         System.out.println("1 - Oui");
         System.out.println("2 - Non");
@@ -155,14 +163,29 @@ public class HouseDemo {
                 "Frequence minimale : "+MIN_FREQUENCY);
     }
 
-    public static String choseSolverType(String str){
+    public static String choseSolverType(int str){
         switch(str){
-            case "1" :
+            case 1 :
                 return "backtrack";
-            case "2" :
+            case 2 :
                 return "mac";
-            case "3" :
+            case 3 :
                 return "macheuristic";
+            default:
+                throw new IllegalStateException("Unexpected value: " + str);
+        }
+    }
+
+    public static String chosePlannerType(int str){
+        switch(str){
+            case 1 :
+                return "astar";
+            case 2 :
+                return "dijkstra";
+            case 3 :
+                return "BFS";
+            case 4 :
+                return "DFS";
             default:
                 throw new IllegalStateException("Unexpected value: " + str);
         }

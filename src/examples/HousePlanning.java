@@ -4,6 +4,8 @@ import planning.*;
 import representation.BooleanVariable;
 import representation.Variable;
 
+import javax.print.DocPrintJob;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -15,6 +17,8 @@ public class HousePlanning {
     Map<Variable, Object> mapSolved;
     List<Action> listAction;
     long timeTaken;
+    BigInteger nbNodes;
+    String plannerChosen;
 
     /**
      * Constructeur
@@ -42,9 +46,7 @@ public class HousePlanning {
         //On part d'une maison vide avec une dalle non coulee
         Map<Variable, Object> start = new HashMap<>();
         for(Variable var : houseRepresentation.getListVariable()){
-            if (!(var instanceof BooleanVariable)) {
-                start.put(var, null);
-            }
+            start.put(var, null);
         }
         start.put(dalleCoulee, false);
 
@@ -109,19 +111,43 @@ public class HousePlanning {
         effect.put(toitureTerminee, true);
         actions.add(new BasicActionWithString(precondition, effect, HouseDemo.PLANNING_COST, "Construire le toit"));
 
-        //Utilisation du A*
-        Planner aStarPlanner = new AStarPlanner(start, actions, goal, new Heuristic() {
-            @Override
-            public float estimate(Map<Variable, Object> state) {
-                return state.size() - end.size();
-            }
-        });
+        //Utilisation du solver
+        Planner planner = null;
+        switch(HouseDemo.PLANNERTYPE){
+            case "astar" :
+                planner = new AStarPlanner(start, actions, goal, new Heuristic() {
+                    @Override
+                    public float estimate(Map<Variable, Object> state) {
+                        int n = 0;
+                        for (Map.Entry<Variable, Object> entry : state.entrySet()) {
+                            if (entry.getValue() != null && entry.getValue().equals(end.get(entry.getKey()))) {
+                                n++;
+                            }
+                        }
+                        return -n;
+                    }
+                });
+                this.plannerChosen = "A*";
+                break;
+            case "dijkstra" :
+                planner = new DijkstraPlanner(start, actions, goal);
+                this.plannerChosen = "Dijkstra";
+                break;
+            case "bfs" :
+                planner = new BFSPlanner(start, actions, goal);
+                this.plannerChosen = "BFS";
+                break;
+            case "dfs" :
+                planner = new DFSPlanner(start, actions, goal);
+                this.plannerChosen = "DFS";
+                break;
+        }
 
         //Affection des resultats
-        this.listAction = aStarPlanner.plan();
+        this.listAction = planner.plan();
         long endTime = System.currentTimeMillis();
         this.timeTaken = endTime - startTime;
-
+        this.nbNodes = planner.getNbNodes();
     }
 
     /**
@@ -147,10 +173,11 @@ public class HousePlanning {
             System.out.print("* Action : " + action.toString());
         }
         System.out.println();
-        System.out.println("* Planning avec A*");
+        System.out.println("* Planning avec : " + this.plannerChosen);
         System.out.println("* Temps mit par le planner : " + this.timeTaken + "ms");
         System.out.println("* Cout total : " + this.getTotalActionCost() + "h");
         System.out.println("* Nombre d'action : " + this.listAction.size());
+        System.out.println("* Nombre de noeuds parcourus : " + this.nbNodes);
     }
 
 }

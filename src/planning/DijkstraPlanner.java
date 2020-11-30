@@ -1,5 +1,6 @@
 package planning;
 
+import java.math.BigInteger;
 import java.util.*;
 
 import representation.*;
@@ -132,5 +133,10 @@ public class DijkstraPlanner implements Planner {
     @Override
     public Goal getGoal() {
         return this.goal;
+    }
+
+    @Override
+    public BigInteger getNbNodes() {
+        return null;
     }
 }

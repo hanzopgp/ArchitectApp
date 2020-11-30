@@ -2,6 +2,7 @@ package planning;
 
 import representation.Variable;
 
+import java.math.BigInteger;
 import java.util.*;
 
 
@@ -84,5 +85,10 @@ public class DFSPlanner implements Planner{
     @Override
     public Goal getGoal() {
         return this.but;
+    }
+
+    @Override
+    public BigInteger getNbNodes() {
+        return null;
     }
 }

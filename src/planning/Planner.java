@@ -2,6 +2,7 @@ package planning;
 
 import representation.Variable;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,4 +39,11 @@ public interface Planner {
      * @return le but voulu
      */
     Goal getGoal();
+
+    /**
+     * Renvoie le nombre de noeuds parcourus
+     * @return le nombre de noeuds parcourus
+     */
+    BigInteger getNbNodes();
+
 }
