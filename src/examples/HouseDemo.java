@@ -18,34 +18,16 @@ public class HouseDemo {
 
     public static void main(String[] args){
 
-        System.out.flush();
-        System.out.println("=============== CHOIX DES PARAMETRES ===============");
-        System.out.println("Entrez la longueur de la maison : (compris entre 1 et 4)");
-        int hauteurMaison = scannerIntLimit(new Scanner(System.in), 1, 4);
-        System.out.println("Entrez la largeur de la maison : (compris entre 1 et 4)");
-        int largeurMaison = scannerIntLimit(new Scanner(System.in), 1, 4);
-        System.out.println("Entrez le nom du solver a utiliser : ");
-        System.out.println("1 - Backtrack");
-        System.out.println("2 - MAC");
-        System.out.println("3 - MacHeuristic");
-        SOLVERTYPE = scannerString(new Scanner(System.in), "Vous devez entrer un nom de solver !");
-        System.out.println("Entrez le nombre maximal de solutions a trouver : (compris entre 0 et 3000)");
-        NB_HOUSE_DATAMINING = scannerIntLimit(new Scanner(System.in), 0, 3000);
-        System.out.println("Entrez la confiance minimale souhaitee : (compris entre 0 et 1)");
-        MIN_CONFIDENCE = scannerFloatLimit(new Scanner(System.in), 0, 1);
-        System.out.println("Entrez la frequence minimale souhaitee : (compris entre 0 et 1)");
-        MIN_FREQUENCY = scannerFloatLimit(new Scanner(System.in), 0, 1);
-        System.out.println();
-        System.out.println("Parametres enregistres !\nMaison de "+hauteurMaison+"x"+largeurMaison+" cases\nSolveur utilise: "+SOLVERTYPE+"\n"+
-                            "Nombre de solutions maximales a trouver : "+NB_HOUSE_DATAMINING+"\n"+
-                            "Confiance minimale : "+MIN_CONFIDENCE+"\n"+
-                            "Frequence minimale : "+MIN_FREQUENCY);
+        //Choix des parametres
+        //inputParameters();
+
         //----------- Utilisation package representation -----------
 
         //Creation de la maison de base
+        System.out.println();
         System.out.println("######################## CONSTRUCTION DE LA MAISON ########################");
 
-        HouseRepresentation houseRepresentation = new HouseRepresentation(hauteurMaison, largeurMaison, LIST_PIECE_NORMAL, LIST_PIECE_EAU);
+        HouseRepresentation houseRepresentation = new HouseRepresentation(HEIGHT, WIDTH, LIST_PIECE_NORMAL, LIST_PIECE_EAU);
 
         //Ajout des contraintes
         houseRepresentation.makeAllConstraint();
@@ -114,6 +96,52 @@ public class HouseDemo {
 
     }
 
+    //----------- Fonction utiles -----------
+
+    public static Set<Variable> listToSetVariable(List<Variable> listVariable){
+        return new HashSet<>(listVariable);
+    }
+
+    public static Set<Constraint> listToSetConstraint(List<Constraint> listConstraint){ return new HashSet<>(listConstraint); }
+
+    public static Set<Object> listToSetObject(List<Object> listObject){ return new HashSet<>(listObject); }
+
+    public static Set<String> objectSetToStringSet(Set<Object> setObject){
+        Set<String> setString = new HashSet<>();
+        for(Object o : setObject){
+            if(o instanceof String){
+                setString.add((String) o);
+            }
+        }
+        return setString;
+    }
+
+    //Fixe les variables globales
+    public static void inputParameters(){
+        System.out.flush();
+        System.out.println("=============== CHOIX DES PARAMETRES ===============");
+        System.out.println("Entrez la longueur de la maison : (compris entre 1 et 4)");
+        WIDTH = scannerIntLimit(new Scanner(System.in), 1, 4);
+        System.out.println("Entrez la largeur de la maison : (compris entre 1 et 4)");
+        HEIGHT = scannerIntLimit(new Scanner(System.in), 1, 4);
+        System.out.println("Entrez le nom du solver a utiliser : ");
+        System.out.println("1 - Backtrack");
+        System.out.println("2 - MAC");
+        System.out.println("3 - MacHeuristic");
+        SOLVERTYPE = scannerString(new Scanner(System.in), "Vous devez entrer un nom de solver !");
+        System.out.println("Entrez le nombre maximal de solutions a trouver : (compris entre 0 et 3000)");
+        NB_HOUSE_DATAMINING = scannerIntLimit(new Scanner(System.in), 0, 3000);
+        System.out.println("Entrez la confiance minimale souhaitee : (compris entre 0 et 1)");
+        MIN_CONFIDENCE = scannerFloatLimit(new Scanner(System.in), 0, 1);
+        System.out.println("Entrez la frequence minimale souhaitee : (compris entre 0 et 1)");
+        MIN_FREQUENCY = scannerFloatLimit(new Scanner(System.in), 0, 1);
+        System.out.println();
+        System.out.println("Parametres enregistres !\nMaison de "+WIDTH+"x"+HEIGHT+" cases\nSolveur utilise: "+SOLVERTYPE+"\n"+
+                "Nombre de solutions maximales a trouver : "+NB_HOUSE_DATAMINING+"\n"+
+                "Confiance minimale : "+MIN_CONFIDENCE+"\n"+
+                "Frequence minimale : "+MIN_FREQUENCY);
+    }
+
     public static String scannerString(Scanner scanner, String errormsg) {
         while (!scanner.hasNext()) {
             System.out.println(errormsg);
@@ -171,26 +199,6 @@ public class HouseDemo {
             input = scannerFloat(scanner, "Veuillez entrer un nombre decimale a virgule");
         } while (input < min || input > max);
         return input;
-    }
-
-    //----------- Fonction utiles -----------
-
-    public static Set<Variable> listToSetVariable(List<Variable> listVariable){
-        return new HashSet<>(listVariable);
-    }
-
-    public static Set<Constraint> listToSetConstraint(List<Constraint> listConstraint){ return new HashSet<>(listConstraint); }
-
-    public static Set<Object> listToSetObject(List<Object> listObject){ return new HashSet<>(listObject); }
-
-    public static Set<String> objectSetToStringSet(Set<Object> setObject){
-        Set<String> setString = new HashSet<>();
-        for(Object o : setObject){
-            if(o instanceof String){
-                setString.add((String) o);
-            }
-        }
-        return setString;
     }
 
 }

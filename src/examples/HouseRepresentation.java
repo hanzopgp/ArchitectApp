@@ -116,6 +116,7 @@ public class HouseRepresentation {
     public void makeAllConstraint(){
         this.makeOnlyOnePieceConstraint();
         this.makeStateSuiteConstraint();
+        this.makeGarageOnSideConstraint();
         //this.makeWaterPartConstraint(); //Impossible de trouver pourquoi elle ne fonctionne pas...
     }
 
