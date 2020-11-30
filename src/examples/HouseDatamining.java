@@ -42,7 +42,7 @@ public class HouseDatamining {
             database.add(map);
         }
         BooleanDatabase booleanDatabase = database.propositionalize();
-        BruteForceAssociationRuleMiner<AssociationRule> bruteForceAssociationRuleMiner = new BruteForceAssociationRuleMiner(booleanDatabase);
+        BruteForceAssociationRuleMiner<AssociationRule<Variable>> bruteForceAssociationRuleMiner = new BruteForceAssociationRuleMiner<>(booleanDatabase);
         this.setAssociationRule = bruteForceAssociationRuleMiner.extract(HouseDemo.MIN_FREQUENCY, HouseDemo.MIN_CONFIDENCE);
         long end = System.currentTimeMillis();
         this.timeTaken = end - start;
@@ -56,10 +56,10 @@ public class HouseDatamining {
         System.out.println("============= RESULTATS DATAMINING =============");
         for (AssociationRule associationRule : this.setAssociationRule) {
             System.out.println("++++++++++++++++++++++++++++++++++++++++");
-            System.out.println("--> Regle : " + associationRule.getPremise());
-            System.out.println("--> Conclusion : " + associationRule.getConclusion());
-            System.out.println("--> Frequence : " + associationRule.getFrequency());
-            System.out.println("--> Confiance : " + associationRule.getConfidence());
+            System.out.println("--> Si ma variable est : " + associationRule.getPremise());
+            System.out.println("--> Cela implique : " + associationRule.getConclusion());
+            System.out.println("--> Frequence de cette regle : " + associationRule.getFrequency());
+            System.out.println("--> Confiance de cette regle : " + associationRule.getConfidence());
         }
         System.out.println("* Frequence minimum : " + HouseDemo.MIN_FREQUENCY);
         System.out.println("* Confiance minimum : " + HouseDemo.MIN_CONFIDENCE);
