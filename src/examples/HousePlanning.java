@@ -6,6 +6,9 @@ import representation.Variable;
 
 import java.util.*;
 
+/**
+ * Classe qui correspond à un planificateur, sur l'exemple du fil rouge
+ */
 public class HousePlanning {
 
     HouseRepresentation houseRepresentation;
@@ -13,12 +16,20 @@ public class HousePlanning {
     Set<Action> listAction;
     long timeTaken;
 
+    /**
+     * Constructeur
+     * @param houseRepresentation - Représentation d'une maison
+     * @param mapSolved - Plan trouvé grâce à un solveur
+     */
     public HousePlanning(HouseRepresentation houseRepresentation, Map<Variable, Object> mapSolved){
         this.houseRepresentation = houseRepresentation;
         this.mapSolved = mapSolved;
         this.listAction = new HashSet<>();
     }
 
+    /**
+     * Planificateur AStart
+     */
     public void planAStar(){
 
         long startTime = System.currentTimeMillis();
@@ -104,6 +115,10 @@ public class HousePlanning {
 
     }
 
+    /**
+     * Méthode retournant le coût de toutes les actions de l'instance actuelle
+     * @return Coût des actions
+     */
     public int getTotalActionCost(){
         int cost = 0;
         for(Action action : this.listAction){
@@ -112,6 +127,9 @@ public class HousePlanning {
         return cost;
     }
 
+    /**
+     * Printer du résultat
+     */
     public void printResults(){
         System.out.println();
         System.out.println("============= LISTE DES ACTIONS A EFFECTUER =============");

@@ -10,6 +10,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Classe qui correspond à un extracteur de conaissances
+ */
 public class HouseDatamining {
 
     private final HouseRepresentation houseRepresentation;
@@ -17,12 +20,21 @@ public class HouseDatamining {
     private Set<AssociationRule> setAssociationRule;
     private long timeTaken = 0;
 
+    /**
+     * Constructeur
+     * @param houseRepresentation - Représentation d'une maison
+     * @param mapSolvedGenerator -
+     */
     public HouseDatamining(HouseRepresentation houseRepresentation, MapSolvedGenerator mapSolvedGenerator){
         this.houseRepresentation = houseRepresentation;
         this.mapSolvedGenerator = mapSolvedGenerator;
         this.setAssociationRule = new HashSet<>();
     }
 
+    /**
+     * Méthode qui permet de trouver un ensemble de règles qui satisfassent les fréquences et confiances du problème
+     * actuel
+     */
     public void mine(){
         long start = System.currentTimeMillis();
         Database database = new Database(HouseDemo.listToSetVariable(this.houseRepresentation.getListVariable()));
@@ -36,6 +48,9 @@ public class HouseDatamining {
         this.timeTaken = end - start;
     }
 
+    /**
+     * Printer du résultat
+     */
     public void printResults(){
         System.out.println();
         System.out.println("============= RESULTATS DATAMINING =============");

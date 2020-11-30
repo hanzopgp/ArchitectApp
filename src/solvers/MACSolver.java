@@ -31,10 +31,10 @@ public class MACSolver extends AbstractSolver{
 
     /**
      * Fonction récursive permettant la résolution du problème
-     * @param instanciation - Instanciation
+     * @param instanciation - Instanciation à vérifier
      * @param variables - Liste de variables de l'instance actuelle
      * @param domaines - Domaines
-     * @return
+     * @return Instanciation
      */
     public Map<Variable, Object> macSolve(Map<Variable, Object> instanciation, LinkedList<Variable> variables, Map<Variable, Set<Object>> domaines) {
         if(variables.isEmpty()){

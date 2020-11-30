@@ -5,11 +5,22 @@ import solvers.VariableHeuristic;
 
 import java.util.*;
 
+/**
+ * Cette classe correspond à un solveur dont l'objectif est de
+ * résoudre un problème d'une manière "heuristique".
+ */
 public class HeuristicMACSolver extends AbstractSolver{
 
     protected VariableHeuristic variableHeuristic;
-    protected ValueHeuristic valueHeuristic; 
+    protected ValueHeuristic valueHeuristic;
 
+    /**
+     * Constructeur
+     * @param variables - Ensemble de variables
+     * @param constraints - Ensemble de contraintes
+     * @param variableHeuristic - Variable heuristique
+     * @param valueHeuristic - Valeur heuristique
+     */
     public HeuristicMACSolver(Set<Variable> variables, Set<Constraint> constraints, VariableHeuristic variableHeuristic, ValueHeuristic valueHeuristic){
         super(variables, constraints);
         this.variableHeuristic = variableHeuristic;
@@ -19,15 +30,21 @@ public class HeuristicMACSolver extends AbstractSolver{
     @Override
     public Map<Variable, Object> solve(){
         Map<Variable, Set<Object>> domaines = new HashMap<>();
-        LinkedList<Variable> variables = new LinkedList<>();
         for(Variable v : this.variables){
             domaines.put(v, v.getDomain());
-            variables.add(v);
         }
-        Map<Variable, Object> newInstanciation = new HashMap<>();
-        return macHeuristic(newInstanciation, variables, domaines);
+        return macHeuristic(new HashMap<>(), new LinkedList<>(this.variables), domaines);
     }
 
+    /**
+     * Cette méthode est un algorithme permettant de trouver une solution à un problème,
+     * en utilisant le même principe que pour MACSolver, mais en choisissant la meilleure variable
+     * de manière heuristique.
+     * @param instanciation - Instanciation à vérifier
+     * @param variables - Liste de variables de l'instance actuelle
+     * @param domaines - Domaines
+     * @return Instanciation
+     */
     public Map<Variable, Object> macHeuristic(Map<Variable, Object> instanciation, LinkedList<Variable> variables, Map<Variable, Set<Object>> domaines){
         if(variables.isEmpty()){
             return instanciation;
@@ -49,7 +66,7 @@ public class HeuristicMACSolver extends AbstractSolver{
                 }
             }
 
-            //On récupère la première variable de notre liste
+            //On récupère la meilleure variable heuristique
             Variable v = this.variableHeuristic.best(new HashSet<>(variables), domainesCopies);
             for(Map.Entry<Variable, Set<Object>> entry : domainesCopies.entrySet()){
                 if(entry.getKey().equals(v)){
@@ -76,15 +93,6 @@ public class HeuristicMACSolver extends AbstractSolver{
             variables.add(v);
         }
         return null;
-    }
-
-
-    public VariableHeuristic getVariableHeuristic(){
-        return this.variableHeuristic;
-    }
-
-    public ValueHeuristic getValueHeuristic(){
-        return this.valueHeuristic;
     }
 
 }
