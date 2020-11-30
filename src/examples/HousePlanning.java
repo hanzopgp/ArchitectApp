@@ -73,7 +73,7 @@ public class HousePlanning {
                     effect.put(var, pieceGeneral);
                     Map<Variable, Object> preconditionTmp = new HashMap<>(precondition);
                     preconditionTmp.put(var, null);
-                    actions.add(new BasicActionWithString(preconditionTmp, effect, HouseDemo.PLANNING_COST, "On positionne la piece : " + var.getName()));
+                    actions.add(new BasicActionWithString(preconditionTmp, effect, HouseDemo.PLANNING_COST, "On positionne la piece : " + var.getName(), pieceGeneral.toString()));
                 }
             }
         }
@@ -143,8 +143,8 @@ public class HousePlanning {
         System.out.println();
         System.out.println("============= LISTE DES ACTIONS A EFFECTUER =============");
         for (Action action : this.listAction) {
-            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.print("* Action : " + action.toString() + "  ");
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.print("* Action : " + action.toString());
         }
         System.out.println();
         System.out.println("* Planning avec A*");

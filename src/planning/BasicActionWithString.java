@@ -16,6 +16,7 @@ import java.util.Map;
 public class BasicActionWithString extends BasicAction implements Action{
 
     private String actionString;
+    private String domaineString;
 
     /**
      *
@@ -24,6 +25,12 @@ public class BasicActionWithString extends BasicAction implements Action{
      * @param cout -> coût de l'action
      * @param actionString -> nom de l'action
      */
+    public BasicActionWithString(Map<Variable, Object> preconditions, Map<Variable, Object> effets, int cout, String actionString, String domaineString) {
+        super(preconditions, effets, cout);
+        this.actionString = actionString;
+        this.domaineString = domaineString;
+    }
+
     public BasicActionWithString(Map<Variable, Object> preconditions, Map<Variable, Object> effets, int cout, String actionString) {
         super(preconditions, effets, cout);
         this.actionString = actionString;
@@ -31,7 +38,13 @@ public class BasicActionWithString extends BasicAction implements Action{
 
     @Override
     public String toString(){
-        String str = "--> " + this.actionString + "\n";
+        String str = "";
+        if(domaineString == null){
+            str += "--> " + this.actionString;
+        }else{
+            str += "--> " + this.actionString + ", Element du domaine : " + this.domaineString;
+        }
+        str += "\n";
         if(HouseDemo.FULL_DISPLAY){
             str += super.toString();
         }
