@@ -12,9 +12,6 @@ import representation.*;
  */
 public class BacktrackSolver extends AbstractSolver{
 
-	private List<Map<Variable, Object>> listForbiddenMap;
-	private boolean simulation = false;
-
 	/**
 	 * Constructeur
 	 * @param variables - Ensemble de variables du problème courant
@@ -48,22 +45,10 @@ public class BacktrackSolver extends AbstractSolver{
 			Map<Variable, Object> newMap = new HashMap<>(map);
 			newMap.put(v, o);
 			if(isConsistent(newMap)){
-				if(this.simulation){
-					System.out.println(this.listForbiddenMap.size());
-					if(newMap.keySet().containsAll(this.variables) && !HouseDemo.mapIsInListMap(map, this.listForbiddenMap)){
-						System.out.println("solution trouvee");
-						System.out.println(!HouseDemo.mapIsInListMap(map, this.listForbiddenMap));
-						System.out.println("map : " + map);
-						System.out.println("forbidden map : "  + this.listForbiddenMap);
-						return newMap;
-					}
-				}else{
-					if(newMap.keySet().containsAll(this.variables)){
-						return newMap;
-					}
+				if(newMap.keySet().containsAll(this.variables)){
+					return newMap;
 				}
 				Queue<Variable> newPile = new LinkedList<>(pile);
-				//newPile.remove(v);
 				newMap = this.sra(newMap, newPile);
 				if(newMap != null){
 					return newMap;
@@ -72,22 +57,5 @@ public class BacktrackSolver extends AbstractSolver{
 		}
 		return null;
 	}
-
-	public void addForbiddenItem(Map<Variable, Object> item){
-		this.listForbiddenMap.add(item);
-	}
-
-	public void setSimulation(boolean simulation) {
-		this.simulation = simulation;
-	}
-
-	public void initListForbiddenMap(){
-		this.listForbiddenMap = new ArrayList<>();
-	}
-
-	public List<Map<Variable, Object>> getListForbiddenMap(){
-		return this.listForbiddenMap;
-	}
-
 
 }

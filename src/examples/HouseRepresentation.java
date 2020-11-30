@@ -101,7 +101,7 @@ public class HouseRepresentation {
     //Ajout de toute les contraintes de l'exemple
     public void makeAllConstraint(){
         this.makeOnlyOnePieceConstraint();
-        this.makeStateSuiteConstraint();
+        //this.makeStateSuiteConstraint();
         //this.makeWaterPartConstraint();
     }
 

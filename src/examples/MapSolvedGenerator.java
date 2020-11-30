@@ -3,6 +3,7 @@ package examples;
 import representation.Constraint;
 import representation.Variable;
 import solvers.BacktrackSolver;
+import solvers.BacktrackSolverMultipleSolution;
 
 import java.util.List;
 import java.util.Map;
@@ -13,15 +14,14 @@ public class MapSolvedGenerator {
     List<Map<Variable, Object>> listSolvedMap;
 
     public MapSolvedGenerator(Set<Variable> setVariable, Set<Constraint> setConstraint){
-        BacktrackSolver backtrackSolver = new BacktrackSolver(setVariable, setConstraint);
-        backtrackSolver.initListForbiddenMap();
-        backtrackSolver.setSimulation(true);
-        for(int i = 0; i < HouseDemo.NB_HOUSE_DATAMINING; i++){
-            Map<Variable, Object> item = backtrackSolver.solve();
-            backtrackSolver.addForbiddenItem(item);
+        BacktrackSolverMultipleSolution backtrackSolverMultipleSolution = new BacktrackSolverMultipleSolution(setVariable, setConstraint);
+        backtrackSolverMultipleSolution.solve();
+        System.out.println("Nombre de solutions recuperees : " + backtrackSolverMultipleSolution.getListSolution().size());
+        System.out.println("Toutes les solutions recupees sont correct : " + backtrackSolverMultipleSolution.testSolutions());
+        System.out.println("Affichage des solutions : ");
+        for(Map<Variable, Object> map : backtrackSolverMultipleSolution.getListSolution()){
+            System.out.println(map.values());
         }
-        backtrackSolver.setSimulation(false);
-        this.listSolvedMap = backtrackSolver.getListForbiddenMap();
     }
 
     public List<Map<Variable, Object>> getListSolvedMap(){

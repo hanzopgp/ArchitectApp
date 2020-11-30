@@ -6,14 +6,14 @@ import java.util.*;
 
 public class HouseDemo {
 
-    public static int WIDTH = 4; //maximum WIDTH*HEIGHT : 12
+    public static int WIDTH = 2; //maximum WIDTH*HEIGHT : 12
     public static int HEIGHT = 3;
     public static List<String> LIST_PIECE_NORMAL = new ArrayList<>(Arrays.asList("salon", "chambre1", "chambre2", "salledejeu", "chambre3", "chambre4", "chambre5"));
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3"));
     public static List<String> LIST_CHAMBRE = new ArrayList<>(Arrays.asList("chambre1", "chambre2", "chambre3", "chambre4",  "chambre5"));
     public static int PLANNING_COST = 5;
     public static String SOLVERTYPE = "backtrack"; //"backtrack", "mac", "macheuristic"
-    public static int NB_HOUSE_DATAMINING = 10;
+    public static int NB_HOUSE_DATAMINING = 20;
 
     public static void main(String[] args){
 
@@ -77,8 +77,6 @@ public class HouseDemo {
 
         //Creation de la base de donnee
         MapSolvedGenerator mapSolvedGenerator = new MapSolvedGenerator(setVariable, setConstraint);
-        System.out.println(mapSolvedGenerator.getListSolvedMap().size());
-        System.out.println(mapSolvedGenerator.getListSolvedMap().get(0).equals(mapSolvedGenerator.getListSolvedMap().get(1)));
 
         //Recuperation des informations
         HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation);
@@ -107,15 +105,6 @@ public class HouseDemo {
             }
         }
         return setString;
-    }
-
-    public static boolean mapIsInListMap(Map<Variable, Object> map1, List<Map<Variable, Object>> listMap){
-        for(Map<Variable, Object> map2 : listMap){
-            if(map1.equals(map2)){
-                return true;
-            }
-        }
-        return false;
     }
 
 }
