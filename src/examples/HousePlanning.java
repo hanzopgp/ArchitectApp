@@ -113,6 +113,8 @@ public class HousePlanning {
     }
 
     public void printResults(){
+        System.out.println();
+        System.out.println("============= LISTE DES ACTIONS A EFFECTUER =============");
         for (Action action : this.listAction) {
             System.out.println("--> Action : " + action);
         }

@@ -10,7 +10,6 @@ public class HouseRepresentation {
     private final int largeur;
     private List<String> listPieceNormal;
     private List<String> listPieceEau;
-    private List<String> listChambre;
     private List<Object> domaine;
     private List<Variable> listVariable;
     private List<Constraint> listConstraint;
@@ -20,15 +19,12 @@ public class HouseRepresentation {
     private BooleanVariable mursEleves;
     private BooleanVariable toitureTerminee;
 
-    private Map<Variable, Object> mapVariable;
-
     public HouseRepresentation(int longueur, int largeur, List<String> listPieceNormal, List<String> listPieceEau, List<String> listChambre ) {
         this.longueur = longueur;
         this.largeur = largeur;
 
         this.listPieceNormal = listPieceNormal;
         this.listPieceEau = listPieceEau;
-        this.listChambre = listChambre;
 
         this.domaine = new ArrayList<>();
         this.listVariable = new ArrayList<>();
@@ -101,25 +97,20 @@ public class HouseRepresentation {
     //Ajout de toute les contraintes de l'exemple
     public void makeAllConstraint(){
         this.makeOnlyOnePieceConstraint();
-        //this.makeStateSuiteConstraint();
+        this.makeStateSuiteConstraint();
         //this.makeWaterPartConstraint();
     }
 
     //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
     public void makeStateSuiteConstraint(){
-        this.addConstraint(new Rule(this.dalleCoulee, false, this.dalleHumide, false));
-        this.addConstraint(new Rule(this.dalleHumide, true, this.dalleCoulee, true));
-        this.addConstraint(new Rule(this.dalleHumide, true, this.mursEleves, false));
-        this.addConstraint(new Rule(this.mursEleves, false, this.toitureTerminee, false));
-
-        this.addConstraint(new Rule(mursEleves, true, dalleCoulee, true));
-        this.addConstraint(new Rule(mursEleves, true, dalleHumide, false));
-        this.addConstraint(new Rule(toitureTerminee, true, mursEleves, true));
-
-//        this.addConstraint(new Rule(this.toitureTerminee, true, this.mursEleves, true));
-//        this.addConstraint(new Rule(this.mursEleves, true, this.dalleCoulee, true));
-//        this.addConstraint(new Rule(this.mursEleves, true, this.dalleHumide, false));
-//        this.addConstraint(new Rule(this.dalleHumide, true, this.dalleCoulee, true));
+        Constraint c1 = new Rule(dalleCoulee, false, dalleHumide, false);
+        Constraint c2 = new Rule(dalleHumide, true, dalleCoulee, true);
+        Constraint c3 = new Rule(dalleHumide, true, mursEleves, false);
+        Constraint c4 = new Rule(mursEleves, false, toitureTerminee, false);
+        Constraint c5 = new Rule(mursEleves, true, dalleCoulee, true);
+        Constraint c6 = new Rule(mursEleves, true, dalleHumide, false);
+        Constraint c7 = new Rule(toitureTerminee, true, mursEleves, true);
+        this.addConstraint(c1,c2,c3,c4,c5,c6,c7);
     }
 
     //Contrainte une seule piece par case
@@ -192,14 +183,6 @@ public class HouseRepresentation {
         System.out.println("* Toiture terminee : " + this.toitureTerminee.toString());
     }
 
-    public void printMapVariable(){
-        System.out.println();
-        System.out.println("============= LISTE DES VARIABLES + AFFECTATION =============");
-        for (Map.Entry<Variable, Object> entry : this.mapVariable.entrySet()) {
-            System.out.println(entry.getKey() + ", Affectation : " + entry.getValue());
-        }
-    }
-
     public void printConstraints(){
         System.out.println();
         System.out.println("============= LISTE DES CONTRAINTES =============");
@@ -214,6 +197,7 @@ public class HouseRepresentation {
     public void addConstraint(Constraint constraint){
         this.listConstraint.add(constraint);
     }
+    public void addConstraint(Constraint ... listConstraint){ this.listConstraint.addAll(Arrays.asList(listConstraint)); }
 
     //Creer les attributs "name" des Variables
     public String[][] buildHouseString(){

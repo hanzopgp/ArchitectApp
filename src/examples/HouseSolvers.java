@@ -63,6 +63,8 @@ public class HouseSolvers {
     }
 
     public void printResults(){
+        System.out.println();
+        System.out.println("============= LISTE DES AFFECTATIONS =============");
         for (Map.Entry<Variable, Object> entry : this.mapSolved.entrySet()) {
             System.out.println("--> Variable : " + entry.getKey() + ", Affectation : " + entry.getValue());
         }
@@ -72,7 +74,8 @@ public class HouseSolvers {
     }
 
     public void printHouse(){
-        System.out.println("Plan de la maison : ");
+        System.out.println();
+        System.out.println("============= PLAN DE LA MAISON =============");
         int cpt = 0;
         for (Map.Entry<Variable, Object> entry : this.mapSolved.entrySet()) {
             if(!(entry.getValue().equals(false)) && !(entry.getValue().equals(true))){

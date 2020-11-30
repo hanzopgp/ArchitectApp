@@ -18,7 +18,7 @@ public class HouseDatamining {
     }
 
     public void printResults(){
-
+        System.out.println();
     }
 
 }

@@ -41,7 +41,7 @@ public class BacktrackSolverMultipleSolution extends AbstractSolver{
      */
     public Map<Variable, Object> sra(Map<Variable, Object> map, Queue<Variable> pile){
         //check si il y a encore des variables
-        if(cpt == HouseDemo.NB_HOUSE_DATAMINING && isConsistent(map)){
+        if(this.cpt == HouseDemo.NB_HOUSE_DATAMINING && isConsistent(map)){
             return null;
         }
         if(pile.isEmpty()){
@@ -59,10 +59,10 @@ public class BacktrackSolverMultipleSolution extends AbstractSolver{
                 }
                 Queue<Variable> newPile = new LinkedList<>(pile);
                 newMap = this.sra(newMap, newPile);
-//                if(newMap != null){
-//                    this.cpt++;
-//                    this.listSolution.add(newMap);
-//                }
+                if(newMap != null){
+                    this.cpt++;
+                    this.listSolution.add(newMap);
+                }
             }
         }
         return null;

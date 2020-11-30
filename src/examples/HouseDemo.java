@@ -28,10 +28,11 @@ public class HouseDemo {
         houseRepresentation.makeAllConstraint();
 
         //Affichage de la maison de base
-        //houseRepresentation.printAll();
+        houseRepresentation.printAll();
 
         //----------- Utilisation package solvers -----------
 
+        System.out.println();
         System.out.println("######################## RESOLUTION ########################");
 
         Set<Variable> setVariable = HouseDemo.listToSetVariable(houseRepresentation.getListVariable());
@@ -58,10 +59,11 @@ public class HouseDemo {
         }
 
         //Affichage du resultat
-        //houseSolvers.printResults();
+        houseSolvers.printResults();
 
         //----------- Utilisation package planning -----------
 
+        System.out.println();
         System.out.println("######################## PLANNING ########################");
 
         //Planning avec algorithm A*
@@ -69,14 +71,16 @@ public class HouseDemo {
         housePlanning.planAStar();
 
         //Affichage du resultat
-        //housePlanning.printResults();
+        housePlanning.printResults();
 
         //----------- Utilisation package datamining -----------
 
+        System.out.println();
         System.out.println("######################## DATAMINING ########################");
 
         //Creation de la base de donnee
         MapSolvedGenerator mapSolvedGenerator = new MapSolvedGenerator(setVariable, setConstraint);
+        mapSolvedGenerator.printResults();
 
         //Recuperation des informations
         HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation);
