@@ -1,5 +1,4 @@
 package planning;
-import dataminingtests.*;
 import planningtests.*;
 
 public class MainPlanning {
@@ -18,9 +17,3 @@ public class MainPlanning {
     }
 
 }
-
-
-
-
-// javac -cp ".:planningtests.jar" -d build planning/*.java
-// java -cp "build:planningtests.jar" planning.Main

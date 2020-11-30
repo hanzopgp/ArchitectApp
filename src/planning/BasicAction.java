@@ -5,7 +5,6 @@ import representation.Variable;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * Cette classe represente des actions qui vont etre testees.
  * Une action sera caracterisee en termes de preconditions qui devront etre
@@ -18,7 +17,6 @@ public class BasicAction implements Action {
     private final Map<Variable, Object> preconditions;
     private final Map<Variable, Object> effets;
     private final int cout;
-
 
     /**
      * 
@@ -57,7 +55,6 @@ public class BasicAction implements Action {
         str += "* Effets : " + this.effets + "\n";
         str += "* Cout : " + this.cout + "h\n";
         return str;
-
     }
 
     @Override

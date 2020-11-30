@@ -157,7 +157,6 @@ public class HouseRepresentation {
                     Variable v2 = this.listVariable.get(j);
                     this.addConstraint(new DifferenceConstraint(v1, v2));
                 }
-
             }
         }
     }

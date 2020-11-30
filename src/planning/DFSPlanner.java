@@ -5,7 +5,6 @@ import representation.Variable;
 import java.math.BigInteger;
 import java.util.*;
 
-
 /**
  * Cette classe represente un planificateur utilisant l'algorithme DFS.
  * Cette algorithme effectue dans un graphe une recherche en profondeur. 
@@ -16,7 +15,6 @@ public class DFSPlanner implements Planner{
     private final Map<Variable, Object> etatInitial;
     private final Set<Action> actions;
     private final Goal but;
-
 
     /**
      * @param etatState -> etat initial

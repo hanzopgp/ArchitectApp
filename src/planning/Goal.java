@@ -4,7 +4,6 @@ import representation.*;
 
 import java.util.Map;
 
-
 /**
  * Interface representant le but a atteindre
  */

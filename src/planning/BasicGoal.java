@@ -10,7 +10,6 @@ import representation.*;
 public class BasicGoal implements Goal{
 
     private final Map<Variable, Object> goal;
-
     
     /**
      * @param goal -> but a atteindre 

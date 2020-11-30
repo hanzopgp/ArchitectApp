@@ -5,7 +5,6 @@ import java.util.*;
 
 import representation.*;
 
-
 /**
  * Cette classe represente un planificateur utilisant l'algorithme Dijkstra.
  * Cette algorithme resoud le probleme du chemin le plus court. 
@@ -17,7 +16,6 @@ public class DijkstraPlanner implements Planner {
     private final Set<Action> actions;
     private final Goal goal;
 
-
     /**
      * @param initialState -> etat initial
      * @param actions -> actions qui pourront etre testee
@@ -28,7 +26,6 @@ public class DijkstraPlanner implements Planner {
         this.actions = actions;
         this.goal = goal;
     }
-
 
     /**
      * Algorithme retournant le plan de coût minimal : Dijkstra
@@ -88,7 +85,6 @@ public class DijkstraPlanner implements Planner {
         }
     }
 
-
     /**
      * Methode recursive appelee a la fin de la recherche de Dijkstra() pour 
      * retourner la liste des actions permettant de passer de l'etat initial 
@@ -118,7 +114,6 @@ public class DijkstraPlanner implements Planner {
         Collections.reverse(sup_plan);
         return sup_plan;
     }
-
 
     @Override
     public Map<Variable, Object> getInitialeState() {

@@ -2,12 +2,10 @@ package planning;
 import representation.*;
 import java.util.*;
 
-
 /**
  * Interface permettant d'estimer un meilleur chemin pour aller a une solution 
  */
 public interface Heuristic{
-
 
     /**
      * Estimation d'un coût

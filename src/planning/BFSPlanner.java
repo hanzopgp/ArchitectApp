@@ -3,7 +3,6 @@ import java.math.BigInteger;
 import java.util.*;
 import representation.*;
 
-
 /**
  * Cette classe represente un planificateur utilisant l'algorithme BFS.
  * Cette algorithme effectue dans un graphe une recherche en largeur. 
@@ -15,8 +14,6 @@ public class BFSPlanner implements Planner{
     private final Map<Variable, Object> initialState;
     private final Set<Action> actions;
     private final Goal goal;
-
-
 
     /**
      * 
@@ -39,8 +36,6 @@ public class BFSPlanner implements Planner{
     public Map<Variable, Object> getInitialeState() {
         return this.initialState;
     }
-
-
 
     /**
      * Algorithme de recherche en largeur : BFS
@@ -87,8 +82,6 @@ public class BFSPlanner implements Planner{
         /** pas d'action possible pour le plan **/
         return null;
     }
-
-
 
     /**
      * Methode recursive permettant de calculer un plan a partir des structures

@@ -4,7 +4,6 @@ import planning.*;
 import representation.BooleanVariable;
 import representation.Variable;
 
-import javax.print.DocPrintJob;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -144,10 +143,12 @@ public class HousePlanning {
         }
 
         //Affection des resultats
-        this.listAction = planner.plan();
-        long endTime = System.currentTimeMillis();
-        this.timeTaken = endTime - startTime;
-        this.nbNodes = planner.getNbNodes();
+        if(planner != null){
+            this.listAction = planner.plan();
+            long endTime = System.currentTimeMillis();
+            this.timeTaken = endTime - startTime;
+            this.nbNodes = planner.getNbNodes();
+        }
     }
 
     /**

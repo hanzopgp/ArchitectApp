@@ -5,7 +5,6 @@ import representation.Variable;
 
 import java.util.Map;
 
-
 /**
  * Cette classe represente des actions qui vont etre testees.
  * Une action sera caracterisee en termes de preconditions qui devront etre
@@ -49,7 +48,6 @@ public class BasicActionWithString extends BasicAction implements Action{
             str += super.toString();
         }
         return str;
-
     }
 
 }

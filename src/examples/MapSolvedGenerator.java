@@ -14,8 +14,8 @@ import java.util.Set;
 public class MapSolvedGenerator {
 
     private final List<Map<Variable, Object>> listSolvedMap;
-    private boolean isCorrect = false;
-    private long timeTaken = 0;
+    private final boolean isCorrect;
+    private final long timeTaken;
 
     /**
      * Constructeur

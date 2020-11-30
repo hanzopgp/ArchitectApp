@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 /**
  * Cette classe represente les plans des algos suivant : DFS, BFS, Dijkstra et A*
  */
@@ -19,13 +18,11 @@ public interface Planner {
      */
     List<Action> plan();
 
-
     /**
      * Renvoie l'etat initial
      * @return -> etat initial
      */
     Map<Variable, Object> getInitialeState();
-
 
     /**
      * Renvoie les actions qui pourront etre testees
@@ -33,7 +30,6 @@ public interface Planner {
      */
     Set<Action> getActions();
 
-    
     /**
      * Renvoie le but voulu
      * @return le but voulu
