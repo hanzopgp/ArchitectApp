@@ -13,7 +13,7 @@ public class HousePlanning {
 
     HouseRepresentation houseRepresentation;
     Map<Variable, Object> mapSolved;
-    Set<Action> listAction;
+    List<Action> listAction;
     long timeTaken;
 
     /**
@@ -24,7 +24,7 @@ public class HousePlanning {
     public HousePlanning(HouseRepresentation houseRepresentation, Map<Variable, Object> mapSolved){
         this.houseRepresentation = houseRepresentation;
         this.mapSolved = mapSolved;
-        this.listAction = new HashSet<>();
+        this.listAction = new ArrayList<>();
     }
 
     /**
@@ -42,7 +42,9 @@ public class HousePlanning {
         //On part d'une maison vide avec une dalle non coulee
         Map<Variable, Object> start = new HashMap<>();
         for(Variable var : houseRepresentation.getListVariable()){
-            start.put(var, null);
+            if (!(var instanceof BooleanVariable)) {
+                start.put(var, null);
+            }
         }
         start.put(dalleCoulee, false);
 
@@ -52,7 +54,7 @@ public class HousePlanning {
         end.put(dalleHumide, false);
         end.put(mursEleves, true);
         end.put(toitureTerminee, true);
-        Goal but = new BasicGoal(end);
+        Goal goal = new BasicGoal(end);
 
         //Declaration des variables
         Set<Action> actions = new HashSet<>();
@@ -63,8 +65,9 @@ public class HousePlanning {
         precondition = new HashMap<>();
         precondition.put(dalleCoulee, true);
         precondition.put(dalleHumide, false);
-        for (Object pieceGeneral : houseRepresentation.getDomaine()) {
-            for (Variable var : houseRepresentation.getListVariable()) {
+
+        for (Variable var : houseRepresentation.getListVariable()) {
+            for (Object pieceGeneral : houseRepresentation.getDomaine()) {
                 if(!(var instanceof BooleanVariable)){
                     effect = new HashMap<>();
                     effect.put(var, pieceGeneral);
@@ -72,7 +75,6 @@ public class HousePlanning {
                     preconditionTmp.put(var, null);
                     actions.add(new BasicActionWithString(preconditionTmp, effect, HouseDemo.PLANNING_COST, "On positionne la piece : " + var.getName()));
                 }
-
             }
         }
 
@@ -107,19 +109,16 @@ public class HousePlanning {
         effect.put(toitureTerminee, true);
         actions.add(new BasicActionWithString(precondition, effect, HouseDemo.PLANNING_COST, "Construire le toit"));
 
-        //Creation de  l'heuristique
-        Heuristic heuristic = new Heuristic() {
+        //Utilisation du A*
+        Planner aStarPlanner = new AStarPlanner(start, actions, goal, new Heuristic() {
             @Override
             public float estimate(Map<Variable, Object> state) {
                 return state.size() - end.size();
             }
-        };
-
-        //Utilisation du A*
-        AStarPlanner aStarPlanner = new AStarPlanner(start, actions, but, heuristic);
+        });
 
         //Affection des resultats
-        this.listAction = aStarPlanner.getActions();
+        this.listAction = aStarPlanner.plan();
         long endTime = System.currentTimeMillis();
         this.timeTaken = endTime - startTime;
 

@@ -1,5 +1,6 @@
 package planning;
 
+import examples.HouseDemo;
 import representation.Variable;
 
 import java.util.Map;
@@ -31,7 +32,9 @@ public class BasicActionWithString extends BasicAction implements Action{
     @Override
     public String toString(){
         String str = "--> " + this.actionString + "\n";
-        str += super.toString();
+        if(HouseDemo.FULL_DISPLAY){
+            str += super.toString();
+        }
         return str;
 
     }

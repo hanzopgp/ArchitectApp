@@ -10,11 +10,12 @@ import java.util.Map;
  */
 public interface Goal {
 
-
     /**
      * 
      * @param variables -> etat courant
      * @return -> le resultat du but
      */
     boolean isSatisfiedBy(Map<Variable, Object> variables);
+
+    Map<Variable, Object> getGoal();
 }

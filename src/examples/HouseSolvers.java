@@ -72,8 +72,10 @@ public class HouseSolvers {
     public void printResults(){
         System.out.println();
         System.out.println("============= LISTE DES AFFECTATIONS =============");
-        for (Map.Entry<Variable, Object> entry : this.mapSolved.entrySet()) {
-            System.out.println("--> Variable : " + entry.getKey() + ", Affectation : " + entry.getValue());
+        if(HouseDemo.FULL_DISPLAY){
+            for (Map.Entry<Variable, Object> entry : this.mapSolved.entrySet()) {
+                System.out.println("--> Variable : " + entry.getKey() + ", Affectation : " + entry.getValue());
+            }
         }
         this.printHouse();
         System.out.println("* Solver utilise : " + this.solverUsed);

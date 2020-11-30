@@ -7,7 +7,7 @@ import java.util.*;
 public class HouseDemo {
 
     public static int WIDTH = 3; //maximum WIDTH*HEIGHT : 16
-    public static int HEIGHT = 3;
+    public static int HEIGHT = 2;
     public static List<String> LIST_PIECE_NORMAL = new ArrayList<>(Arrays.asList("salon", "chambre1", "salledejeu", "chambre2", "garage", "chambre3", "chambre4", "cinema", "chambre5"));
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3", "toilette3"));
     public static int PLANNING_COST = 5;
@@ -15,11 +15,12 @@ public class HouseDemo {
     public static int NB_HOUSE_DATAMINING = 100;
     public static float MIN_FREQUENCY = 0.7f;
     public static float MIN_CONFIDENCE = 0.7f;
+    public static boolean FULL_DISPLAY = true;
 
     public static void main(String[] args){
 
         //Choix des parametres
-        //inputParameters();
+        inputParameters();
 
         //----------- Utilisation package representation -----------
 
@@ -33,7 +34,7 @@ public class HouseDemo {
         houseRepresentation.makeAllConstraint();
 
         //Affichage de la maison de base
-        //houseRepresentation.printAll();
+        houseRepresentation.printAll();
 
         //----------- Utilisation package solvers -----------
 
@@ -64,7 +65,7 @@ public class HouseDemo {
         }
 
         //Affichage du resultat
-        //houseSolvers.printResults();
+        houseSolvers.printResults();
 
         //----------- Utilisation package planning -----------
 
@@ -85,14 +86,14 @@ public class HouseDemo {
 
         //Creation et affichage de la base de donnee
         MapSolvedGenerator mapSolvedGenerator = new MapSolvedGenerator(setVariable, setConstraint);
-        //mapSolvedGenerator.printResults();
+        mapSolvedGenerator.printResults();
 
         //Recuperation des informations
         HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation, mapSolvedGenerator);
         houseDatamining.mine();
 
         //Affichage du resultat
-        //houseDatamining.printResults();
+        houseDatamining.printResults();
 
     }
 
@@ -128,7 +129,13 @@ public class HouseDemo {
         System.out.println("1 - Backtrack");
         System.out.println("2 - MAC");
         System.out.println("3 - MacHeuristic");
-        SOLVERTYPE = scannerString(new Scanner(System.in), "Vous devez entrer un nom de solver !");
+        String strSolverType = scannerString(new Scanner(System.in), "Vous devez entrer un nom de solver !");
+        SOLVERTYPE = choseSolverType(strSolverType);
+        System.out.println("Voulez vous l'affichage complet ? : ");
+        System.out.println("1 - Oui");
+        System.out.println("2 - Non");
+        String strFullDisplay = scannerString(new Scanner(System.in), "Vous devez entrer 'oui' ou 'non' !");
+        FULL_DISPLAY = (strFullDisplay.equals("oui"));
         System.out.println("Entrez le nombre maximal de solutions a trouver : (compris entre 0 et 3000)");
         NB_HOUSE_DATAMINING = scannerIntLimit(new Scanner(System.in), 0, 3000);
         System.out.println("Entrez la confiance minimale souhaitee : (compris entre 0 et 1)");
@@ -140,6 +147,19 @@ public class HouseDemo {
                 "Nombre de solutions maximales a trouver : "+NB_HOUSE_DATAMINING+"\n"+
                 "Confiance minimale : "+MIN_CONFIDENCE+"\n"+
                 "Frequence minimale : "+MIN_FREQUENCY);
+    }
+
+    public static String choseSolverType(String str){
+        switch(str){
+            case "1" :
+                return "backtrack";
+            case "2" :
+                return "mac";
+            case "3" :
+                return "macheuristic";
+            default:
+                throw new IllegalStateException("Unexpected value: " + str);
+        }
     }
 
     public static String scannerString(Scanner scanner, String errormsg) {

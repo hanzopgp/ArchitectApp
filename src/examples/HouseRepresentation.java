@@ -213,18 +213,19 @@ public class HouseRepresentation {
 //        }
 //    }
 
-
     //----------- Affichage -----------
 
     /**
      * Printer global
      */
     public void printAll(){
-        this.printArea();
-        this.printDomaine();
+        if(HouseDemo.FULL_DISPLAY){
+            this.printArea();
+            this.printDomaine();
+            this.printBooleanVariables();
+            this.printConstraints();
+        }
         this.printVariables();
-        this.printBooleanVariables();
-        this.printConstraints();
     }
 
     /**

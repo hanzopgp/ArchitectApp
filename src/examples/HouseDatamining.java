@@ -64,7 +64,7 @@ public class HouseDatamining {
         System.out.println("* Frequence minimum : " + HouseDemo.MIN_FREQUENCY);
         System.out.println("* Confiance minimum : " + HouseDemo.MIN_CONFIDENCE);
         System.out.println("* Nombre de regles pour ces parametres : " + this.setAssociationRule.size());
-        System.out.println("* Temps pour la creation de la base de donnee : " + this.timeTaken + "ms");
+        System.out.println("* Temps pour l'extraction des regles : " + this.timeTaken + "ms");
     }
 
 }

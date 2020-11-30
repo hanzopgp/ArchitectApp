@@ -46,11 +46,13 @@ public class MapSolvedGenerator {
     public void printResults(){
         System.out.println();
         System.out.println("============= CREATION DE LA BASE DE DONNEE =============");
-        System.out.println("* Affichage des solutions : ");
-        //        for(Map<Variable, Object> map : this.listSolvedMap){
-//            System.out.println("--> " + map.values());
-//        }
-        this.printHouse();
+        if(HouseDemo.FULL_DISPLAY){
+            System.out.println("* Affichage des solutions : ");
+            for(Map<Variable, Object> map : this.listSolvedMap){
+                System.out.println("--> " + map.values());
+            }
+            this.printHouse();
+        }
         System.out.println("* Nombre de solutions recuperees : " + this.listSolvedMap.size());
         System.out.println("* Toutes les solutions recupees sont correct : " + this.isCorrect);
         System.out.println("* Temps pour la creation de la base de donnee : " + this.timeTaken + "ms");
