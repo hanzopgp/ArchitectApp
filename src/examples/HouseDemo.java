@@ -12,8 +12,8 @@ public class HouseDemo {
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3"));
     public static int PLANNING_COST = 5;
     public static String SOLVERTYPE = "backtrack"; //"backtrack", "mac", "macheuristic"
-    public static int NB_HOUSE_DATAMINING = 10;
-    public static float MIN_FREQUENCY = 0.7f;
+    public static int NB_HOUSE_DATAMINING = 1000;
+    public static float MIN_FREQUENCY = 0.3f;
     public static float MIN_CONFIDENCE = 0.7f;
 
     public static void main(String[] args){

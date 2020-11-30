@@ -4,10 +4,7 @@ import representation.Constraint;
 import representation.Variable;
 import solvers.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class HouseSolvers {
 
@@ -34,19 +31,9 @@ public class HouseSolvers {
 
     public void solveWithMacAndHeuristic(){
         long start = System.currentTimeMillis();
-        VariableHeuristic variableHeuristic = new VariableHeuristic() {
-            @Override
-            public Variable best(Set<Variable> variables, Map<Variable, Set<Object>> domains) {
-                return null;
-            }
-        };
-        ValueHeuristic valueHeuristic = new ValueHeuristic() {
-            @Override
-            public List<Object> ordering(Variable variable, Set<Object> domain) {
-                return null;
-            }
-        };
-        HeuristicMACSolver heuristicMACSolver = new HeuristicMACSolver(setVariable, setConstraint, variableHeuristic, valueHeuristic);
+        VariableHeuristic variableHeuristic = new NbConstraintsVariableHeuristic(this.setVariable, this.setConstraint, true);
+        ValueHeuristic valueHeuristic = new RandomValueHeuristic(new Random());
+        HeuristicMACSolver heuristicMACSolver = new HeuristicMACSolver(this.setVariable, this.setConstraint, variableHeuristic, valueHeuristic);
         this.mapSolved = heuristicMACSolver.solve();
         this.solverUsed = "Mac solver with heuristic";
         long end = System.currentTimeMillis();
@@ -55,7 +42,7 @@ public class HouseSolvers {
 
     public void solveWithMac(){
         long start = System.currentTimeMillis();
-        MACSolver macSolver = new MACSolver(setVariable, setConstraint);
+        MACSolver macSolver = new MACSolver(this.setVariable, this.setConstraint);
         this.mapSolved = macSolver.solve();
         this.solverUsed = "Mac solver";
         long end = System.currentTimeMillis();
