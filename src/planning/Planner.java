@@ -8,27 +8,27 @@ import java.util.Set;
 
 
 /**
- * Cette classe représente les plans des algos suivant : DFS, BFS, Dijkstra et A*
+ * Cette classe represente les plans des algos suivant : DFS, BFS, Dijkstra et A*
  */
 public interface Planner {
 
     /**
-     * Renvoie le résultat de l'algorithme executé
+     * Renvoie le resultat de l'algorithme execute
      * @return -> liste des actions 
      */
     List<Action> plan();
 
 
     /**
-     * Renvoie l'état initial
-     * @return -> état initial
+     * Renvoie l'etat initial
+     * @return -> etat initial
      */
     Map<Variable, Object> getInitialeState();
 
 
     /**
-     * Renvoie les actions qui pourront être testées
-     * @return -> actions qui pourront être testées
+     * Renvoie les actions qui pourront être testees
+     * @return -> actions qui pourront être testees
      */
     Set<Action> getActions();
 

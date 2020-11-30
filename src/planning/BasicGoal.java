@@ -3,8 +3,8 @@ import java.util.*;
 import representation.*;
 
 /**
- * Cette classe représente la validité des buts. Cette validité est montrée 
- * par les valeurs obtenues des variables instanciées.
+ * Cette classe represente la validite des buts. Cette validite est montree 
+ * par les valeurs obtenues des variables instanciees.
  */
 
 public class BasicGoal implements Goal{
@@ -13,7 +13,7 @@ public class BasicGoal implements Goal{
 
     
     /**
-     * @param goal -> but à atteindre 
+     * @param goal -> but a atteindre 
      */
     public BasicGoal(Map<Variable, Object> goal){
         this.goal = goal;

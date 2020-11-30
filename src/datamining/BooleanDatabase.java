@@ -6,7 +6,7 @@ import java.util.Set;
 import representation.BooleanVariable;
 
 /**
- * Classe qui correspond à un ensemble de variables booléennes
+ * Classe qui correspond a un ensemble de variables booleennes
  */
 public class BooleanDatabase{
 	
@@ -15,7 +15,7 @@ public class BooleanDatabase{
 
 	/**
 	 * Constructeur
-	 * @param items - Ensemble de variable booléennes
+	 * @param items - Ensemble de variable booleennes
 	 */
 	public BooleanDatabase(Set<BooleanVariable> items){
 		this.items = items;
@@ -23,7 +23,7 @@ public class BooleanDatabase{
 	}
 
 	/**
-	 * Ajoute un ensemble de variable à l'ensemble déjà existant
+	 * Ajoute un ensemble de variable a l'ensemble deja existant
 	 * @param transactions - Ensemble de variables
 	 */
 	public void add(Set<BooleanVariable> transactions){
@@ -32,7 +32,7 @@ public class BooleanDatabase{
 
 	/**
 	 * Getter de items
-	 * @return Retourne l'ensemble de variables booléennes
+	 * @return Retourne l'ensemble de variables booleennes
 	 */
 	public Set<BooleanVariable> getItems(){
 		return this.items;

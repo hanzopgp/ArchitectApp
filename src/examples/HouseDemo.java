@@ -18,12 +18,34 @@ public class HouseDemo {
 
     public static void main(String[] args){
 
+        System.out.flush();
+        System.out.println("=============== CHOIX DES PARAMETRES ===============");
+        System.out.println("Entrez la longueur de la maison : (compris entre 1 et 4)");
+        int hauteurMaison = scannerIntLimit(new Scanner(System.in), 1, 4);
+        System.out.println("Entrez la largeur de la maison : (compris entre 1 et 4)");
+        int largeurMaison = scannerIntLimit(new Scanner(System.in), 1, 4);
+        System.out.println("Entrez le nom du solver a utiliser : ");
+        System.out.println("1 - Backtrack");
+        System.out.println("2 - MAC");
+        System.out.println("3 - MacHeuristic");
+        SOLVERTYPE = scannerString(new Scanner(System.in), "Vous devez entrer un nom de solver !");
+        System.out.println("Entrez le nombre maximal de solutions a trouver : (compris entre 0 et 3000)");
+        NB_HOUSE_DATAMINING = scannerIntLimit(new Scanner(System.in), 0, 3000);
+        System.out.println("Entrez la confiance minimale souhaitee : (compris entre 0 et 1)");
+        MIN_CONFIDENCE = scannerFloatLimit(new Scanner(System.in), 0, 1);
+        System.out.println("Entrez la frequence minimale souhaitee : (compris entre 0 et 1)");
+        MIN_FREQUENCY = scannerFloatLimit(new Scanner(System.in), 0, 1);
+        System.out.println();
+        System.out.println("Parametres enregistres !\nMaison de "+hauteurMaison+"x"+largeurMaison+" cases\nSolveur utilise: "+SOLVERTYPE+"\n"+
+                            "Nombre de solutions maximales a trouver : "+NB_HOUSE_DATAMINING+"\n"+
+                            "Confiance minimale : "+MIN_CONFIDENCE+"\n"+
+                            "Frequence minimale : "+MIN_FREQUENCY);
         //----------- Utilisation package representation -----------
 
         //Creation de la maison de base
         System.out.println("######################## CONSTRUCTION DE LA MAISON ########################");
 
-        HouseRepresentation houseRepresentation = new HouseRepresentation(HEIGHT, WIDTH, LIST_PIECE_NORMAL, LIST_PIECE_EAU);
+        HouseRepresentation houseRepresentation = new HouseRepresentation(hauteurMaison, largeurMaison, LIST_PIECE_NORMAL, LIST_PIECE_EAU);
 
         //Ajout des contraintes
         houseRepresentation.makeAllConstraint();
@@ -90,6 +112,65 @@ public class HouseDemo {
         //Affichage du resultat
         //houseDatamining.printResults();
 
+    }
+
+    public static String scannerString(Scanner scanner, String errormsg) {
+        while (!scanner.hasNext()) {
+            System.out.println(errormsg);
+            scanner.nextLine();
+        }
+        return scanner.next();
+    }
+
+    // Verifie que l'input est un int
+    public static int scannerInt(Scanner scanner, String errormsg) {
+        while (!scanner.hasNextInt()) {
+            System.out.println(errormsg);
+            scanner.nextLine();
+        }
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        return input;
+    }
+
+    // Verifie que l'input est un float
+    public static float scannerFloat(Scanner scanner, String errormsg) {
+        while (!scanner.hasNextFloat()) {
+            System.out.println(errormsg);
+            scanner.nextLine();
+        }
+        float input = scanner.nextFloat();
+        scanner.nextLine();
+        System.out.println("VALEUR : "+input);
+        return input;
+    }
+
+    // Verifie que l'input est un int et qu'il est entre min et max
+    public static int scannerIntLimit(Scanner scanner, int min, int max) {
+        int input;
+        int cpt = 0;
+        do {
+            if (cpt >= 1) { //affiche le msg d'erreur specifique a scannerIntLimit apres un cycle (donc une erreur de l'utilisateur)
+                System.out.println("Entrez un nombre entre " + min + " et " + max + " !");
+            }
+            cpt++;
+            input = scannerInt(scanner, "Veuillez entrer un nombre entier");
+        } while (input < min || input > max);
+        return input;
+    }
+
+    // Verifie que l'input est un int et qu'il est entre min et max
+    public static float scannerFloatLimit(Scanner scanner, int min, int max) {
+        float input;
+        int cpt = 0;
+        do {
+            if (cpt >= 1) { //affiche le msg d'erreur specifique a scannerIntLimit apres un cycle (donc une erreur de l'utilisateur)
+                System.out.println("Entrez un nombre entre " + min + " et " + max + " !");
+            }
+            cpt++;
+            input = scannerFloat(scanner, "Veuillez entrer un nombre decimale a virgule");
+        } while (input < min || input > max);
+        return input;
     }
 
     //----------- Fonction utiles -----------

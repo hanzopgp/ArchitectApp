@@ -4,9 +4,9 @@ import java.util.Set;
 import java.util.HashSet;
 
 /**
- * Cette classe correspond à une variable booléenne,
- * avec un ensemble de domaines composé uniquement de
- * booléens
+ * Cette classe correspond a une variable booleenne,
+ * avec un ensemble de domaines compose uniquement de
+ * booleens
  */
 public class BooleanVariable extends Variable{
 	

@@ -3,8 +3,8 @@ import java.util.*;
 import representation.*;
 
 /**
- * Cette classe correspond à un solveur dont le fonctionnement permet de
- * vérifier si un ensemble de domaines de variable est dit "arc-cohérent" avec
+ * Cette classe correspond a un solveur dont le fonctionnement permet de
+ * verifier si un ensemble de domaines de variable est dit "arc-coherent" avec
  * les contraintes de l'instance MACSolver, afin de faciliter la recherche d'une
  * solution.
  */
@@ -30,8 +30,8 @@ public class MACSolver extends AbstractSolver{
 
 
     /**
-     * Fonction récursive permettant la résolution du problème
-     * @param instanciation - Instanciation à vérifier
+     * Fonction recursive permettant la resolution du probleme
+     * @param instanciation - Instanciation a verifier
      * @param variables - Liste de variables de l'instance actuelle
      * @param domaines - Domaines
      * @return Instanciation
@@ -49,7 +49,7 @@ public class MACSolver extends AbstractSolver{
                 return null;
             }
 
-            //SI toutes les variables sont instanciées
+            //SI toutes les variables sont instanciees
             for(Variable v : variables) {
                 for (Map.Entry<Variable, Set<Object>> entry : domaines.entrySet()) {
                     if (entry.getKey().equals(v)) {
@@ -60,7 +60,7 @@ public class MACSolver extends AbstractSolver{
             }
 
 
-            //on récupère la première variable de notre liste
+            //on recupere la premiere variable de notre liste
             Variable v = variables.poll();
             for(Map.Entry<Variable, Set<Object>> entry : domainesCopie.entrySet()){
                 if(entry.getKey().equals(v)){
@@ -72,7 +72,7 @@ public class MACSolver extends AbstractSolver{
                             domainesCopie.put(v, tmpDomaines);
                             Map<Variable, Object> newInstanciation = new HashMap<>();
                             newInstanciation = this.macSolve(instanciation, variables, domainesCopie);
-                            if(newInstanciation != null){ //Solution trouvé
+                            if(newInstanciation != null){ //Solution trouve
                                 return newInstanciation;
                             }
                         }

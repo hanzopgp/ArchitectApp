@@ -6,15 +6,15 @@ import java.util.Map;
 
 
 /**
- * Interface représentant le but à atteindre
+ * Interface representant le but a atteindre
  */
 public interface Goal {
 
 
     /**
      * 
-     * @param variables -> état courant
-     * @return -> le résultat du but
+     * @param variables -> etat courant
+     * @return -> le resultat du but
      */
     boolean isSatisfiedBy(Map<Variable, Object> variables);
 }

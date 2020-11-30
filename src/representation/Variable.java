@@ -3,8 +3,8 @@ package representation;
 import java.util.Set;
 
 /**
- * Cette classe correspond à une variable normale,
- * qui possède un ensemble de domaines
+ * Cette classe correspond a une variable normale,
+ * qui possede un ensemble de domaines
  */
 public class Variable{
 

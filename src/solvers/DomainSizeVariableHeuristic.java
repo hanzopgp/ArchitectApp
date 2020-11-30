@@ -20,7 +20,7 @@ public class DomainSizeVariableHeuristic implements  VariableHeuristic{
      * Constructeur
      * @param listVariables - Ensemble de variables
      * @param listContraintes - Ensemble de contraintes
-     * @param greatest - booléan indiquant ici si on préfère les variables avec
+     * @param greatest - boolean indiquant ici si on prefere les variables avec
      *                   le plus grand domaine (true) ou avec le plus petit domaine (false)
      */
     public DomainSizeVariableHeuristic(Set<Variable> listVariables, Set<Constraint> listContraintes, boolean greatest){

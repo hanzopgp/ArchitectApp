@@ -7,7 +7,7 @@ import solvers.*;
 import java.util.*;
 
 /**
- * Cette classe permet d'utiliser différents solveurs de contraintes, sur l'exemple du fil rouge
+ * Cette classe permet d'utiliser differents solveurs de contraintes, sur l'exemple du fil rouge
  */
 public class HouseSolvers {
 
@@ -29,7 +29,7 @@ public class HouseSolvers {
     }
 
     /**
-     * Méthode permettant de résoudre le problème grâce à l'algorithme Backtrack
+     * Methode permettant de resoudre le probleme grâce a l'algorithme Backtrack
      */
     public void solveWithBacktrack(){
         long start = System.currentTimeMillis();
@@ -41,7 +41,7 @@ public class HouseSolvers {
     }
 
     /**
-     * Méthode permettant de résoudre le problème grâce à l'algorithme MacAndHeuristic
+     * Methode permettant de resoudre le probleme grâce a l'algorithme MacAndHeuristic
      */
     public void solveWithMacAndHeuristic(){
         long start = System.currentTimeMillis();
@@ -55,7 +55,7 @@ public class HouseSolvers {
     }
 
     /**
-     * Méthode permettant de résoudre le problème grâce à l'algorithme MAC
+     * Methode permettant de resoudre le probleme grâce a l'algorithme MAC
      */
     public void solveWithMac(){
         long start = System.currentTimeMillis();
@@ -67,7 +67,7 @@ public class HouseSolvers {
     }
 
     /**
-     * Printer du résultat
+     * Printer du resultat
      */
     public void printResults(){
         System.out.println();
@@ -81,7 +81,7 @@ public class HouseSolvers {
     }
 
     /**
-     * Printer de la maison générée
+     * Printer de la maison generee
      */
     public void printHouse(){
         System.out.println();

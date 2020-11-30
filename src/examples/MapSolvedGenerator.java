@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Classe qui stocke toutes les map qui ont étés résolus
+ * Classe qui stocke toutes les map qui ont etes resolus
  */
 public class MapSolvedGenerator {
 
@@ -41,7 +41,7 @@ public class MapSolvedGenerator {
     }
 
     /**
-     * Printer du résultat
+     * Printer du resultat
      */
     public void printResults(){
         System.out.println();

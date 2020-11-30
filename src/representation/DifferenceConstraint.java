@@ -3,7 +3,7 @@ package representation;
 import java.util.*;
 
 /**
- * Cette classe correspond à une contrainte dite "différente"
+ * Cette classe correspond a une contrainte dite "differente"
  */
 public class DifferenceConstraint implements Constraint{
 	
@@ -12,8 +12,8 @@ public class DifferenceConstraint implements Constraint{
 
 	/**
 	 * Constructeur
-	 * @param v1 première variable
-	 * @param v2 deuxième variable
+	 * @param v1 premiere variable
+	 * @param v2 deuxieme variable
 	 */
 	public DifferenceConstraint(Variable v1, Variable v2){
 		this.v1 = v1;

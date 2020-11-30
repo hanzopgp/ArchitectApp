@@ -4,7 +4,7 @@ import representation.*;
 
 
 /**
- * Cette classe représente un planificateur utilisant l'algorithme BFS.
+ * Cette classe represente un planificateur utilisant l'algorithme BFS.
  * Cette algorithme effectue dans un graphe une recherche en largeur. 
  * L'algorithme trouve le plan le plus court en premier mais peut explorer 
  * inutilement des noeuds. 
@@ -19,9 +19,9 @@ public class BFSPlanner implements Planner{
 
     /**
      * 
-     * @param initialState -> état initial
-     * @param actions -> actions qui pourront être testée
-     * @param goal -> but à obtenir
+     * @param initialState -> etat initial
+     * @param actions -> actions qui pourront être testee
+     * @param goal -> but a obtenir
      */
     public BFSPlanner(Map<Variable, Object> initialState, Set<Action> actions, Goal goal) {
         this.initialState = initialState;
@@ -60,17 +60,17 @@ public class BFSPlanner implements Planner{
         if (this.getGoal().isSatisfiedBy(initialState)) {
             return new LinkedList<Action>();
         }
-        /** tant que tous les états n'ont pas été ouvert **/
+        /** tant que tous les etats n'ont pas ete ouvert **/
         while(!open.isEmpty()){
             instantiation = open.pollFirst();
             open.remove(instantiation);
             closed.add(instantiation);
-            /** boucle qui itère les actions **/
+            /** boucle qui itere les actions **/
             for(Action a : this.actions){
                 /** test l'action **/
                 if(a.isApplicable(instantiation)){
                     next = a.successor(instantiation);
-                    /** test la liste des ouverts et des états déjà exploré **/
+                    /** test la liste des ouverts et des etats deja explore **/
                     if(!closed.contains(next) && !open.contains(next)){
                         father.put(next,instantiation);
                         plan.put(next,a);
@@ -90,13 +90,13 @@ public class BFSPlanner implements Planner{
 
 
     /**
-     * Méthode récursive permettant de calculer un plan à partir des structures
+     * Methode recursive permettant de calculer un plan a partir des structures
      * produites par la recherche.
-     * La méthode sera appelée à la fin de la recherche de bfs().
+     * La methode sera appelee a la fin de la recherche de bfs().
      * 
-     * @param father -> possède le father des états visités
-     * @param plan -> les étapes faites précédement = plan actuel
-     * @param goal2 -> but suivant à valider
+     * @param father -> possede le father des etats visites
+     * @param plan -> les etapes faites precedement = plan actuel
+     * @param goal2 -> but suivant a valider
      * @return -> reconstruction du plan
      */
     public List<Action> get_bfs_plan(Map<Map<Variable,Object>,Map<Variable,Object>> father,

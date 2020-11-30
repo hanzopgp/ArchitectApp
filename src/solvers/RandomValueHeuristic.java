@@ -5,7 +5,7 @@ import representation.Variable;
 import java.util.*;
 
 /**
- * Cette classe permet de mélanger un ensemble de domaines et de le retourner
+ * Cette classe permet de melanger un ensemble de domaines et de le retourner
  */
 public class RandomValueHeuristic implements ValueHeuristic{
 
@@ -13,7 +13,7 @@ public class RandomValueHeuristic implements ValueHeuristic{
 
     /**
      * Constructeur
-     * @param random - Objet permettant de générer un nombre pseudo-aléatoire
+     * @param random - Objet permettant de generer un nombre pseudo-aleatoire
      */
     public RandomValueHeuristic(Random random){
         this.random = random;

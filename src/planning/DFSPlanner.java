@@ -6,9 +6,9 @@ import java.util.*;
 
 
 /**
- * Cette classe représente un planificateur utilisant l'algorithme DFS.
+ * Cette classe represente un planificateur utilisant l'algorithme DFS.
  * Cette algorithme effectue dans un graphe une recherche en profondeur. 
- * Il va parcourir ou/et rechercher des structures de données arborescentes ou graphiques. 
+ * Il va parcourir ou/et rechercher des structures de donnees arborescentes ou graphiques. 
  */
 public class DFSPlanner implements Planner{
 
@@ -18,9 +18,9 @@ public class DFSPlanner implements Planner{
 
 
     /**
-     * @param etatState -> état initial
-     * @param actions -> actions qui pourront être testée
-     * @param goal -> but à obtenir
+     * @param etatState -> etat initial
+     * @param actions -> actions qui pourront être testee
+     * @param goal -> but a obtenir
      */
     public DFSPlanner(Map<Variable, Object> etatInitial, Set<Action> actions, Goal but) {
         this.etatInitial = etatInitial;
@@ -37,9 +37,9 @@ public class DFSPlanner implements Planner{
     /**
      * Algorithme de recherche en profondeur : DFS
      * 
-     * @param etatInitial -> état actuel
-     * @param plan -> les étapes faites précédement = plan actuel
-     * @param closed -> liste des états déjà explorés
+     * @param etatInitial -> etat actuel
+     * @param plan -> les etapes faites precedement = plan actuel
+     * @param closed -> liste des etats deja explores
      * @return -> plan obtenu
      */
     public List<Action> dfs(Map<Variable, Object> etatInitial, LinkedList<Action> plan, Set<Map<Variable, Object>> closed){
@@ -48,12 +48,12 @@ public class DFSPlanner implements Planner{
         if(this.getGoal().isSatisfiedBy(etatInitial)){
             return plan;
         }else{
-            /** boucle qui itère les actions **/
+            /** boucle qui itere les actions **/
             for(Action a : this.actions){
                 /** test l'action **/
                 if(a.isApplicable(etatInitial)){
                     next = a.successor(etatInitial);
-                    /** test la liste des états déjà exploré **/
+                    /** test la liste des etats deja explore **/
                     if(!(closed.contains(next))){
                         closed.add(next);
                         plan.add(a);

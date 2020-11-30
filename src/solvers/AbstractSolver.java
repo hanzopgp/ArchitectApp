@@ -4,7 +4,7 @@ import java.util.*;
 import representation.*;
 
 /**
- * Classe qui définit le comportement de base d'un solveur
+ * Classe qui definit le comportement de base d'un solveur
  */
 public abstract class AbstractSolver implements Solver{
 	
@@ -13,8 +13,8 @@ public abstract class AbstractSolver implements Solver{
 
 	/**
 	 * Constructeur
-	 * @param variables - Ensemble de variables du problème courant
-	 * @param constraints - Ensemble de contraintes du problème courant
+	 * @param variables - Ensemble de variables du probleme courant
+	 * @param constraints - Ensemble de contraintes du probleme courant
 	 */
 	public AbstractSolver(Set<Variable> variables, Set<Constraint> constraints){
 		for(Constraint c : constraints){
@@ -27,9 +27,9 @@ public abstract class AbstractSolver implements Solver{
 	}
 
 	/**
-	 * Retourne un booléan si l'instanciation en paramètre satisfait les
-	 * contraintes du problème courant
-	 * @param tab - Instanciation à vérifier
+	 * Retourne un boolean si l'instanciation en parametre satisfait les
+	 * contraintes du probleme courant
+	 * @param tab - Instanciation a verifier
 	 * @return
 	 */
 	public boolean isConsistent(Map<Variable, Object> tab){

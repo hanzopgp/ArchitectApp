@@ -3,7 +3,7 @@ package representation;
 import java.util.*;
 
 /**
- * Cette classe correspond à une contrainte en extension
+ * Cette classe correspond a une contrainte en extension
  */
 public class BinaryExtensionConstraint implements Constraint{
 	
@@ -13,8 +13,8 @@ public class BinaryExtensionConstraint implements Constraint{
 
 	/**
 	 * Constructeur
-	 * @param v1 - première variable
-	 * @param v2 - deuxième variable
+	 * @param v1 - premiere variable
+	 * @param v2 - deuxieme variable
 	 */
 	public BinaryExtensionConstraint(Variable v1, Variable v2){
 		this.v1 = v1;
@@ -23,7 +23,7 @@ public class BinaryExtensionConstraint implements Constraint{
 	}
 
 	/**
-	 * Ajoute un couple de variable autorisées
+	 * Ajoute un couple de variable autorisees
 	 * @param var1
 	 * @param var2
 	 */
@@ -40,8 +40,8 @@ public class BinaryExtensionConstraint implements Constraint{
 	}
 	@Override
 	public boolean isSatisfiedBy(Map<Variable, Object> tab){
-		//On vérifie si v1 et v2 sont présents, puis on compare la valeur de v1
-		// dans la map à l1 et on récupère le boolean, de même pour v2 et l2 et enfin,
+		//On verifie si v1 et v2 sont presents, puis on compare la valeur de v1
+		// dans la map a l1 et on recupere le boolean, de même pour v2 et l2 et enfin,
 		// on fait la condition l1 -> l2.
 		boolean test1 = tab.containsKey(v1);
 		boolean test2 = tab.containsKey(v2);
@@ -64,7 +64,7 @@ public class BinaryExtensionConstraint implements Constraint{
 	}
 
 	/**
-	 * Retourne la première variable
+	 * Retourne la premiere variable
 	 * @return
 	 */
 	public Variable getV1() {
@@ -72,7 +72,7 @@ public class BinaryExtensionConstraint implements Constraint{
 	}
 
 	/**
-	 * Retourne la deuxième variable
+	 * Retourne la deuxieme variable
 	 * @return
 	 */
 	public Variable getV2() {
@@ -80,7 +80,7 @@ public class BinaryExtensionConstraint implements Constraint{
 	}
 
 	/**
-	 * Retourne l'ensemble de couples autorisés par la contrainte
+	 * Retourne l'ensemble de couples autorises par la contrainte
 	 * @return
 	 */
 	public List<Tuple> getCoupleAllowed() {
@@ -88,7 +88,7 @@ public class BinaryExtensionConstraint implements Constraint{
 	}
 
 	/**
-	 * Définis l'ensemble de couples autorisés par la contrainte
+	 * Definis l'ensemble de couples autorises par la contrainte
 	 * @param coupleAllowed
 	 */
 	public void setCoupleAllowed(List<Tuple> coupleAllowed) {

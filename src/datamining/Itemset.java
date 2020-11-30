@@ -6,7 +6,7 @@ import java.util.Set;
 import representation.BooleanVariable;
 
 /**
- * Classe qui correspond à un motif
+ * Classe qui correspond a un motif
  */
 public class Itemset{
 	
@@ -15,8 +15,8 @@ public class Itemset{
 
 	/**
 	 * Constructeur
-	 * @param items - Ensemble de variable booléennes
-	 * @param frequence - Fréquence du motif
+	 * @param items - Ensemble de variable booleennes
+	 * @param frequence - Frequence du motif
 	 */
 	public Itemset(Set<BooleanVariable> items, float frequence){
 		this.items = items;
@@ -32,8 +32,8 @@ public class Itemset{
 	}
 
 	/**
-	 * Getter de la fréquence
-	 * @return Retourne la fréquence de l'instance
+	 * Getter de la frequence
+	 * @return Retourne la frequence de l'instance
 	 */
 	public float getFrequency(){
 		return this.frequence;
