@@ -35,7 +35,8 @@ public class HouseDemo {
         MIN_CONFIDENCE = scannerFloatLimit(new Scanner(System.in), 0, 1);
         System.out.println("Entrez la fréquence minimale souhaitée : (compris entre 0 et 1)");
         MIN_FREQUENCY = scannerFloatLimit(new Scanner(System.in), 0, 1);
-        System.out.println("Paramètres enregistrés ! Maison de "+hauteurMaison+"x"+largeurMaison+" cases\nSolveur utilisé: "+SOLVERTYPE+"\n"+
+        System.out.println();
+        System.out.println("Paramètres enregistrés !\nMaison de "+hauteurMaison+"x"+largeurMaison+" cases\nSolveur utilisé: "+SOLVERTYPE+"\n"+
                             "Nombre de solutions maximales à trouver : "+NB_HOUSE_DATAMINING+"\n"+
                             "Confiance minimale : "+MIN_CONFIDENCE+"\n"+
                             "Fréquence minimale : "+MIN_FREQUENCY);
@@ -136,7 +137,6 @@ public class HouseDemo {
     public static float scannerFloat(Scanner scanner, String errormsg) {
         while (!scanner.hasNextFloat()) {
             System.out.println(errormsg);
-            System.out.println("VALEUR : "+scanner.next());
             scanner.nextLine();
         }
         float input = scanner.nextFloat();
@@ -168,7 +168,7 @@ public class HouseDemo {
                 System.out.println("Entrez un nombre entre " + min + " et " + max + " !");
             }
             cpt++;
-            input = scannerFloat(scanner, "Veuillez entrer un nombre entier");
+            input = scannerFloat(scanner, "Veuillez entrer un nombre décimale à virgule");
         } while (input < min || input > max);
         return input;
     }
