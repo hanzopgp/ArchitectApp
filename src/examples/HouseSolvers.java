@@ -65,13 +65,7 @@ public class HouseSolvers {
         System.out.println("============= PLAN DE LA MAISON =============");
         int cpt = 0;
         for (Map.Entry<Variable, Object> entry : this.mapSolved.entrySet()) {
-            if(!(entry.getValue().equals(false)) && !(entry.getValue().equals(true))){
-                cpt++;
-                System.out.print("["+entry.getValue() + "]\t\t");
-                if(cpt%HouseDemo.WIDTH == 0){
-                    System.out.println();
-                }
-            }
+            cpt = MapSolvedGenerator.printer(cpt, entry);
         }
     }
 

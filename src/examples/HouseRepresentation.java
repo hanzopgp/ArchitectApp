@@ -98,7 +98,21 @@ public class HouseRepresentation {
     public void makeAllConstraint(){
         this.makeOnlyOnePieceConstraint();
         this.makeStateSuiteConstraint();
+        this.makeGarageOnSideConstraint();
         //this.makeWaterPartConstraint(); //Impossible de trouver pourquoi elle ne fonctionne pas...
+    }
+
+    //Contrainte garage interdit au centre de la maison
+    public void makeGarageOnSideConstraint(){
+        Variable[][] arrayVariable = this.listTo2DArray(this.listVariable);
+        for(int i = 0; i < this.longueur; i++){
+            for(int j = 0; j < this.largeur; j++){
+                if(!(i == 0 || j == 0 || i == this.longueur - 1 || j == this.largeur - 1)){
+                    Variable v = arrayVariable[i][j];
+                    v.getDomain().remove("garage");
+                }
+            }
+        }
     }
 
     //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
