@@ -39,9 +39,14 @@ public class HousePlanning {
         BooleanVariable mursEleves = houseRepresentation.getMursEleves();
         BooleanVariable toitureTerminee = houseRepresentation.getToitureTerminee();
 
+        //On part d'une maison vide avec une dalle non coulee
         Map<Variable, Object> start = new HashMap<>();
+        for(Variable var : houseRepresentation.getListVariable()){
+            start.put(var, null);
+        }
         start.put(dalleCoulee, false);
 
+        //Le but est d'arrive a une composition valable comme ci dessous
         Map<Variable, Object> end = new HashMap<>(this.mapSolved);
         end.put(dalleCoulee, true);
         end.put(dalleHumide, false);
@@ -49,40 +54,10 @@ public class HousePlanning {
         end.put(toitureTerminee, true);
         Goal but = new BasicGoal(end);
 
+        //Declaration des variables
         Set<Action> actions = new HashSet<>();
         Map<Variable, Object> precondition;
         Map<Variable, Object> effect;
-
-        //Couler dalle
-        precondition = new HashMap<>();
-        effect = new HashMap<>();
-        effect.put(dalleCoulee, true);
-        effect.put(dalleHumide, true);
-        actions.add(new BasicAction(precondition, effect, HouseDemo.PLANNING_COST));
-
-        //Sechange dalle
-        precondition = new HashMap<>();
-        effect = new HashMap<>();
-        precondition.put(dalleCoulee, true);
-        precondition.put(dalleHumide, true);
-        effect.put(dalleHumide, false);
-        actions.add(new BasicAction(precondition, effect, HouseDemo.PLANNING_COST));
-
-        //Consruire murs
-        precondition = new HashMap<>();
-        effect = new HashMap<>();
-        precondition.put(dalleCoulee, true);
-        precondition.put(dalleHumide, false);
-        effect.put(mursEleves, true);
-        actions.add(new BasicAction(precondition, effect, HouseDemo.PLANNING_COST));
-
-        //Construire toiture
-        precondition = new HashMap<>();
-        effect = new HashMap<>();
-        precondition.put(dalleCoulee, true);
-        precondition.put(mursEleves, true);
-        effect.put(toitureTerminee, true);
-        actions.add(new BasicAction(precondition, effect, HouseDemo.PLANNING_COST));
 
         //On positionne les pieces
         precondition = new HashMap<>();
@@ -90,12 +65,47 @@ public class HousePlanning {
         precondition.put(dalleHumide, false);
         for (Object pieceGeneral : houseRepresentation.getDomaine()) {
             for (Variable var : houseRepresentation.getListVariable()) {
-                effect = new HashMap<>();
-                effect.put(var, pieceGeneral);
-                Map<Variable, Object> preconditionTmp = new HashMap<>(precondition);
-                actions.add(new BasicAction(preconditionTmp, effect, HouseDemo.PLANNING_COST));
+                if(!(var instanceof BooleanVariable)){
+                    effect = new HashMap<>();
+                    effect.put(var, pieceGeneral);
+                    Map<Variable, Object> preconditionTmp = new HashMap<>(precondition);
+                    preconditionTmp.put(var, null);
+                    actions.add(new BasicActionWithString(preconditionTmp, effect, HouseDemo.PLANNING_COST, "On positionne la piece : " + var.getName()));
+                }
+
             }
         }
+
+        //Couler dalle
+        precondition = new HashMap<>();
+        effect = new HashMap<>();
+        effect.put(dalleCoulee, true);
+        effect.put(dalleHumide, true);
+        actions.add(new BasicActionWithString(precondition, effect, HouseDemo.PLANNING_COST, "Couler la dalle"));
+
+        //Sechange dalle
+        precondition = new HashMap<>();
+        effect = new HashMap<>();
+        precondition.put(dalleCoulee, true);
+        precondition.put(dalleHumide, true);
+        effect.put(dalleHumide, false);
+        actions.add(new BasicActionWithString(precondition, effect, HouseDemo.PLANNING_COST, "Attendre que la dalle seche"));
+
+        //Consruire murs
+        precondition = new HashMap<>();
+        effect = new HashMap<>();
+        precondition.put(dalleCoulee, true);
+        precondition.put(dalleHumide, false);
+        effect.put(mursEleves, true);
+        actions.add(new BasicActionWithString(precondition, effect, HouseDemo.PLANNING_COST, "Construire les murs"));
+
+        //Construire toiture
+        precondition = new HashMap<>();
+        effect = new HashMap<>();
+        precondition.put(dalleCoulee, true);
+        precondition.put(mursEleves, true);
+        effect.put(toitureTerminee, true);
+        actions.add(new BasicActionWithString(precondition, effect, HouseDemo.PLANNING_COST, "Construire le toit"));
 
         //Creation de  l'heuristique
         Heuristic heuristic = new Heuristic() {
@@ -106,10 +116,10 @@ public class HousePlanning {
         };
 
         //Utilisation du A*
-        new AStarPlanner(start, actions, but, heuristic);
+        AStarPlanner aStarPlanner = new AStarPlanner(start, actions, but, heuristic);
 
         //Affection des resultats
-        this.listAction = actions;
+        this.listAction = aStarPlanner.getActions();
         long endTime = System.currentTimeMillis();
         this.timeTaken = endTime - startTime;
 
@@ -134,8 +144,10 @@ public class HousePlanning {
         System.out.println();
         System.out.println("============= LISTE DES ACTIONS A EFFECTUER =============");
         for (Action action : this.listAction) {
-            System.out.print("--> Action : " + action);
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.print("* Action : " + action.toString() + "  ");
         }
+        System.out.println();
         System.out.println("* Planning avec A*");
         System.out.println("* Temps mit par le planner : " + this.timeTaken + "ms");
         System.out.println("* Cout total : " + this.getTotalActionCost());

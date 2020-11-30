@@ -42,7 +42,7 @@ public class HouseDatamining {
             database.add(map);
         }
         BooleanDatabase booleanDatabase = database.propositionalize();
-        BruteForceAssociationRuleMiner bruteForceAssociationRuleMiner = new BruteForceAssociationRuleMiner(booleanDatabase);
+        BruteForceAssociationRuleMiner<AssociationRule> bruteForceAssociationRuleMiner = new BruteForceAssociationRuleMiner(booleanDatabase);
         this.setAssociationRule = bruteForceAssociationRuleMiner.extract(HouseDemo.MIN_FREQUENCY, HouseDemo.MIN_CONFIDENCE);
         long end = System.currentTimeMillis();
         this.timeTaken = end - start;

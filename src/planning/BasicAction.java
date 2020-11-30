@@ -52,7 +52,7 @@ public class BasicAction implements Action {
 
     @Override
     public String toString(){
-        String str = "+++++++++++++++++++++++++++\n";
+        String str = "";
         str += "* Preconditions : " + this.preconditions + "\n";
         str += "* Effets : " + this.effets + "\n";
         str += "* Cout : " + this.cout + "\n";

@@ -29,7 +29,7 @@ public class HouseDemo {
         houseRepresentation.makeAllConstraint();
 
         //Affichage de la maison de base
-        houseRepresentation.printAll();
+        //houseRepresentation.printAll();
 
         //----------- Utilisation package solvers -----------
 
@@ -60,7 +60,7 @@ public class HouseDemo {
         }
 
         //Affichage du resultat
-        houseSolvers.printResults();
+        //houseSolvers.printResults();
 
         //----------- Utilisation package planning -----------
 
@@ -81,14 +81,14 @@ public class HouseDemo {
 
         //Creation et affichage de la base de donnee
         MapSolvedGenerator mapSolvedGenerator = new MapSolvedGenerator(setVariable, setConstraint);
-        mapSolvedGenerator.printResults();
+        //mapSolvedGenerator.printResults();
 
         //Recuperation des informations
         HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation, mapSolvedGenerator);
         houseDatamining.mine();
 
         //Affichage du resultat
-        houseDatamining.printResults();
+        //houseDatamining.printResults();
 
     }
 
