@@ -15,7 +15,7 @@ public class HouseDemo {
     public static int NB_HOUSE_DATAMINING = 100;
     public static float MIN_FREQUENCY = 0.7f;
     public static float MIN_CONFIDENCE = 0.7f;
-    public static boolean FULL_DISPLAY = true;
+    public static boolean FULL_DISPLAY = false;
 
     public static void main(String[] args){
 

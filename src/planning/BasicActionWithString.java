@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class BasicActionWithString extends BasicAction implements Action{
 
-    private String actionString;
+    private final String actionString;
     private String domaineString;
 
     /**

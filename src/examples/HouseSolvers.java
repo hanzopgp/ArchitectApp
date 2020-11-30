@@ -70,9 +70,9 @@ public class HouseSolvers {
      * Printer du resultat
      */
     public void printResults(){
-        System.out.println();
-        System.out.println("============= LISTE DES AFFECTATIONS =============");
         if(HouseDemo.FULL_DISPLAY){
+            System.out.println();
+            System.out.println("============= LISTE DES AFFECTATIONS =============");
             for (Map.Entry<Variable, Object> entry : this.mapSolved.entrySet()) {
                 System.out.println("--> Variable : " + entry.getKey() + ", Affectation : " + entry.getValue());
             }

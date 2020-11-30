@@ -55,7 +55,7 @@ public class BasicAction implements Action {
         String str = "";
         str += "* Preconditions : " + this.preconditions + "\n";
         str += "* Effets : " + this.effets + "\n";
-        str += "* Cout : " + this.cout + "\n";
+        str += "* Cout : " + this.cout + "h\n";
         return str;
 
     }

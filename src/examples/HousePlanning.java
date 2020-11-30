@@ -73,7 +73,7 @@ public class HousePlanning {
                     effect.put(var, pieceGeneral);
                     Map<Variable, Object> preconditionTmp = new HashMap<>(precondition);
                     preconditionTmp.put(var, null);
-                    actions.add(new BasicActionWithString(preconditionTmp, effect, HouseDemo.PLANNING_COST, "On positionne la piece : " + var.getName(), pieceGeneral.toString()));
+                    actions.add(new BasicActionWithString(preconditionTmp, effect, HouseDemo.PLANNING_COST - 3, "On positionne la piece : " + var.getName(), pieceGeneral.toString()));
                 }
             }
         }
@@ -91,7 +91,7 @@ public class HousePlanning {
         precondition.put(dalleCoulee, true);
         precondition.put(dalleHumide, true);
         effect.put(dalleHumide, false);
-        actions.add(new BasicActionWithString(precondition, effect, HouseDemo.PLANNING_COST, "Attendre que la dalle seche"));
+        actions.add(new BasicActionWithString(precondition, effect, HouseDemo.PLANNING_COST + 5, "Attendre que la dalle seche"));
 
         //Consruire murs
         precondition = new HashMap<>();
@@ -149,7 +149,7 @@ public class HousePlanning {
         System.out.println();
         System.out.println("* Planning avec A*");
         System.out.println("* Temps mit par le planner : " + this.timeTaken + "ms");
-        System.out.println("* Cout total : " + this.getTotalActionCost());
+        System.out.println("* Cout total : " + this.getTotalActionCost() + "h");
         System.out.println("* Nombre d'action : " + this.listAction.size());
     }
 
