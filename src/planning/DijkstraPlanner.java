@@ -6,8 +6,8 @@ import representation.*;
 
 
 /**
- * Cette classe représente un planificateur utilisant l'algorithme Dijkstra.
- * Cette algorithme résoud le problème du chemin le plus court. 
+ * Cette classe represente un planificateur utilisant l'algorithme Dijkstra.
+ * Cette algorithme resoud le probleme du chemin le plus court. 
  * L'algorithme retourne le plan de coût minimal. 
  */
 public class DijkstraPlanner implements Planner {
@@ -18,9 +18,9 @@ public class DijkstraPlanner implements Planner {
 
 
     /**
-     * @param initialState -> état initial
-     * @param actions -> actions qui pourront être testée
-     * @param goal -> but à obtenir
+     * @param initialState -> etat initial
+     * @param actions -> actions qui pourront être testee
+     * @param goal -> but a obtenir
      */
     public DijkstraPlanner(Map<Variable, Object> initialState, Set<Action> actions, Goal goal) {
         this.initialState = initialState;
@@ -50,24 +50,24 @@ public class DijkstraPlanner implements Planner {
         distance.put(initialState, 0);
         open.add(initialState);
 
-        /** tant que tous les états n'ont pas été ouvert **/
+        /** tant que tous les etats n'ont pas ete ouvert **/
         while (!open.isEmpty()) {
-            /** donne à instanciation l'élément le plus petit **/
+            /** donne a instanciation l'element le plus petit **/
             instantiation = Collections.min(open, com);
             open.remove(instantiation);
             if (this.getGoal().isSatisfiedBy(instantiation)) {
                 goals.add(instantiation);
             }
-            /** boucle qui itère les actions **/
+            /** boucle qui itere les actions **/
             for (Action act : this.actions) {
                 /** test l'action **/
                 if (act.isApplicable(instantiation)) {
                     next = act.successor(instantiation);
-                    /** test la liste des ouverts et des états déjà exploré **/
+                    /** test la liste des ouverts et des etats deja explore **/
                     if (!distance.containsKey(next)) {
                         distance.put(next, Integer.MAX_VALUE);
                     }
-                    /** regarde si le coût calculé est inférieur à celui retenu précédemment **/
+                    /** regarde si le coût calcule est inferieur a celui retenu precedemment **/
                     if (distance.get(next) > distance.get(instantiation) + act.getCost()) {
                         distance.put(next, distance.get(instantiation) + act.getCost());
                         father.put(next, instantiation);
@@ -78,7 +78,7 @@ public class DijkstraPlanner implements Planner {
             }
 
         }
-        /** test si un but est trouvé **/
+        /** test si un but est trouve **/
         if (goals.isEmpty()) {
             return null;
         /** retourne le meilleur plan **/
@@ -89,14 +89,14 @@ public class DijkstraPlanner implements Planner {
 
 
     /**
-     * Méthode récursive appelée à la fin de la recherche de Dijkstra() pour 
-     * retourner la liste des actions permettant de passer de l'état initial 
-     * à un sous-plan qui est le but.
+     * Methode recursive appelee a la fin de la recherche de Dijkstra() pour 
+     * retourner la liste des actions permettant de passer de l'etat initial 
+     * a un sous-plan qui est le but.
      * 
-     * @param father -> possède le father des états visités
-     * @param plan -> les étapes faites précédement = plan actuel
-     * @param goels -> but suivant à valider
-     * @param distance -> possède les trajets les plus courts pour aller aux noeuds déjà visités
+     * @param father -> possede le father des etats visites
+     * @param plan -> les etapes faites precedement = plan actuel
+     * @param goels -> but suivant a valider
+     * @param distance -> possede les trajets les plus courts pour aller aux noeuds deja visites
      * @return -> reconstruction du plan avec les plus petites distances
      */
     public List<Action> get_dijkstra_plan(

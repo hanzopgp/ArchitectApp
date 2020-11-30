@@ -4,23 +4,23 @@ import java.util.*;
 import representation.BooleanVariable;
 
 /**
- * Extracteur de données fonctionnant sur le principe
+ * Extracteur de donnees fonctionnant sur le principe
  * de l'algorithme Apriori
  */
 public class Apriori extends AbstractItemsetMiner{
 
 	/**
 	 * Constructeur
-	 * @param base - Base de données
+	 * @param base - Base de donnees
 	 */
 	public Apriori(BooleanDatabase base){
 		super(base);		
 	}
 
 	/**
-	 * Renvoie uniquement les Itemset dont la fréquence d'apparition est supérieure
-	 * ou égale à la fréquence minimale passée en paramètre
-	 * @param frequency - Fréquence minimale à dépasser
+	 * Renvoie uniquement les Itemset dont la frequence d'apparition est superieure
+	 * ou egale a la frequence minimale passee en parametre
+	 * @param frequency - Frequence minimale a depasser
 	 * @return Ensemble d'Itemset
 	 */
 	public Set<Itemset> frequentSingletons(float frequency){
@@ -71,11 +71,11 @@ public class Apriori extends AbstractItemsetMiner{
 	}
 
 	/**
-	 * Assemble deux ensembles de variables booléennes en une seule. Elles doivent cependant
-	 * avoir la même taille, et l'avant dernier élément de chacun des deux ensemble doivent être
-	 * égaux.
-	 * @param l1 - Premier ensemble à combiner
-	 * @param l2 - Deuxième ensemble à combiner
+	 * Assemble deux ensembles de variables booleennes en une seule. Elles doivent cependant
+	 * avoir la même taille, et l'avant dernier element de chacun des deux ensemble doivent être
+	 * egaux.
+	 * @param l1 - Premier ensemble a combiner
+	 * @param l2 - Deuxieme ensemble a combiner
 	 * @return
 	 */
 	public static SortedSet<BooleanVariable> combine(SortedSet<BooleanVariable>l1, SortedSet<BooleanVariable>l2){
@@ -98,9 +98,9 @@ public class Apriori extends AbstractItemsetMiner{
 	}
 
 	/**
-	 * Retourne un booléen indiquant si l'ensemble de variable passé en paramètre
+	 * Retourne un booleen indiquant si l'ensemble de variable passe en parametre
 	 * est contenu dans la Collection d'ensembles
-	 * @param list - Ensemble de variables booléennes
+	 * @param list - Ensemble de variables booleennes
 	 * @param collectionList - Collection d'ensembles de variables
 	 * @return
 	 */
@@ -120,4 +120,4 @@ public class Apriori extends AbstractItemsetMiner{
 }
 
 
-//pas d'iterator, crée une copie de list (avant la boucle) faire un for sur la copie, dans la boucle, on remove l'item courant, on test si collectionList ne contient pas le set, on return false. Après le if, on remet l'item courant.
+//pas d'iterator, cree une copie de list (avant la boucle) faire un for sur la copie, dans la boucle, on remove l'item courant, on test si collectionList ne contient pas le set, on return false. Apres le if, on remet l'item courant.

@@ -9,8 +9,8 @@ import representation.*;
 
 
 /**
- * Cette classe représente un planificateur utilisant l'algorithme A*.
- * Cette algorithme se termine dès qu'il a atteint l'un des noeuds solutions. 
+ * Cette classe represente un planificateur utilisant l'algorithme A*.
+ * Cette algorithme se termine des qu'il a atteint l'un des noeuds solutions. 
  */
 public class AStarPlanner implements Planner{
 
@@ -20,9 +20,9 @@ public class AStarPlanner implements Planner{
     private final Heuristic heuristic;
 
     /**
-     * @param initialState -> état initial
-     * @param actions -> actions qui pourront être testée
-     * @param goal -> but à obtenir
+     * @param initialState -> etat initial
+     * @param actions -> actions qui pourront être testee
+     * @param goal -> but a obtenir
      * @param heuristic -> heuristic
      */
     public AStarPlanner(Map<Variable, Object> initialState, Set<Action> actions, Goal goal, Heuristic heuristic){
@@ -34,13 +34,13 @@ public class AStarPlanner implements Planner{
 
 
     /**
-     * Méthode récursive permettant de calculer un plan à partir des structures
+     * Methode recursive permettant de calculer un plan a partir des structures
      * produites par la recherche.
-     * La méthode sera appelée où l'on aura atteint le but.
+     * La methode sera appelee ou l'on aura atteint le but.
      * 
-     * @param father -> possède le father des états visités
-     * @param plan -> les étapes faites précédement = plan actuel
-     * @param goal2 -> but suivant à valider
+     * @param father -> possede le father des etats visites
+     * @param plan -> les etapes faites precedement = plan actuel
+     * @param goal2 -> but suivant a valider
      * @return -> reconstruction du plan
      */
     public List<Action> get_bfs_plan(Map<Map<Variable,Object>,Map<Variable,Object>> father,
@@ -80,9 +80,9 @@ public class AStarPlanner implements Planner{
         distance.put(initialState, 0.0);
         value.put(this.initialState, Float.valueOf(this.heuristic.estimate(this.initialState)).doubleValue());
 
-        /** tant que tous les états n'ont pas été ouvert **/
+        /** tant que tous les etats n'ont pas ete ouvert **/
         while(!open.isEmpty()){
-            /** donne à instanciation l'élément le plus petit **/
+            /** donne a instanciation l'element le plus petit **/
             //instanciation = Collections.min(open, com);
             instanciation = open.poll();
             if(this.getGoal().isSatisfiedBy(instanciation)){
@@ -93,11 +93,11 @@ public class AStarPlanner implements Planner{
                     /** test l'action **/
                     if(act.isApplicable(instanciation)){
                         next = act.successor(instanciation);
-                    /** test la liste des ouverts et des états déjà exploré **/
+                    /** test la liste des ouverts et des etats deja explore **/
                         if(!distance.containsKey(next)){
                             distance.put(next, Double.MAX_VALUE);
                         }
-                    /** regarde si le coût calculé est inférieur à celui retenu précédemment **/
+                    /** regarde si le coût calcule est inferieur a celui retenu precedemment **/
                         if(distance.get(next) > distance.get(instanciation) + act.getCost()){
                             distance.put(next, distance.get(instanciation) + act.getCost());
                             value.put(next, distance.get(next) + this.heuristic.estimate(next));

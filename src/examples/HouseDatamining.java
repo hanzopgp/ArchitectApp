@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Classe qui correspond à un extracteur de conaissances
+ * Classe qui correspond a un extracteur de conaissances
  */
 public class HouseDatamining {
 
@@ -21,7 +21,7 @@ public class HouseDatamining {
 
     /**
      * Constructeur
-     * @param houseRepresentation - Représentation d'une maison
+     * @param houseRepresentation - Representation d'une maison
      * @param mapSolvedGenerator -
      */
     public HouseDatamining(HouseRepresentation houseRepresentation, MapSolvedGenerator mapSolvedGenerator){
@@ -31,7 +31,7 @@ public class HouseDatamining {
     }
 
     /**
-     * Méthode qui permet de trouver un ensemble de règles qui satisfassent les fréquences et confiances du problème
+     * Methode qui permet de trouver un ensemble de regles qui satisfassent les frequences et confiances du probleme
      * actuel
      */
     public void mine(){
@@ -45,7 +45,7 @@ public class HouseDatamining {
     }
 
     /**
-     * Printer du résultat
+     * Printer du resultat
      */
     public void printResults(){
         System.out.println();

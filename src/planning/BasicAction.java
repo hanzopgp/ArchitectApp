@@ -7,10 +7,10 @@ import java.util.Map;
 
 
 /**
- * Cette classe représente des actions qui vont être testées.
- * Une action sera caractérisée en termes de préconditions qui devront être
- * vraies pour qu'elle puisse être éxécutée, et enterme d'effets qui 
- * s'ensuivent quand elle est éxécutée.
+ * Cette classe represente des actions qui vont être testees.
+ * Une action sera caracterisee en termes de preconditions qui devront être
+ * vraies pour qu'elle puisse être executee, et enterme d'effets qui 
+ * s'ensuivent quand elle est executee.
  * 
  */
 public class BasicAction implements Action {
@@ -22,8 +22,8 @@ public class BasicAction implements Action {
 
     /**
      * 
-     * @param preconditions -> précondition respectée = on va effectuer l'action
-     * @param effets -> effet donné sur l'état
+     * @param preconditions -> precondition respectee = on va effectuer l'action
+     * @param effets -> effet donne sur l'etat
      * @param cout -> coût de l'action
      */
     public BasicAction(Map<Variable, Object> preconditions, Map<Variable, Object> effets, int cout) {
@@ -33,7 +33,7 @@ public class BasicAction implements Action {
     }
 
     @Override
-    //Retourne vrai si les préconditions sont contenues dans l'état
+    //Retourne vrai si les preconditions sont contenues dans l'etat
     public boolean isApplicable(Map<Variable, Object> etat) {
         return etat.entrySet().containsAll(this.preconditions.entrySet());
     }

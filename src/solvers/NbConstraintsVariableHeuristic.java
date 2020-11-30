@@ -18,7 +18,7 @@ public class NbConstraintsVariableHeuristic implements  VariableHeuristic{
      * Constructeur
      * @param listVariables - Ensemble de variables
      * @param listContraintes - Ensemble de contraintes
-     * @param most - booléen indiquant si on préfère que les variables apparaissant
+     * @param most - booleen indiquant si on prefere que les variables apparaissant
      *               dans le plus de contraintes (true) ou dans le moins de contraintes (false)
      */
     public NbConstraintsVariableHeuristic(Set<Variable> listVariables, Set<Constraint> listContraintes, boolean most){

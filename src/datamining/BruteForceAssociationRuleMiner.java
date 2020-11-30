@@ -13,10 +13,10 @@ public class BruteForceAssociationRuleMiner<E> extends AbstractAssociationRuleMi
     }
 
     /**
-     * Retourne tout les sous-ensembles possibles d'un ensemble de variable passée en paramètre.
-     * Code trouvé sur cette page : https://www.geeksforgeeks.org/finding-all-subsets-of-a-given-set-in-java/
+     * Retourne tout les sous-ensembles possibles d'un ensemble de variable passee en parametre.
+     * Code trouve sur cette page : https://www.geeksforgeeks.org/finding-all-subsets-of-a-given-set-in-java/
      *
-     * @param items - Ensemble de variables booléennes
+     * @param items - Ensemble de variables booleennes
      * @return
      */
     public static Set<Set<BooleanVariable>> allCandidatePremises(Set<BooleanVariable> items){

@@ -6,7 +6,7 @@ import representation.Variable;
 import java.util.*;
 
 /**
- * Classe qui correspond à un ensemble de variables non booléennes
+ * Classe qui correspond a un ensemble de variables non booleennes
  */
 public class Database {
 
@@ -15,7 +15,7 @@ public class Database {
 
     /**
      * Constructeur
-     * @param variables - Ensemble de variables non booléennes
+     * @param variables - Ensemble de variables non booleennes
      */
     public Database(Set<Variable> variables) {
         this.variables = variables;
@@ -23,7 +23,7 @@ public class Database {
     }
 
     /**
-     * Permet d'ajouter une instance à la database
+     * Permet d'ajouter une instance a la database
      * @param value
      */
     public void add(Map<Variable, Object> value){
@@ -42,10 +42,10 @@ public class Database {
             //on parcours le domaine de la variable
             for(Object domain : v.getDomain()){
                 //on test si le domaine est un boolean ou pas, auquel cas c'est une BooleanVariable
-                //et pas une simple Variable et on créé la BooleanVariable correspondante
+                //et pas une simple Variable et on cree la BooleanVariable correspondante
                 if(domain instanceof Boolean){
                     BooleanVariable booleanVariable = new BooleanVariable(v.getName());
-                    //Si le domaine correspond à false, alors on renvoie un item null dans la map
+                    //Si le domaine correspond a false, alors on renvoie un item null dans la map
                     //autrement, on renvoie la valeur de l'item en cours
                     if(domain.equals(false)){
                         items.put(domain, null);
@@ -73,19 +73,19 @@ public class Database {
         //Aide pour boucler sur la map :
         // https://www.codingame.com/playgrounds/6162/6-ways-to-iterate-or-loop-a-map-in-java
         for(Map.Entry<Variable, Map<Object, BooleanVariable>> entry : items.entrySet()){
-            //on boucle dans chaque map de la map items pour récupérer toutes les variables et les transformer
+            //on boucle dans chaque map de la map items pour recuperer toutes les variables et les transformer
             //en BooleanVariable
             for(Map.Entry<Object, BooleanVariable> mapOfEntry : entry.getValue().entrySet()){
                 BooleanVariable booleanVariable = mapOfEntry.getValue();
-                //on peut récupérer des variables null
+                //on peut recuperer des variables null
                 if(booleanVariable != null){
                     booleanVariables.add(booleanVariable);
                 }
             }
         }
 
-        //On créé une instance de BooleanDatabase en récupérant une partie de ses données finales
-        //L'autre partie correspond aux Variable actuellement stockés dans Database que l'on va transformer
+        //On cree une instance de BooleanDatabase en recuperant une partie de ses donnees finales
+        //L'autre partie correspond aux Variable actuellement stockes dans Database que l'on va transformer
         //en BooleanVariable
         BooleanDatabase booleanDatabase = new BooleanDatabase(booleanVariables);
 
@@ -94,9 +94,9 @@ public class Database {
             Set<BooleanVariable> tmpBooleanVariables = new HashSet<>();
             //Pour chaque item de notre Database actuelle, on la transforme en item d'une BooleanDatabase :
             for(Map.Entry<Variable, Object> mapInstance : instanceItem.entrySet()){
-                // on récupère la valeur de la clé associé à "items" grace à la Variable contenu dans mapInstance.getKey(),
+                // on recupere la valeur de la cle associe a "items" grace a la Variable contenu dans mapInstance.getKey(),
                 // ce qui renvoie --> Map<Object, BooleanVariable>
-                // mapInstance->getValue() renvoie Object, et on récupère la valeur associé à cet objet,
+                // mapInstance->getValue() renvoie Object, et on recupere la valeur associe a cet objet,
                 // donc une BooleanVariable
                 if(items.get(mapInstance.getKey()).get(mapInstance.getValue()) instanceof BooleanVariable){
                     BooleanVariable v = items.get(mapInstance.getKey()).get(mapInstance.getValue());

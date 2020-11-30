@@ -7,7 +7,7 @@ import representation.Variable;
 import java.util.*;
 
 /**
- * Classe qui correspond à un planificateur, sur l'exemple du fil rouge
+ * Classe qui correspond a un planificateur, sur l'exemple du fil rouge
  */
 public class HousePlanning {
 
@@ -18,8 +18,8 @@ public class HousePlanning {
 
     /**
      * Constructeur
-     * @param houseRepresentation - Représentation d'une maison
-     * @param mapSolved - Plan trouvé grâce à un solveur
+     * @param houseRepresentation - Representation d'une maison
+     * @param mapSolved - Plan trouve grâce a un solveur
      */
     public HousePlanning(HouseRepresentation houseRepresentation, Map<Variable, Object> mapSolved){
         this.houseRepresentation = houseRepresentation;
@@ -116,7 +116,7 @@ public class HousePlanning {
     }
 
     /**
-     * Méthode retournant le coût de toutes les actions de l'instance actuelle
+     * Methode retournant le coût de toutes les actions de l'instance actuelle
      * @return Coût des actions
      */
     public int getTotalActionCost(){
@@ -128,7 +128,7 @@ public class HousePlanning {
     }
 
     /**
-     * Printer du résultat
+     * Printer du resultat
      */
     public void printResults(){
         System.out.println();

@@ -6,8 +6,8 @@ import solvers.VariableHeuristic;
 import java.util.*;
 
 /**
- * Cette classe correspond à un solveur dont l'objectif est de
- * résoudre un problème d'une manière "heuristique".
+ * Cette classe correspond a un solveur dont l'objectif est de
+ * resoudre un probleme d'une maniere "heuristique".
  */
 public class HeuristicMACSolver extends AbstractSolver{
 
@@ -37,10 +37,10 @@ public class HeuristicMACSolver extends AbstractSolver{
     }
 
     /**
-     * Cette méthode est un algorithme permettant de trouver une solution à un problème,
+     * Cette methode est un algorithme permettant de trouver une solution a un probleme,
      * en utilisant le même principe que pour MACSolver, mais en choisissant la meilleure variable
-     * de manière heuristique.
-     * @param instanciation - Instanciation à vérifier
+     * de maniere heuristique.
+     * @param instanciation - Instanciation a verifier
      * @param variables - Liste de variables de l'instance actuelle
      * @param domaines - Domaines
      * @return Instanciation
@@ -56,7 +56,7 @@ public class HeuristicMACSolver extends AbstractSolver{
                 return null;
             }
 
-            //Si toutes les variables sont instanciées
+            //Si toutes les variables sont instanciees
             for(Variable v : variables){
                 for(Map.Entry<Variable, Set<Object>> entry : domaines.entrySet()){
                     if(entry.getKey().equals(v)){
@@ -66,7 +66,7 @@ public class HeuristicMACSolver extends AbstractSolver{
                 }
             }
 
-            //On récupère la meilleure variable heuristique
+            //On recupere la meilleure variable heuristique
             Variable v = this.variableHeuristic.best(new HashSet<>(variables), domainesCopies);
             for(Map.Entry<Variable, Set<Object>> entry : domainesCopies.entrySet()){
                 if(entry.getKey().equals(v)){
@@ -81,7 +81,7 @@ public class HeuristicMACSolver extends AbstractSolver{
                             }
                             Map<Variable, Object> newInstanciation = new HashMap<>();
                             newInstanciation = this.macHeuristic(instanciation, variables, domainesCopies);
-                            // Solution trouvée
+                            // Solution trouvee
                             if(newInstanciation != null){
                                 return newInstanciation;
                             }

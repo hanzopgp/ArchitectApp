@@ -4,7 +4,7 @@ import java.util.*;
 import representation.*;
 
 /**
- * Cette classe correspond à un ensemble dit "arc-cohérent" sur plusieurs
+ * Cette classe correspond a un ensemble dit "arc-coherent" sur plusieurs
  * contraintes.
  */
 public class ArcConsistency{
@@ -23,10 +23,10 @@ public class ArcConsistency{
 	/**
 	 * Fonction qui permet de supprimer les variables qui ne satisfassent pas
 	 * la contrainte actuelle
-	 * @param var1 - Première variable
-	 * @param var1Domaine - Domaine de la première variable
-	 * @param var2 - Deuxième variable
-	 * @param var2Domaine - Domaine de la deuxième variable
+	 * @param var1 - Premiere variable
+	 * @param var1Domaine - Domaine de la premiere variable
+	 * @param var2 - Deuxieme variable
+	 * @param var2Domaine - Domaine de la deuxieme variable
 	 * @param constraint - Contrainte que var1 et var2 doivent satisfaire
 	 * @return
 	 */
@@ -51,8 +51,8 @@ public class ArcConsistency{
 	}
 
 	/**
-	 * Cette méthode permet de rendre les domaines passés en paramètres "arc-cohérents"
-	 * avec la contrainte en paramètre
+	 * Cette methode permet de rendre les domaines passes en parametres "arc-coherents"
+	 * avec la contrainte en parametre
 	 * @param c - Contrainte
 	 * @param mapDom - Domaines
 	 * @return
@@ -64,12 +64,12 @@ public class ArcConsistency{
 		if(!constraintIterator.hasNext()){
 			return false;
 		}else{
-			//on récupère la première variable de la contrainte
+			//on recupere la premiere variable de la contrainte
 			Variable v1 = constraintIterator.next();
 			if(!mapDom.containsKey(v1)){
 				return false;
 			}else{
-				//on récupère la deuxième variable de la contrainte
+				//on recupere la deuxieme variable de la contrainte
 				Variable v2 = constraintIterator.next();
 				if(!mapDom.containsKey(v2)){
 					return false;
@@ -83,8 +83,8 @@ public class ArcConsistency{
 	}
 
 	/**
-	 * Cette méthode agit de la même sorte que enforce(), mais elle permet de rendre
-	 * les domaines passés en paramètres "arc-cohérents" avec les contraintes contenues
+	 * Cette methode agit de la même sorte que enforce(), mais elle permet de rendre
+	 * les domaines passes en parametres "arc-coherents" avec les contraintes contenues
 	 * dans cette classe.
 	 * @param mapDom - Domaines
 	 * @return
@@ -94,7 +94,7 @@ public class ArcConsistency{
 			enforce(c, mapDom);
 		}
 
-		//retourne true si et seulement si tous les domaines sont non vides à la fin du traitement
+		//retourne true si et seulement si tous les domaines sont non vides a la fin du traitement
 		for(Set<Object> varDomaine : mapDom.values()){
 			if(varDomaine.size() == 0){
 				return false;

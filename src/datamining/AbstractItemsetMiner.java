@@ -5,7 +5,7 @@ import java.util.*;
 import representation.BooleanVariable;
 
 /**
- * Classe qui définit le comportement de base d'un mineur
+ * Classe qui definit le comportement de base d'un mineur
  */
 public abstract class AbstractItemsetMiner implements ItemsetMiner{
 	
@@ -14,7 +14,7 @@ public abstract class AbstractItemsetMiner implements ItemsetMiner{
 
 	/**
 	 * Constructeur
-	 * @param base - Base de données
+	 * @param base - Base de donnees
 	 */
 	public AbstractItemsetMiner(BooleanDatabase base){
 		this.base = base;
@@ -38,10 +38,10 @@ public abstract class AbstractItemsetMiner implements ItemsetMiner{
 	}
 
 	/**
-	 * Retourne la fréquence d'apparition d'un ensemble de variable booléens
-	 * parmis les transaction de la base de données de l'instance actuelle.
-	 * @param items - Ensemble de variables booléennes à vérifier.
-	 * @return Fréquence d'apparition
+	 * Retourne la frequence d'apparition d'un ensemble de variable booleens
+	 * parmis les transaction de la base de donnees de l'instance actuelle.
+	 * @param items - Ensemble de variables booleennes a verifier.
+	 * @return Frequence d'apparition
 	 */
 	public float frequency(Set<BooleanVariable> items){
 		float frequency = 0;

@@ -24,22 +24,22 @@ public class HouseDemo {
         int hauteurMaison = scannerIntLimit(new Scanner(System.in), 1, 4);
         System.out.println("Entrez la largeur de la maison : (compris entre 1 et 4)");
         int largeurMaison = scannerIntLimit(new Scanner(System.in), 1, 4);
-        System.out.println("Entrez le nom du solver à utiliser : ");
+        System.out.println("Entrez le nom du solver a utiliser : ");
         System.out.println("1 - Backtrack");
         System.out.println("2 - MAC");
         System.out.println("3 - MacHeuristic");
         SOLVERTYPE = scannerString(new Scanner(System.in), "Vous devez entrer un nom de solver !");
-        System.out.println("Entrez le nombre maximal de solutions à trouver : (compris entre 0 et 3000)");
+        System.out.println("Entrez le nombre maximal de solutions a trouver : (compris entre 0 et 3000)");
         NB_HOUSE_DATAMINING = scannerIntLimit(new Scanner(System.in), 0, 3000);
-        System.out.println("Entrez la confiance minimale souhaitée : (compris entre 0 et 1)");
+        System.out.println("Entrez la confiance minimale souhaitee : (compris entre 0 et 1)");
         MIN_CONFIDENCE = scannerFloatLimit(new Scanner(System.in), 0, 1);
-        System.out.println("Entrez la fréquence minimale souhaitée : (compris entre 0 et 1)");
+        System.out.println("Entrez la frequence minimale souhaitee : (compris entre 0 et 1)");
         MIN_FREQUENCY = scannerFloatLimit(new Scanner(System.in), 0, 1);
         System.out.println();
-        System.out.println("Paramètres enregistrés !\nMaison de "+hauteurMaison+"x"+largeurMaison+" cases\nSolveur utilisé: "+SOLVERTYPE+"\n"+
-                            "Nombre de solutions maximales à trouver : "+NB_HOUSE_DATAMINING+"\n"+
+        System.out.println("Parametres enregistres !\nMaison de "+hauteurMaison+"x"+largeurMaison+" cases\nSolveur utilise: "+SOLVERTYPE+"\n"+
+                            "Nombre de solutions maximales a trouver : "+NB_HOUSE_DATAMINING+"\n"+
                             "Confiance minimale : "+MIN_CONFIDENCE+"\n"+
-                            "Fréquence minimale : "+MIN_FREQUENCY);
+                            "Frequence minimale : "+MIN_FREQUENCY);
         //----------- Utilisation package representation -----------
 
         //Creation de la maison de base
@@ -168,7 +168,7 @@ public class HouseDemo {
                 System.out.println("Entrez un nombre entre " + min + " et " + max + " !");
             }
             cpt++;
-            input = scannerFloat(scanner, "Veuillez entrer un nombre décimale à virgule");
+            input = scannerFloat(scanner, "Veuillez entrer un nombre decimale a virgule");
         } while (input < min || input > max);
         return input;
     }

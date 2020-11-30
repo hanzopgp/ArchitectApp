@@ -7,19 +7,19 @@ import java.util.Map;
 public interface Action {
     
     /**
-     * Test si les préconditions sont contenues dans l'état
+     * Test si les preconditions sont contenues dans l'etat
      * 
-     * @param variables -> l'état donné qui va être testé
-     * @return -> boolean donnant le résultat de l'action
+     * @param variables -> l'etat donne qui va être teste
+     * @return -> boolean donnant le resultat de l'action
      */
     boolean isApplicable(Map<Variable, Object> variables);
 
 
     /**
-     * Passe à l'état suivant
+     * Passe a l'etat suivant
      * 
-     * @param variables -> état courant
-     * @return -> état suivant
+     * @param variables -> etat courant
+     * @return -> etat suivant
      */
     Map<Variable, Object> successor(Map<Variable, Object> variables);
 
