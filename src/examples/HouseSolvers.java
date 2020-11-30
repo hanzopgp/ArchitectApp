@@ -6,6 +6,9 @@ import solvers.*;
 
 import java.util.*;
 
+/**
+ * Cette classe permet d'utiliser différents solveurs de contraintes, sur l'exemple du fil rouge
+ */
 public class HouseSolvers {
 
     Set<Variable> setVariable;
@@ -14,12 +17,20 @@ public class HouseSolvers {
     String solverUsed;
     long timeTaken;
 
+    /**
+     * Constructeur
+     * @param setVariable - Ensemble de variables
+     * @param setConstraint - Ensemble de contraintes
+     */
     public HouseSolvers(Set<Variable> setVariable, Set<Constraint> setConstraint) {
         this.setVariable = setVariable;
         this.setConstraint = setConstraint;
         this.mapSolved = new HashMap<>();
     }
 
+    /**
+     * Méthode permettant de résoudre le problème grâce à l'algorithme Backtrack
+     */
     public void solveWithBacktrack(){
         long start = System.currentTimeMillis();
         BacktrackSolver backtrackSolver = new BacktrackSolver(this.setVariable, this.setConstraint);
@@ -29,6 +40,9 @@ public class HouseSolvers {
         this.timeTaken = end - start;
     }
 
+    /**
+     * Méthode permettant de résoudre le problème grâce à l'algorithme MacAndHeuristic
+     */
     public void solveWithMacAndHeuristic(){
         long start = System.currentTimeMillis();
         VariableHeuristic variableHeuristic = new NbConstraintsVariableHeuristic(this.setVariable, this.setConstraint, true);
@@ -40,6 +54,9 @@ public class HouseSolvers {
         this.timeTaken = end - start;
     }
 
+    /**
+     * Méthode permettant de résoudre le problème grâce à l'algorithme MAC
+     */
     public void solveWithMac(){
         long start = System.currentTimeMillis();
         MACSolver macSolver = new MACSolver(this.setVariable, this.setConstraint);
@@ -49,6 +66,9 @@ public class HouseSolvers {
         this.timeTaken = end - start;
     }
 
+    /**
+     * Printer du résultat
+     */
     public void printResults(){
         System.out.println();
         System.out.println("============= LISTE DES AFFECTATIONS =============");
@@ -60,6 +80,9 @@ public class HouseSolvers {
         System.out.println("* Temps mit par le solveur : " + this.timeTaken + "ms");
     }
 
+    /**
+     * Printer de la maison générée
+     */
     public void printHouse(){
         System.out.println();
         System.out.println("============= PLAN DE LA MAISON =============");
@@ -75,6 +98,10 @@ public class HouseSolvers {
         }
     }
 
+    /**
+     * Getter de mapSolved
+     * @return mapSolved
+     */
     public Map<Variable, Object> getMapSolved() {
         return this.mapSolved;
     }

@@ -4,6 +4,9 @@ import representation.*;
 
 import java.util.*;
 
+/**
+ * Représentation d'une maison, selon l'exemple du fil rouge
+ */
 public class HouseRepresentation {
 
     private final int longueur;
@@ -19,6 +22,13 @@ public class HouseRepresentation {
     private BooleanVariable mursEleves;
     private BooleanVariable toitureTerminee;
 
+    /**
+     * Constructeur
+     * @param longueur - Longueur de la maison
+     * @param largeur - Largeur de la maison
+     * @param listPieceNormal - Liste des pièces dites "normale", donc sans rapport avec des pièces d'eau
+     * @param listPieceEau - Liste des pièces dites "Pièce d'eau", donc sans rapport avec les pièces normales
+     */
     public HouseRepresentation(int longueur, int largeur, List<String> listPieceNormal, List<String> listPieceEau) {
         this.longueur = longueur;
         this.largeur = largeur;
@@ -35,6 +45,10 @@ public class HouseRepresentation {
 
     //----------- Construction -----------
 
+    /**
+     * Méthode permettant la construction de l'ensemble des pièces, des variables associées
+     * à celles-ci, ainsi que leur domaine
+     */
     public void makeAll(){
         this.makeListPiece();
         this.makeDomain();
@@ -80,6 +94,10 @@ public class HouseRepresentation {
         }
     }
 
+    /**
+     * Construction des variable booléennes qui concernent les étapes
+     * de construction de la maison
+     */
     public void makeBooleanVariables(){
         this.dalleCoulee = new BooleanVariable("dalleCoulee");
         this.dalleHumide = new BooleanVariable("dalleHumide");
@@ -101,7 +119,12 @@ public class HouseRepresentation {
         //this.makeWaterPartConstraint(); //Impossible de trouver pourquoi elle ne fonctionne pas...
     }
 
-    //Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
+    /**
+     * Méthode qui permet de définir les règles de base du problème. Par exemple,
+     * une dalle peut être humide uniquement si elle à déjà été coulée.
+     *
+     * Contrainte dalle coulee -> dalle humide -> murs eleves -> toiture terminee
+     */
     public void makeStateSuiteConstraint(){
         Constraint c1 = new Rule(dalleCoulee, false, dalleHumide, false);
         Constraint c2 = new Rule(dalleHumide, true, dalleCoulee, true);
@@ -113,7 +136,10 @@ public class HouseRepresentation {
         this.addConstraint(c1,c2,c3,c4,c5,c6,c7);
     }
 
-    //Contrainte une seule piece par case
+    /**
+     * Méthode permettant de définir une contrainte qui implique qu'il n'y a
+     * qu'une seule pièce par case.
+     */
     public void makeOnlyOnePieceConstraint(){
         for(int i = 0; i < this.longueur * this.largeur; i++){
             for(int j = i + 1; j < this.largeur * this.longueur; j++){
@@ -127,7 +153,11 @@ public class HouseRepresentation {
         }
     }
 
-    //Contrainte pieces d'eau cote a cote
+
+    /**
+     * Méthode permettant de définir une contrainte qui implique que toutes
+     * les pièces d'eau seront cote à cote.
+     */
     public void makeWaterPartConstraint(){
         List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
         tmpListVariable.removeIf(tmpV -> tmpV instanceof BooleanVariable);
@@ -177,6 +207,9 @@ public class HouseRepresentation {
 
     //----------- Affichage -----------
 
+    /**
+     * Printer global
+     */
     public void printAll(){
         this.printArea();
         this.printDomaine();
@@ -185,6 +218,9 @@ public class HouseRepresentation {
         this.printConstraints();
     }
 
+    /**
+     * Printer de la maison
+     */
     public void printArea(){
         System.out.println();
         System.out.println("============= MAISON =============");
@@ -196,6 +232,9 @@ public class HouseRepresentation {
         }
     }
 
+    /**
+     * Printer des domaines de l'instance
+     */
     public void printDomaine(){
         System.out.println();
         System.out.println("============= DOMAINE =============");
@@ -204,6 +243,9 @@ public class HouseRepresentation {
         }
     }
 
+    /**
+     * Printer de l'ensemble des variables de l'instance
+     */
     public void printVariables(){
         System.out.println();
         System.out.println("============= LISTE DES VARIABLES =============");
@@ -212,6 +254,9 @@ public class HouseRepresentation {
         }
     }
 
+    /**
+     * Printer de l'ensemble des variables booléennes de l'instance
+     */
     public void printBooleanVariables(){
         System.out.println();
         System.out.println("============= LISTE DES VARIABLES BOOLEENES =============");
@@ -221,6 +266,9 @@ public class HouseRepresentation {
         System.out.println("* Toiture terminee : " + this.toitureTerminee.toString());
     }
 
+    /**
+     * Printer de l'ensemble des contraintes de l'instance
+     */
     public void printConstraints(){
         System.out.println();
         System.out.println("============= LISTE DES CONTRAINTES =============");
@@ -232,13 +280,27 @@ public class HouseRepresentation {
 
     //----------- Fonction utiles -----------
 
+    /**
+     * Méthode permettant d'ajouter une contrainte au problème actuel.
+     * @param constraint - Contrainte à ajouter
+     */
     public void addConstraint(Constraint constraint){
         this.listConstraint.add(constraint);
     }
 
+    /**
+     * Méthode permettant d'ajouter une liste de contrainte à la liste
+     * de contrainte existante du problème.
+     * @param listConstraint
+     */
     public void addConstraint(Constraint ... listConstraint){ this.listConstraint.addAll(Arrays.asList(listConstraint)); }
 
-    //Creer les attributs "name" des Variables
+
+    /**
+     * Méthode permettant de retourner un tableau 2D de toutes les pièces de la maison,
+     * avec leur nom qui précise leur position (ex : piece1,2)
+     * @return
+     */
     public String[][] buildHouseString(){
         String[][] listPieceString = new String[this.longueur][this.largeur];
         for(int i = 0; i < this.longueur; i++){
@@ -250,6 +312,13 @@ public class HouseRepresentation {
     }
 
     //Transforme la liste de Variable en un tableau 2D
+
+    /**
+     * Méthode permettant de retourner un tableau 2D de toutes les variables passées
+     * en paramètre.
+     * @param listVariable - Liste de variables à transformer
+     * @return Tableau 2D de Variable
+     */
     public Variable[][] listTo2DArray(List<Variable> listVariable){
         Variable[][] array = new Variable[this.longueur][this.largeur];
         for(int i = 0; i < this.longueur; i++){
@@ -261,6 +330,12 @@ public class HouseRepresentation {
     }
 
     //Renvoie la liste des voisins d'une case donnee
+
+    /**
+     * Méthode permettant de retourner tout les voisins autour d'une pièce.
+     * @param var - Variable représentant une pièce
+     * @return Liste de pièces voisines
+     */
     public ArrayList<Variable> getNeighbors(Variable var){
         ArrayList<Variable> neighbors = new ArrayList<>();
         List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
@@ -299,6 +374,12 @@ public class HouseRepresentation {
         return neighbors;
     }
 
+    /**
+     * Méthode permettant de retourner toutes les pièces n'étant pas voisine à une
+     * pièce de référence passée en paramètre
+     * @param var - Variable représentant une pièce de référence
+     * @return Liste de non-voisins
+     */
     public List<Variable> getNotNeighbors(Variable var){
         ArrayList<Variable> neighbors = this.getNeighbors(var);
         List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
@@ -315,22 +396,50 @@ public class HouseRepresentation {
 
     //----------- Getter et Setter -----------
 
+    /**
+     * Getter de listContraint
+     * @return Liste des contraintes du problème
+     */
     public List<Constraint> getListConstraint(){
         return this.listConstraint;
     }
 
+    /**
+     * Getter de listVariable
+     * @return Liste des variables du problème
+     */
     public List<Variable> getListVariable(){
         return this.listVariable;
     }
 
+    /**
+     * Getter de dalleCoulee
+     * @return dalleCoulee
+     */
     public BooleanVariable getDalleCoulee() { return dalleCoulee; }
 
+    /**
+     * Getter de dalleHumide
+     * @return dalleHumide
+     */
     public BooleanVariable getDalleHumide() { return dalleHumide; }
 
+    /**
+     * Getter de mursEleves
+     * @return mursEleves
+     */
     public BooleanVariable getMursEleves() { return mursEleves; }
 
+    /**
+     * Getter de toitureTerminee
+     * @return toitureTerminee
+     */
     public BooleanVariable getToitureTerminee() { return toitureTerminee; }
 
+    /**
+     * Getter des domaine
+     * @return Ensemble de domaines du problème
+     */
     public Set<Object> getDomaine() { return HouseDemo.listToSetObject(domaine); }
 
 }

@@ -8,11 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Classe qui stocke toutes les map qui ont étés résolus
+ */
 public class MapSolvedGenerator {
 
     private final List<Map<Variable, Object>> listSolvedMap;
     private boolean isCorrect = false;
 
+    /**
+     * Constructeur
+     * @param setVariable - Ensemble de variables
+     * @param setConstraint - Ensemble de contraintes
+     */
     public MapSolvedGenerator(Set<Variable> setVariable, Set<Constraint> setConstraint){
         BacktrackSolverMultipleSolution backtrackSolverMultipleSolution = new BacktrackSolverMultipleSolution(setVariable, setConstraint);
         backtrackSolverMultipleSolution.solve();
@@ -20,10 +28,17 @@ public class MapSolvedGenerator {
         this.isCorrect = backtrackSolverMultipleSolution.testSolutions();
     }
 
+    /**
+     * Getter de listSolvedMap
+     * @return listSolvedMap
+     */
     public List<Map<Variable, Object>> getListSolvedMap(){
         return this.listSolvedMap;
     }
 
+    /**
+     * Printer du résultat
+     */
     public void printResults(){
         System.out.println();
         System.out.println("============= CREATION DE LA BASE DE DONNEE =============");
