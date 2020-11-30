@@ -177,7 +177,9 @@ public class HousePlanning {
         System.out.println("* Temps mit par le planner : " + this.timeTaken + "ms");
         System.out.println("* Cout total : " + this.getTotalActionCost() + "h");
         System.out.println("* Nombre d'action : " + this.listAction.size());
-        System.out.println("* Nombre de noeuds parcourus : " + this.nbNodes);
+        if(this.plannerChosen.equals("A*")){
+            System.out.println("* Nombre de noeuds parcourus : " + this.nbNodes);
+        }
     }
 
 }
