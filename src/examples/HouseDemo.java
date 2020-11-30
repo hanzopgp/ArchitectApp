@@ -6,7 +6,7 @@ import java.util.*;
 
 public class HouseDemo {
 
-    public static int WIDTH = 3; //maximum WIDTH*HEIGHT : 16
+    public static int WIDTH = 2; //maximum WIDTH*HEIGHT : 16
     public static int HEIGHT = 2;
     public static List<String> LIST_PIECE_NORMAL = new ArrayList<>(Arrays.asList("salon", "chambre1", "salledejeu", "chambre2", "garage", "chambre3", "chambre4", "cinema", "chambre5"));
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb+toilette", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3", "toilette3"));
@@ -21,7 +21,7 @@ public class HouseDemo {
     public static void main(String[] args){
 
         //Choix des parametres
-        inputParameters();
+        //inputParameters();
 
         //----------- Utilisation package representation -----------
 

@@ -184,7 +184,39 @@ public class HouseRepresentation {
         }
     }
 
-    //Contrainte pieces d'eau cote a cote
+//    //Tentative utilisation de la distance au lieu de la fonction getNotNeighbors()
+//    public void makeWaterPartConstraint(){
+//        int x1,x2,y1,y2,d;
+//        List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
+//        tmpListVariable.removeIf(tmpV -> tmpV instanceof BooleanVariable);
+//        for(Variable v1 : tmpListVariable){ //Pour chaque piece de la maison
+//            x1 = (int)v1.getName().charAt(6); //piece(x,y)
+//            y1 = (int)v1.getName().charAt(8);
+//            for(Variable v2 : tmpListVariable){ //Pour chacun des non-voisins de v1
+//                if(v1 != v2){
+//                    x2 = (int)v2.getName().charAt(6); //piece(x,y)
+//                    y2 = (int)v2.getName().charAt(8);
+//                    d = Math.max(Math.abs(x1-x2), Math.abs(y1-y2));
+//                    if(d > 1){
+//                        BinaryExtensionConstraint constraint = new BinaryExtensionConstraint(v1, v2); //On cree un lien entre les deux
+//                        for(Object room1 : v1.getDomain()){
+//                            for(Object room2 : v2.getDomain()){
+//                                if(!room1.equals(room2)){
+//                                    Set<Object> setEau = new HashSet<>(this.listPieceEau);
+//                                    if (!setEau.contains(room1) || !setEau.contains(room2)) { //Si v1 ou v2 n'est pas une piece d'eau
+//                                        constraint.addTuple(room1, room2); //Alors tous les couples sont autorises
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        this.addConstraint(constraint);
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+//    //Contrainte pieces d'eau cote a cote
 //    public void makeWaterPartConstraint(){
 //        List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
 //        tmpListVariable.removeIf(tmpV -> tmpV instanceof BooleanVariable);
