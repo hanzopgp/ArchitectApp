@@ -19,7 +19,7 @@ public class DFSPlanner implements Planner{
 
     /**
      * @param etatState -> etat initial
-     * @param actions -> actions qui pourront être testee
+     * @param actions -> actions qui pourront etre testee
      * @param goal -> but a obtenir
      */
     public DFSPlanner(Map<Variable, Object> etatInitial, Set<Action> actions, Goal but) {

@@ -38,7 +38,7 @@ public class HeuristicMACSolver extends AbstractSolver{
 
     /**
      * Cette methode est un algorithme permettant de trouver une solution a un probleme,
-     * en utilisant le même principe que pour MACSolver, mais en choisissant la meilleure variable
+     * en utilisant le meme principe que pour MACSolver, mais en choisissant la meilleure variable
      * de maniere heuristique.
      * @param instanciation - Instanciation a verifier
      * @param variables - Liste de variables de l'instance actuelle

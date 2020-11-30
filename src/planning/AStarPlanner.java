@@ -21,7 +21,7 @@ public class AStarPlanner implements Planner{
 
     /**
      * @param initialState -> etat initial
-     * @param actions -> actions qui pourront être testee
+     * @param actions -> actions qui pourront etre testee
      * @param goal -> but a obtenir
      * @param heuristic -> heuristic
      */

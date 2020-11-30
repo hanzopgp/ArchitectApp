@@ -83,7 +83,7 @@ public class ArcConsistency{
 	}
 
 	/**
-	 * Cette methode agit de la même sorte que enforce(), mais elle permet de rendre
+	 * Cette methode agit de la meme sorte que enforce(), mais elle permet de rendre
 	 * les domaines passes en parametres "arc-coherents" avec les contraintes contenues
 	 * dans cette classe.
 	 * @param mapDom - Domaines

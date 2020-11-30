@@ -72,7 +72,7 @@ public class Apriori extends AbstractItemsetMiner{
 
 	/**
 	 * Assemble deux ensembles de variables booleennes en une seule. Elles doivent cependant
-	 * avoir la même taille, et l'avant dernier element de chacun des deux ensemble doivent être
+	 * avoir la meme taille, et l'avant dernier element de chacun des deux ensemble doivent etre
 	 * egaux.
 	 * @param l1 - Premier ensemble a combiner
 	 * @param l2 - Deuxieme ensemble a combiner

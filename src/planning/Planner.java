@@ -27,8 +27,8 @@ public interface Planner {
 
 
     /**
-     * Renvoie les actions qui pourront être testees
-     * @return -> actions qui pourront être testees
+     * Renvoie les actions qui pourront etre testees
+     * @return -> actions qui pourront etre testees
      */
     Set<Action> getActions();
 

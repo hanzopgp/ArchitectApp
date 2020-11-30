@@ -7,9 +7,9 @@ import java.util.Map;
 
 
 /**
- * Cette classe represente des actions qui vont être testees.
- * Une action sera caracterisee en termes de preconditions qui devront être
- * vraies pour qu'elle puisse être executee, et enterme d'effets qui 
+ * Cette classe represente des actions qui vont etre testees.
+ * Une action sera caracterisee en termes de preconditions qui devront etre
+ * vraies pour qu'elle puisse etre executee, et enterme d'effets qui
  * s'ensuivent quand elle est executee.
  * 
  */

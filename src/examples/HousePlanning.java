@@ -19,7 +19,7 @@ public class HousePlanning {
     /**
      * Constructeur
      * @param houseRepresentation - Representation d'une maison
-     * @param mapSolved - Plan trouve grâce a un solveur
+     * @param mapSolved - Plan trouve grace a un solveur
      */
     public HousePlanning(HouseRepresentation houseRepresentation, Map<Variable, Object> mapSolved){
         this.houseRepresentation = houseRepresentation;

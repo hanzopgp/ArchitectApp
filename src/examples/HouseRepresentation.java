@@ -5,7 +5,7 @@ import representation.*;
 import java.util.*;
 
 /**
- * Représentation d'une maison, selon l'exemple du fil rouge
+ * Representation d'une maison, selon l'exemple du fil rouge
  */
 public class HouseRepresentation {
 
@@ -26,8 +26,8 @@ public class HouseRepresentation {
      * Constructeur
      * @param longueur - Longueur de la maison
      * @param largeur - Largeur de la maison
-     * @param listPieceNormal - Liste des pièces dites "normale", donc sans rapport avec des pièces d'eau
-     * @param listPieceEau - Liste des pièces dites "Pièce d'eau", donc sans rapport avec les pièces normales
+     * @param listPieceNormal - Liste des pieces dites "normale", donc sans rapport avec des pieces d'eau
+     * @param listPieceEau - Liste des pieces dites "Piece d'eau", donc sans rapport avec les pieces normales
      */
     public HouseRepresentation(int longueur, int largeur, List<String> listPieceNormal, List<String> listPieceEau) {
         this.longueur = longueur;
@@ -46,8 +46,8 @@ public class HouseRepresentation {
     //----------- Construction -----------
 
     /**
-     * Méthode permettant la construction de l'ensemble des pièces, des variables associées
-     * à celles-ci, ainsi que leur domaine
+     * Methode permettant la construction de l'ensemble des pieces, des variables associees
+     * a celles-ci, ainsi que leur domaine
      */
     public void makeAll(){
         this.makeListPiece();
@@ -95,7 +95,7 @@ public class HouseRepresentation {
     }
 
     /**
-     * Construction des variable booléennes qui concernent les étapes
+     * Construction des variable booleennes qui concernent les etapes
      * de construction de la maison
      */
     public void makeBooleanVariables(){
@@ -146,8 +146,8 @@ public class HouseRepresentation {
     }
 
     /**
-     * Méthode permettant de définir une contrainte qui implique qu'il n'y a
-     * qu'une seule pièce par case.
+     * Methode permettant de definir une contrainte qui implique qu'il n'y a
+     * qu'une seule piece par case.
      */
     public void makeOnlyOnePieceConstraint(){
         for(int i = 0; i < this.longueur * this.largeur; i++){
@@ -164,8 +164,8 @@ public class HouseRepresentation {
 
 
     /**
-     * Méthode permettant de définir une contrainte qui implique que toutes
-     * les pièces d'eau seront cote à cote.
+     * Methode permettant de definir une contrainte qui implique que toutes
+     * les pieces d'eau seront cote a cote.
      */
     public void makeWaterPartConstraint(){
         List<Variable> tmpListVariable = new ArrayList<>(this.listVariable);
@@ -197,7 +197,7 @@ public class HouseRepresentation {
 //                for(String elementDomainV1 : domainV1){
 //                    if(this.listPieceEau.contains(elementDomainV1)){ //On regarde chaque element du domaine de V1, si l'element et une piece d'eau alors
 //                        for(String pieceNormal : this.listPieceNormal){
-//                            constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorisés de la contrainte SEULEMENT les pieces normales
+//                            constraint.addTuple(elementDomainV1, pieceNormal); //On ajoute aux couples autorises de la contrainte SEULEMENT les pieces normales
 //                        }
 //                    }
 //                    else if(this.listPieceNormal.contains(elementDomainV1)){ //Mais si c'est une piece normale
@@ -264,7 +264,7 @@ public class HouseRepresentation {
     }
 
     /**
-     * Printer de l'ensemble des variables booléennes de l'instance
+     * Printer de l'ensemble des variables booleennes de l'instance
      */
     public void printBooleanVariables(){
         System.out.println();
@@ -290,24 +290,24 @@ public class HouseRepresentation {
     //----------- Fonction utiles -----------
 
     /**
-     * Méthode permettant d'ajouter une contrainte au problème actuel.
-     * @param constraint - Contrainte à ajouter
+     * Methode permettant d'ajouter une contrainte au probleme actuel.
+     * @param constraint - Contrainte a ajouter
      */
     public void addConstraint(Constraint constraint){
         this.listConstraint.add(constraint);
     }
 
     /**
-     * Méthode permettant d'ajouter une liste de contrainte à la liste
-     * de contrainte existante du problème.
+     * Methode permettant d'ajouter une liste de contrainte a la liste
+     * de contrainte existante du probleme.
      * @param listConstraint
      */
     public void addConstraint(Constraint ... listConstraint){ this.listConstraint.addAll(Arrays.asList(listConstraint)); }
 
 
     /**
-     * Méthode permettant de retourner un tableau 2D de toutes les pièces de la maison,
-     * avec leur nom qui précise leur position (ex : piece1,2)
+     * Methode permettant de retourner un tableau 2D de toutes les pieces de la maison,
+     * avec leur nom qui precise leur position (ex : piece1,2)
      * @return
      */
     public String[][] buildHouseString(){
@@ -323,9 +323,9 @@ public class HouseRepresentation {
     //Transforme la liste de Variable en un tableau 2D
 
     /**
-     * Méthode permettant de retourner un tableau 2D de toutes les variables passées
-     * en paramètre.
-     * @param listVariable - Liste de variables à transformer
+     * Methode permettant de retourner un tableau 2D de toutes les variables passees
+     * en parametre.
+     * @param listVariable - Liste de variables a transformer
      * @return Tableau 2D de Variable
      */
     public Variable[][] listTo2DArray(List<Variable> listVariable){
@@ -341,9 +341,9 @@ public class HouseRepresentation {
     //Renvoie la liste des voisins d'une case donnee
 
     /**
-     * Méthode permettant de retourner tout les voisins autour d'une pièce.
-     * @param var - Variable représentant une pièce
-     * @return Liste de pièces voisines
+     * Methode permettant de retourner tout les voisins autour d'une piece.
+     * @param var - Variable representant une piece
+     * @return Liste de pieces voisines
      */
     public ArrayList<Variable> getNeighbors(Variable var){
         ArrayList<Variable> neighbors = new ArrayList<>();
@@ -384,9 +384,9 @@ public class HouseRepresentation {
     }
 
     /**
-     * Méthode permettant de retourner toutes les pièces n'étant pas voisine à une
-     * pièce de référence passée en paramètre
-     * @param var - Variable représentant une pièce de référence
+     * Methode permettant de retourner toutes les pieces n'etant pas voisine a une
+     * piece de reference passee en parametre
+     * @param var - Variable representant une piece de reference
      * @return Liste de non-voisins
      */
     public List<Variable> getNotNeighbors(Variable var){
@@ -407,7 +407,7 @@ public class HouseRepresentation {
 
     /**
      * Getter de listContraint
-     * @return Liste des contraintes du problème
+     * @return Liste des contraintes du probleme
      */
     public List<Constraint> getListConstraint(){
         return this.listConstraint;
@@ -415,7 +415,7 @@ public class HouseRepresentation {
 
     /**
      * Getter de listVariable
-     * @return Liste des variables du problème
+     * @return Liste des variables du probleme
      */
     public List<Variable> getListVariable(){
         return this.listVariable;
@@ -447,7 +447,7 @@ public class HouseRepresentation {
 
     /**
      * Getter des domaine
-     * @return Ensemble de domaines du problème
+     * @return Ensemble de domaines du probleme
      */
     public Set<Object> getDomaine() { return HouseDemo.listToSetObject(domaine); }
 

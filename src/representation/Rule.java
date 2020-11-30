@@ -36,7 +36,7 @@ public class Rule implements Constraint{
 
 	@Override
 	public boolean isSatisfiedBy(Map<Variable, Object> tab){
-		//On verifie si v1 et v2 sont presents, puis on compare la valeur de v1 dans la map a l1 et on recupere le boolean, de même pour v2 et l2 et enfin, on fait la condition l1 -> l2.
+		//On verifie si v1 et v2 sont presents, puis on compare la valeur de v1 dans la map a l1 et on recupere le boolean, de meme pour v2 et l2 et enfin, on fait la condition l1 -> l2.
 		boolean test1 = tab.containsKey(v1);
 		boolean test2 = tab.containsKey(v2);
 		if(test1 & test2){

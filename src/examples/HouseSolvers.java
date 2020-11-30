@@ -29,7 +29,7 @@ public class HouseSolvers {
     }
 
     /**
-     * Methode permettant de resoudre le probleme grâce a l'algorithme Backtrack
+     * Methode permettant de resoudre le probleme grace a l'algorithme Backtrack
      */
     public void solveWithBacktrack(){
         long start = System.currentTimeMillis();
@@ -41,7 +41,7 @@ public class HouseSolvers {
     }
 
     /**
-     * Methode permettant de resoudre le probleme grâce a l'algorithme MacAndHeuristic
+     * Methode permettant de resoudre le probleme grace a l'algorithme MacAndHeuristic
      */
     public void solveWithMacAndHeuristic(){
         long start = System.currentTimeMillis();
@@ -55,7 +55,7 @@ public class HouseSolvers {
     }
 
     /**
-     * Methode permettant de resoudre le probleme grâce a l'algorithme MAC
+     * Methode permettant de resoudre le probleme grace a l'algorithme MAC
      */
     public void solveWithMac(){
         long start = System.currentTimeMillis();

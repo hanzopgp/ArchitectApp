@@ -19,7 +19,7 @@ public class DijkstraPlanner implements Planner {
 
     /**
      * @param initialState -> etat initial
-     * @param actions -> actions qui pourront être testee
+     * @param actions -> actions qui pourront etre testee
      * @param goal -> but a obtenir
      */
     public DijkstraPlanner(Map<Variable, Object> initialState, Set<Action> actions, Goal goal) {

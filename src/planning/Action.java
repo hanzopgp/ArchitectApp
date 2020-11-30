@@ -9,7 +9,7 @@ public interface Action {
     /**
      * Test si les preconditions sont contenues dans l'etat
      * 
-     * @param variables -> l'etat donne qui va être teste
+     * @param variables -> l'etat donne qui va etre teste
      * @return -> boolean donnant le resultat de l'action
      */
     boolean isApplicable(Map<Variable, Object> variables);
