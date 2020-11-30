@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class RandomValueHeuristic implements ValueHeuristic{
 
-    private Random random;
+    private final Random random;
 
     /**
      * Constructeur

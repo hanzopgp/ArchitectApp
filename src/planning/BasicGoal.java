@@ -9,7 +9,7 @@ import representation.*;
 
 public class BasicGoal implements Goal{
 
-    private Map<Variable, Object> goal;
+    private final Map<Variable, Object> goal;
 
     
     /**
@@ -25,10 +25,6 @@ public class BasicGoal implements Goal{
 
     @Override
     public boolean isSatisfiedBy(Map<Variable, Object> state){
-        if(state.entrySet().containsAll(this.goal.entrySet())){
-            return true;
-        }else{
-            return false;
-        }
+        return state.entrySet().containsAll(this.goal.entrySet());
     }
 }

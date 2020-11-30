@@ -12,9 +12,9 @@ import representation.*;
  */
 public class DijkstraPlanner implements Planner {
 
-    private Map<Variable, Object> initialState;
-    private Set<Action> actions;
-    private Goal goal;
+    private final Map<Variable, Object> initialState;
+    private final Set<Action> actions;
+    private final Goal goal;
 
 
     /**

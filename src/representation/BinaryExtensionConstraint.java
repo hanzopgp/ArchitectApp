@@ -58,6 +58,11 @@ public class BinaryExtensionConstraint implements Constraint{
 		return false;
 	}
 
+	@Override
+	public String toString(){
+		return "* Contrainte en extension binaire";
+	}
+
 	/**
 	 * Retourne la première variable
 	 * @return

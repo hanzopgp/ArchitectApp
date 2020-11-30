@@ -52,9 +52,9 @@ public class Apriori extends AbstractItemsetMiner{
 			List<SortedSet<BooleanVariable>> item2 = new ArrayList<>();
 			for(int j=0;j<items.size();j++){
 				for(int k=j+1;k<items.size();k++){
-					SortedSet<BooleanVariable> tmp2 = this.combine(items.get(j), items.get(k));
+					SortedSet<BooleanVariable> tmp2 = combine(items.get(j), items.get(k));
 					//print test allsubsetfrequent
-					if(tmp2 != null && this.allSubsetsFrequent(tmp2, items)){
+					if(tmp2 != null && allSubsetsFrequent(tmp2, items)){
 						//print test
 						float frequence = frequency(tmp2);
 						if(frequence >= frequenceMin){

@@ -47,5 +47,10 @@ public class Rule implements Constraint{
 			throw new IllegalArgumentException("L'objet ne contient pas les variables");
 		}
 	}
+
+	@Override
+	public String toString(){
+		return "* Contrainte de regle";
+	}
 	
 }

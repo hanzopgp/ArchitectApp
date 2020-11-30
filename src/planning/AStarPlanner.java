@@ -14,10 +14,10 @@ import representation.*;
  */
 public class AStarPlanner implements Planner{
 
-    private Map<Variable, Object> initialState;
-    private Set<Action> actions;
-    private Goal goal;
-    private Heuristic heuristic;
+    private final Map<Variable, Object> initialState;
+    private final Set<Action> actions;
+    private final Goal goal;
+    private final Heuristic heuristic;
 
     /**
      * @param initialState -> état initial
@@ -69,7 +69,7 @@ public class AStarPlanner implements Planner{
         Map<Map<Variable, Object>, Double> value = new HashMap<>();
 
         //List<Map<Variable, Object>> open = new LinkedList<Map<Variable, Object>>();
-        PriorityQueue<Map<Variable, Object>> open = new PriorityQueue<>((Comparator<Map<Variable, Object>>) (state1, state2) -> (Double.valueOf(value.get(state1))).compareTo(Double.valueOf(value.get(state2))));
+        PriorityQueue<Map<Variable, Object>> open = new PriorityQueue<>((state1, state2) -> (Double.valueOf(value.get(state1))).compareTo(Double.valueOf(value.get(state2))));
 
         Map<Variable, Object> instanciation = new HashMap<Variable, Object>();
         //Comparator<Map<Variable, Object>> com = (state1, state2) -> value.get(state1) - value.get(state2);

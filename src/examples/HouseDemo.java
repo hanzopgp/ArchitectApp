@@ -10,10 +10,11 @@ public class HouseDemo {
     public static int HEIGHT = 3;
     public static List<String> LIST_PIECE_NORMAL = new ArrayList<>(Arrays.asList("salon", "chambre1", "chambre2", "salledejeu", "chambre3", "chambre4", "chambre5"));
     public static List<String> LIST_PIECE_EAU = new ArrayList<>(Arrays.asList("sdb", "cuisine", "toilette", "toilette2",  "sdb2", "sdb3"));
-    public static List<String> LIST_CHAMBRE = new ArrayList<>(Arrays.asList("chambre1", "chambre2", "chambre3", "chambre4",  "chambre5"));
     public static int PLANNING_COST = 5;
     public static String SOLVERTYPE = "backtrack"; //"backtrack", "mac", "macheuristic"
-    public static int NB_HOUSE_DATAMINING = 20;
+    public static int NB_HOUSE_DATAMINING = 10;
+    public static float MIN_FREQUENCY = 0.7f;
+    public static float MIN_CONFIDENCE = 0.7f;
 
     public static void main(String[] args){
 
@@ -22,7 +23,7 @@ public class HouseDemo {
         //Creation de la maison de base
         System.out.println("######################## CONSTRUCTION DE LA MAISON ########################");
 
-        HouseRepresentation houseRepresentation = new HouseRepresentation(WIDTH, HEIGHT, LIST_PIECE_NORMAL, LIST_PIECE_EAU, LIST_CHAMBRE);
+        HouseRepresentation houseRepresentation = new HouseRepresentation(HEIGHT, WIDTH, LIST_PIECE_NORMAL, LIST_PIECE_EAU);
 
         //Ajout des contraintes
         houseRepresentation.makeAllConstraint();
@@ -78,12 +79,12 @@ public class HouseDemo {
         System.out.println();
         System.out.println("######################## DATAMINING ########################");
 
-        //Creation de la base de donnee
+        //Creation et affichage de la base de donnee
         MapSolvedGenerator mapSolvedGenerator = new MapSolvedGenerator(setVariable, setConstraint);
         mapSolvedGenerator.printResults();
 
         //Recuperation des informations
-        HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation);
+        HouseDatamining houseDatamining = new HouseDatamining(houseRepresentation, mapSolvedGenerator);
         houseDatamining.mine();
 
         //Affichage du resultat

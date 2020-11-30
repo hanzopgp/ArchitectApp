@@ -51,7 +51,7 @@ public class Variable{
 
 	@Override
 	public String toString(){
-		return "--> Piece : " + this.name + ", Domaine : " + this.domaine;
+		return "--> Nom : " + this.name + ", Domaine : " + this.domaine;
 	}
 	
 	

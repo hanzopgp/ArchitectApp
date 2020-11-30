@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class MapSolvedGenerator {
 
-    private List<Map<Variable, Object>> listSolvedMap;
+    private final List<Map<Variable, Object>> listSolvedMap;
     private boolean isCorrect = false;
 
     public MapSolvedGenerator(Set<Variable> setVariable, Set<Constraint> setConstraint){

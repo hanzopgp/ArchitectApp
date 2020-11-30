@@ -10,9 +10,9 @@ import java.util.*;
  */
 public class NbConstraintsVariableHeuristic implements  VariableHeuristic{
 
-    private Set<Variable> listVariables;
-    private Set<Constraint> listContraintes;
-    private boolean most;
+    private final Set<Variable> listVariables;
+    private final Set<Constraint> listContraintes;
+    private final boolean most;
 
     /**
      * Constructeur

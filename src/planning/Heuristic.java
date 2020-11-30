@@ -15,5 +15,5 @@ public interface Heuristic{
      * @param state -> état courant
      * @return -> le coût estimé pour aller à l'état suivant
      */
-    public float estimate(Map<Variable, Object> state);
+    float estimate(Map<Variable, Object> state);
 }

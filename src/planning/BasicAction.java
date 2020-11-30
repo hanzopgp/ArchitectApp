@@ -51,6 +51,16 @@ public class BasicAction implements Action {
     }
 
     @Override
+    public String toString(){
+        String str = "+++++++++++++++++++++++++++\n";
+        str += "* Preconditions : " + this.preconditions + "\n";
+        str += "* Effets : " + this.effets + "\n";
+        str += "* Cout : " + this.cout + "\n";
+        return str;
+
+    }
+
+    @Override
     public int getCost() {
         return this.cout;
     }

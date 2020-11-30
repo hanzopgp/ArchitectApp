@@ -10,8 +10,8 @@ import java.util.*;
  */
 public class Database {
 
-    private Set<Variable> variables;
-    private List<Map<Variable, Object>> instances;
+    private final Set<Variable> variables;
+    private final List<Map<Variable, Object>> instances;
 
     /**
      * Constructeur

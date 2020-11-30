@@ -12,7 +12,7 @@ import representation.*;
  */
 public class BacktrackSolverMultipleSolution extends AbstractSolver{
 
-    private List<Map<Variable, Object>> listSolution;
+    private final List<Map<Variable, Object>> listSolution;
     private int cpt;
 
     /**
@@ -59,10 +59,10 @@ public class BacktrackSolverMultipleSolution extends AbstractSolver{
                 }
                 Queue<Variable> newPile = new LinkedList<>(pile);
                 newMap = this.sra(newMap, newPile);
-                if(newMap != null){
-                    this.cpt++;
-                    this.listSolution.add(newMap);
-                }
+//                if(newMap != null){
+//                    this.cpt++;
+//                    this.listSolution.add(newMap);
+//                }
             }
         }
         return null;

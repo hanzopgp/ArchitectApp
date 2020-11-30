@@ -116,10 +116,10 @@ public class HousePlanning {
         System.out.println();
         System.out.println("============= LISTE DES ACTIONS A EFFECTUER =============");
         for (Action action : this.listAction) {
-            System.out.println("--> Action : " + action);
+            System.out.print("--> Action : " + action);
         }
         System.out.println("* Planning avec A*");
-        System.out.println("* Temps mit par le planner : " + this.timeTaken);
+        System.out.println("* Temps mit par le planner : " + this.timeTaken + "ms");
         System.out.println("* Cout total : " + this.getTotalActionCost());
         System.out.println("* Nombre d'action : " + this.listAction.size());
     }

@@ -37,5 +37,10 @@ public class DifferenceConstraint implements Constraint{
 			throw new IllegalArgumentException("L'objet ne contient pas les variables");
 		}
 	}
+
+	@Override
+	public String toString(){
+		return "* Contrainte de difference";
+	}
 	
 }

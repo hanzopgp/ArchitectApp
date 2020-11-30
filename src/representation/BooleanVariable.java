@@ -23,7 +23,7 @@ public class BooleanVariable extends Variable{
 
 	@Override
 	public String toString(){
-		return "--> " + this.name + ", Domaine : " + domaine;
+		return "--> Nom : " + this.name + ", Domaine : " + domaine;
 	}
 
 }

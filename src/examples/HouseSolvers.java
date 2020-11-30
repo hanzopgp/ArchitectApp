@@ -70,7 +70,7 @@ public class HouseSolvers {
         }
         this.printHouse();
         System.out.println("* Solver utilise : " + this.solverUsed);
-        System.out.println("* Temps mit par le solveur : " + this.timeTaken);
+        System.out.println("* Temps mit par le solveur : " + this.timeTaken + "ms");
     }
 
     public void printHouse(){

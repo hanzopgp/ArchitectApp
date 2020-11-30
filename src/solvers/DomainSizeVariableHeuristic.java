@@ -12,9 +12,9 @@ import java.util.Set;
  */
 public class DomainSizeVariableHeuristic implements  VariableHeuristic{
 
-    private Set<Variable> listVariables;
-    private Set<Constraint> listContraintes;
-    private boolean greatest;
+    private final Set<Variable> listVariables;
+    private final Set<Constraint> listContraintes;
+    private final boolean greatest;
 
     /**
      * Constructeur
