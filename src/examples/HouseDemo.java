@@ -52,10 +52,16 @@ public class HouseDemo {
         }
 
         //Choix du solver utilise
-        switch (SOLVERTYPE) {
-            case "backtrack" -> houseSolvers.solveWithBacktrack();
-            case "mac" -> houseSolvers.solveWithMac();
-            case "macheuristic" -> houseSolvers.solveWithMacAndHeuristic();
+        switch(SOLVERTYPE){
+            case "backtrack" :
+                houseSolvers.solveWithBacktrack();
+                break;
+            case "mac" :
+                houseSolvers.solveWithMac();
+                break;
+            case "macheuristic" :
+                houseSolvers.solveWithMacAndHeuristic();
+                break;
         }
 
         //Stoper le programme si pas de resolution possible
