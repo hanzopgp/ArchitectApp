@@ -6,8 +6,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Mineur de règle basé sur l'algorithme "brute-force"
+ * @param <E>
+ */
 public class BruteForceAssociationRuleMiner<E> extends AbstractAssociationRuleMiner{
 
+    /**
+     * Constructeur
+     * @param database - Base de données
+     */
     public BruteForceAssociationRuleMiner(BooleanDatabase database) {
         super(database);
     }

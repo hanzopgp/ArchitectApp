@@ -2,6 +2,9 @@ package datamining;
 
 import dataminingtests.*;
 
+/**
+ * Classe de test du package datamining
+ */
 public class MainDatamining {
 	
 	public static void main (String[] args){
@@ -15,8 +18,8 @@ public class MainDatamining {
 		ok = ok && AbstractAssociationRuleMinerTests.testConfidence();
 		ok = ok && BruteForceAssociationRuleMinerTests.testAllCandidatePremises();
 		ok = ok && BruteForceAssociationRuleMinerTests.testExtract();
-		//ok = ok && DatabaseTests.testItemTable();
-		//ok = ok && DatabaseTests.testPropositionalize();
+		ok = ok && DatabaseTests.testItemTable();
+		ok = ok && DatabaseTests.testPropositionalize();
 		System.out.println(ok ? "All tests passed" : "At least one test failed");
 	}
 	

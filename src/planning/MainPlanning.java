@@ -1,6 +1,9 @@
 package planning;
 import planningtests.*;
 
+/**
+ * Classe de test du package planning.
+ */
 public class MainPlanning {
 
     public static void main(String[] args){
@@ -11,7 +14,7 @@ public class MainPlanning {
         ok = ok && BasicGoalTests.testIsSatisfiedBy();
         ok = ok && DFSPlannerTests.testPlan();
         ok = ok && BFSPlannerTests.testPlan();
-        //ok = ok && AStarPlannerTests.testPlan()
+        ok = ok && AStarPlannerTests.testPlan();
         ok = ok && DijkstraPlannerTests.testPlan();
         System.out.println(ok ? "All tests passed" : "At least one test failed");
     }

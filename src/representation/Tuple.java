@@ -1,5 +1,8 @@
 package representation;
 
+/**
+ * Classe qui correspond à un couple de deux valeurs
+ */
 public class Tuple{
 
     public Object x,y;

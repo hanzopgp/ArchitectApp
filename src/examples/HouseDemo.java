@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * Classe principale du package example,
- * servant à utiliser toute la librairie développée.
+ * servant a utiliser toute la librairie developpee.
  */
 public class HouseDemo {
 

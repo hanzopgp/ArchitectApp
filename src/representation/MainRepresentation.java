@@ -2,6 +2,9 @@ package representation;
 
 import representationtests.*;
 
+/**
+ * Classe de test du package representation
+ */
 public class MainRepresentation {
 
 	public static void main (String[] args){

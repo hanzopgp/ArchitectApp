@@ -2,6 +2,9 @@ package solvers;
 
 import solvertests.*;
 
+/**
+ * Classe de tests
+ */
 public class MainSolvers {
 	public static void main (String[] args){
 		boolean ok = true;
@@ -9,12 +12,12 @@ public class MainSolvers {
 		ok = ok && BacktrackSolverTests.testSolve();
 		ok = ok && ArcConsistencyTests.testFilter();
 		ok = ok && ArcConsistencyTests.testEnforce();
-		//ok = ok && ArcConsistencyTests.testEnforceArcConsistency();
-		//ok = ok && MACSolverTests.testSolve();                         /* NOT GOOD */
-		//ok = ok && HeuristicMACSolverTests.testSolve();                /* NOT GOOD */
-		ok = ok && NbConstraintsVariableHeuristicTests.testBest();     /* NOT GOOD */
-		//ok = ok && DomainSizeVariableHeuristicTests.testBest();        /* NOT GOOD */
-		//ok = ok && RandomValueHeuristicTests.testOrdering();           /* NOT GOOD */
+		ok = ok && ArcConsistencyTests.testEnforceArcConsistency();
+		ok = ok && MACSolverTests.testSolve();
+		ok = ok && HeuristicMACSolverTests.testSolve();
+		ok = ok && NbConstraintsVariableHeuristicTests.testBest();
+		ok = ok && DomainSizeVariableHeuristicTests.testBest();
+		ok = ok && RandomValueHeuristicTests.testOrdering();
 		System.out.println(ok ? "All tests passed" : "At least one test failed");
 	}
 }

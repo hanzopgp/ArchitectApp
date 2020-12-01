@@ -87,7 +87,7 @@ public abstract class AbstractAssociationRuleMiner implements AssociationRuleMin
 
     /**
      * Getter de la Database
-     * @return
+     * @return Database
      */
     public BooleanDatabase getDatabase() {
         return database;

@@ -76,7 +76,7 @@ public class Apriori extends AbstractItemsetMiner{
 	 * egaux.
 	 * @param l1 - Premier ensemble a combiner
 	 * @param l2 - Deuxieme ensemble a combiner
-	 * @return
+	 * @return Ensemble de variables booléennes
 	 */
 	public static SortedSet<BooleanVariable> combine(SortedSet<BooleanVariable>l1, SortedSet<BooleanVariable>l2){
 		SortedSet<BooleanVariable> result = new TreeSet<>(COMPARATOR);
@@ -102,7 +102,7 @@ public class Apriori extends AbstractItemsetMiner{
 	 * est contenu dans la Collection d'ensembles
 	 * @param list - Ensemble de variables booleennes
 	 * @param collectionList - Collection d'ensembles de variables
-	 * @return
+	 * @return Booléen
 	 */
 	public static boolean allSubsetsFrequent(Set<BooleanVariable>list, Collection<SortedSet<BooleanVariable>>collectionList){
 		Set<BooleanVariable> listDel = new HashSet<>(list);

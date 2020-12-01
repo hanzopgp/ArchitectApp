@@ -25,6 +25,9 @@ import solvertests.MACSolverTests;
 import solvertests.NbConstraintsVariableHeuristicTests;
 import solvertests.RandomValueHeuristicTests;
 
+/**
+ * Classe qui teste l'ensemble des fonctions de la librairie
+ */
 public class MainTests {
 
     public static void main(String[] args) {
