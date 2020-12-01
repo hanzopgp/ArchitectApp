@@ -1,21 +1,21 @@
 # Fil Rouge:
 
-This project has been built by : 
+Ce projet a été concu par : 
 - Durand Enzo : 21510242
 - Leconte Thomas : 22008087
 - Robert Adrien : 21701370
 - Lepage Dylan : 21804570
 
-## How to use main project ?
+## Notice d'utilisation ?
 
-### Compile project :
+### Compiler le projet :
     - Linux : javac -cp "src/tests/dataminingtests.jar:src/tests/solvertests.jar:src/tests/planningtests.jar:src/tests/representationtests.jar" -d build/ src/*/*.java
     - Windows : javac -cp "src/tests/dataminingtests.jar;src/tests/planningtests.jar;src/tests/solvertests.jar;src/tests/representationtests.jar" -d build src/*/*.java
 
-### Execute project :
+### Executer le project :
     - Linux / Windows : java -cp build/ examples.HouseDemo
 
-## How are  `representation`, `solvers`, `planning`, `datamining` package working :
+## Comment les packages `representation`, `solvers`, `planning`, `datamining` fonctionnent :
 Ces 4 packages forment une librarie permettant de faire de la programmation par contrainte. La partie representation permet de créer les variables du problème (avec la classe Variable et BooleanVariable), et les contraintes (interface Constraint). L'interface Constraint implémente 3 classes :
 - Rule : ce type de contrainte permet dans notre exemple de spécifier directement un lien entre deux BooleanVariable. Par exemple elle nous permet de dire "SI la toiture est terminée ALORS les murs sont terminés".
 - DifferenceConstraint : ce type de contrainte nous permet ici de faire en sorte que chaque pièce de la maison ait un élement du domaine différent.
@@ -28,14 +28,14 @@ Le package planning nous permet de recuperer, parmi toutes les actions possibles
 
 Le package datamining permet, grâce a une liste de solution, d'extraire des motifs qui se répetent, suivant la fréquence de ces motifs.
 
-## How is  `example` package working :
+## Comment le package `example` fonctionne :
 >Tout commence sur la classe **HouseDemo**. On va d'abord demander à l'utilisateur de renseigner les valeurs qu'il souhaite pour son
 futur plan de maison. Ensuite, on va construire toutes les contraintes de la maison grâce à la méthode `houseRepresentation.>makeAllConstraint()`. Le solver choisit va donc commencer son travail de résolution grâce aux Variables et aux contraintes créées précédemment. Une fois les résultats affichés, c'est le package Planner qui travaille (un peu trop longtemps des fois) pour trouver le plan correspondant à la solution trouvé par solver, et enfin le package Datamining stocke et affiche les règles trouvées.
 
-## How is  `tests` package working :
+## Comment le package `tests` fonctionne :
 >Nous avons une classe éxécutable dans le package tests, il fait appel a toutes les methodes de test de la librairie. Si toutes les fonctions testées sont correct alors "All tests passed" s'affiche. Cependant les tests fonctionnent comme ceci : quelques inputs dont on connait les outputs sont envoyés dans la methode testée. On ne test que des valeurs "spéciales" comme un tableau vide par exemple. Il est donc possible que les tests passent alors qu'il y a une erreur de fonctionnement d'une méthode pour certain cas.
 
-## Other details :
+## Autres détails :
 >Le package examples contient la démonstration de tout les packages développés dans la librairie. Ainsi, il y a une classe de démonstration pour chaque package développé (HouseRepresentation->package representation, etc ..). Notre classe Main est donc
 **examples.HouseDemo**.
 
