@@ -1,7 +1,33 @@
-How to use Main project: 
+# Fil Rouge:
 
-- git clone https://github.com/hanzopgp/ArchitectApp
+This project has been built by : 
+- Durand Enzo : 21510242
+- Leconte Thomas : 22008087
+- Robert Adrien : 21701370
+- Lepage Dylan : 21804570
+## How to use main project ?
 
-- javac -cp "src/tests/dataminingtests.jar:src/tests/solvertests.jar:src/tests/planningtests.jar:src/tests/representationtests.jar" -d build/ src/\*/\*.java
+### Compile project :
+    - Linux : javac -cp "src/tests/dataminingtests.jar:src/tests/solvertests.jar:src/tests/planningtests.jar:src/tests/representationtests.jar" -d build/ src/\*/\*.java
+    - Windows : javac -cp "src/tests/dataminingtests.jar;src/tests/planningtests.jar;src/tests/solvertests.jar;src/tests/representationtests.jar" -d build src/\*/\*.java
 
-- java -cp build/ examples.HouseDemo
+### Execute project :
+    - Linux / Windows : java -cp build/ examples.HouseDemo
+
+## How is working `example` package :
+>Tout commence sur la classe **HouseDemo**. On va d'abord demander à l'utilisateur de renseigner les valeurs qu'il souhaite pour son
+futur plan de maison. Ensuite, on va construire toutes les contraintes de la maison grâce à la méthode `houseRepresentation.>makeAllConstraint()`. Le solver choisit va donc commencer son travail de résolution grâce aux Variables et aux contraintes créées précédemment. Une fois les résultats affichés, c'est le package Planner qui travaille (un peu trop longtemps des fois) pour trouver le plan correspondant à la solution trouvé par solver, et enfin le package Datamining stocke et affiche les résultats trouvés.
+
+## Other details :
+>Le package examples contient la démonstration de tout les packages développés dans la librairie. Ainsi, il y a une classe de démonstration pour chaque package développé (HouseRepresentation->package representation, etc ..). Notre classe Main est donc
+**examples.HouseDemo**.
+
+- Pour executer rapidement le programme, sans passer par le renseignement de valeurs initiales, il faut commenter la ligne 24 de la
+classe principale **HouseDemo** : `inputParameters();`.
+- Malgré tout nos efforts, et après de nombreuses heures de debuggage passées avec Josselin Guérenon (que l'on remercie encore une fois),
+nous n'avons pas réussi à satisfaire la contrainte concernant les pièces d'eau. Le détail doit être minime mais nous ne savons pas qu'est
+ce qui pose problème...Elle est donc commenté et ne s'execute pas par défaut. Elle se trouve néanmoins dans la classe **HouseRepresentation**, ligne 120.
+- Notre package **solvers** contient une classe `BackTrackSolverMultipleSolution`. Elle reprend le même code que `BacktrackSolver` mais
+elle stocke les résultats trouvé par le solver pour les utiliser plus tard dans le package **examples**.
+- Concernant l'affichage des différentes parties de notre démonstration, nous avons @override plusieurs fonctions `toString()`, notamment dans la classe **Variable** et **Action**.
+- Lors de l'execution de l'exemple **HouseDemo**, le Planner met beaucoup de temps à s'éxecuter à partir de 6 pièces.

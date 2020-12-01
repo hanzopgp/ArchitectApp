@@ -4,6 +4,10 @@ import representation.*;
 
 import java.util.*;
 
+/**
+ * Classe principale du package example,
+ * servant à utiliser toute la librairie développée.
+ */
 public class HouseDemo {
 
     public static int WIDTH = 2; //maximum WIDTH*HEIGHT : 16
@@ -218,7 +222,6 @@ public class HouseDemo {
         }
         float input = scanner.nextFloat();
         scanner.nextLine();
-        System.out.println("VALEUR : "+input);
         return input;
     }
 
