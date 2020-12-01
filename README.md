@@ -58,3 +58,13 @@ Ces essais se trouvent dans le fichier **HouseRepresentation** ligne 187.
 elle stocke les résultats trouvés par le solver pour les utiliser plus tard dans le package **examples**.
 - Concernant l'affichage des différentes parties de notre démonstration, nous avons @override plusieurs fonctions `toString()`, notamment dans la classe **Variable** et **Action**.
 - Lors de l'execution de l'exemple **HouseDemo**, le **Planner** met beaucoup de temps à s'éxecuter à partir de 6 pièces.
+
+## Liens utiles :
+
+https://en.wikipedia.org/wiki/Constraint_programming
+https://en.wikipedia.org/wiki/Backtracking
+https://en.wikipedia.org/wiki/Local_consistency
+https://en.wikipedia.org/wiki/A*_search_algorithm
+https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+https://en.wikipedia.org/wiki/Breadth-first_search
+https://en.wikipedia.org/wiki/Depth-first_search
