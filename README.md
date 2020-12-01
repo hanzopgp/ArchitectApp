@@ -21,8 +21,11 @@ Ces 4 packages forment une librarie permettant de faire de la programmation par 
 - DifferenceConstraint : ce type de contrainte nous permet ici de faire en sorte que chaque pièce de la maison ait un élement du domaine différent.
 - BinaryExtensionConstraint : nous n'avons pas réussit a implémenter celle-ci dans l'exemple. Le principe de cette contrainte est de créer un lien entre deux object Variable,
 pour ensuite spécifier explicitement les couples autorisés de domaine entre deux variables.
+
 Dans le package solvers nous avons mit a disposition plusieurs types de solveurs dont un algorithme de backtrack, ou MAC. Ce package permet de choisir un element du domaine pour chaque variable du problème suivant la liste de variables et de contraintes créées.
-Le package planning nous permet de recuperer, parmi toutes les actions possibles d'un problème résolu, la meilleure suite d'actions pour arriver a un but.
+
+Le package planning nous permet de recuperer, parmi toutes les actions possibles d'un problème résolu, la meilleure suite d'actions pour arriver a un but. Nous avons plusieurs algorithmes nous permettant de trouver la meilleure suite d'action dont Dijkstra, A*, DFS, BFS.
+
 Le package datamining permet, grâce a une liste de solution, d'extraire des motifs qui se répetent, suivant la fréquence de ces motifs.
 
 ## How is  `example` package working :
