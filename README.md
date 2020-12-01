@@ -1,6 +1,6 @@
-# Fil Rouge:
+# Programmation par contrainte (Fil Rouge IA L3 Informatique) :
 
-##Ce projet a été concu par : 
+## Ce projet a été concu par : 
 - Durand Enzo : 21510242
 - Leconte Thomas : 22008087
 - Robert Adrien : 21701370
@@ -46,9 +46,9 @@ futur plan de maison. Ensuite, on va construire toutes les contraintes de la mai
 >Nous avons une classe éxécutable dans le package **tests**, il fait appel à toutes les méthodes de tests de la librairie. Si toutes les fonctions testées sont correctes alors "All tests passed" s'affiche. Cependant les tests fonctionnent comme ceci : quelques inputs dont on connait les outputs sont envoyés dans la méthode testée. On ne teste que des valeurs "spéciales" comme un tableau vide par exemple. Il est donc possible que les tests passent alors qu'il y a une erreur de fonctionnement d'une méthode pour certains cas.
 
 ## Autres détails :
->Le package examples contient la démonstration de tous les packages développés dans la librairie. Ainsi, il y a une classe de démonstration pour chaque package développé (HouseRepresentation->package **representation**, etc ..). Notre classe Main est donc
-**examples.HouseDemo**.
 
+- Le package examples contient la démonstration de tous les packages développés dans la librairie. Ainsi, il y a une classe de démonstration pour chaque package développé (HouseRepresentation->package **representation**, etc ..). Notre classe Main est donc
+**examples.HouseDemo**.
 - Pour exécuter rapidement le programme, sans passer par le renseignement de valeurs initiales, il faut commenter la ligne 24 de la
 classe principale **HouseDemo** : `inputParameters();`.
 - Malgré tous nos efforts, et après de nombreuses heures de debuggage passées avec Josselin Guérenon (que l'on remercie encore une fois),
