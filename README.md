@@ -15,6 +15,16 @@ This project has been built by :
 ### Execute project :
     - Linux / Windows : java -cp build/ examples.HouseDemo
 
+## How are  `representation`, `solvers`, `planning`, `datamining` package working :
+Ces 4 packages forment une librarie permettant de faire de la programmation par contrainte. La partie representation permet de créer les variables du problème (avec la classe Variable et BooleanVariable), et les contraintes (interface Constraint). L'interface Constraint implémente 3 classes :
+- Rule : ce type de contrainte permet dans notre exemple de spécifier directement un lien entre deux BooleanVariable. Par exemple elle nous permet de dire "SI la toiture est terminée ALORS les murs sont terminés".
+- DifferenceConstraint : ce type de contrainte nous permet ici de faire en sorte que chaque pièce de la maison ait un élement du domaine différent.
+- BinaryExtensionConstraint : nous n'avons pas réussit a implémenter celle-ci dans l'exemple. Le principe de cette contrainte est de créer un lien entre deux object Variable,
+pour ensuite spécifier explicitement les couples autorisés de domaine entre deux variables.
+Dans le package solvers nous avons mit a disposition plusieurs types de solveurs dont un algorithme de backtrack, ou MAC. Ce package permet de choisir un element du domaine pour chaque variable du problème suivant la liste de variables et de contraintes créées.
+Le package planning nous permet de recuperer, parmi toutes les actions possibles d'un problème résolu, la meilleure suite d'actions pour arriver a un but.
+Le package datamining permet, grâce a une liste de solution, d'extraire des motifs qui se répetent, suivant la fréquence de ces motifs.
+
 ## How is  `example` package working :
 >Tout commence sur la classe **HouseDemo**. On va d'abord demander à l'utilisateur de renseigner les valeurs qu'il souhaite pour son
 futur plan de maison. Ensuite, on va construire toutes les contraintes de la maison grâce à la méthode `houseRepresentation.>makeAllConstraint()`. Le solver choisit va donc commencer son travail de résolution grâce aux Variables et aux contraintes créées précédemment. Une fois les résultats affichés, c'est le package Planner qui travaille (un peu trop longtemps des fois) pour trouver le plan correspondant à la solution trouvé par solver, et enfin le package Datamining stocke et affiche les règles trouvées.
