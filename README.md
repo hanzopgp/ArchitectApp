@@ -16,7 +16,7 @@ Ce projet a été concu par :
     - Linux / Windows : java -cp build/ examples.HouseDemo
 
 ## Fonctionnement des packages `representation`, `solvers`, `planning`, `datamining` :
-Ces 4 packages forment une librarie permettant de faire de la programmation par contrainte. 
+**Ces 4 packages forment une librarie permettant de faire de la programmation par contrainte.** 
 
 >La partie representation permet de créer les variables du problème (avec la classe **Variable** et **BooleanVariable**), et les contraintes (interface **Constraint**). L'interface **Constraint** implémente 3 classes :
 - **Rule** : ce type de contrainte permet dans notre exemple de spécifier directement un lien entre deux **BooleanVariable**. Par exemple elle nous permet de dire "SI la toiture est terminée ALORS les murs sont terminés".
