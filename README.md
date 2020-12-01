@@ -61,10 +61,10 @@ elle stocke les résultats trouvés par le solver pour les utiliser plus tard da
 
 ## Liens utiles :
 
-https://en.wikipedia.org/wiki/Constraint_programming
-https://en.wikipedia.org/wiki/Backtracking
-https://en.wikipedia.org/wiki/Local_consistency
-https://en.wikipedia.org/wiki/A*_search_algorithm
-https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-https://en.wikipedia.org/wiki/Breadth-first_search
-https://en.wikipedia.org/wiki/Depth-first_search
+- https://en.wikipedia.org/wiki/Constraint_programming
+- https://en.wikipedia.org/wiki/Backtracking
+- https://en.wikipedia.org/wiki/Local_consistency
+- https://en.wikipedia.org/wiki/A*_search_algorithm
+- https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+- https://en.wikipedia.org/wiki/Breadth-first_search
+- https://en.wikipedia.org/wiki/Depth-first_search
