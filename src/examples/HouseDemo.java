@@ -152,8 +152,8 @@ public class HouseDemo {
         System.out.println("Voulez vous l'affichage complet ? : ");
         System.out.println("1 - Oui");
         System.out.println("2 - Non");
-        String strFullDisplay = scannerString(new Scanner(System.in), "Vous devez entrer 'oui' ou 'non' !");
-        FULL_DISPLAY = (strFullDisplay.equals("oui"));
+        int intFullDisplay = scannerIntLimit(new Scanner(System.in), 1, 2);
+        FULL_DISPLAY = (intFullDisplay == 1);
         System.out.println("Entrez le nombre maximal de solutions a trouver : (compris entre 0 et 3000)");
         NB_HOUSE_DATAMINING = scannerIntLimit(new Scanner(System.in), 0, 3000);
         System.out.println("Entrez la confiance minimale souhaitee : (compris entre 0 et 1)");
