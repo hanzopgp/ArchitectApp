@@ -18,11 +18,11 @@
 
 ### Compiler le projet :
    
-- javac -cp "src/tests/dataminingtests.jar:src/tests/solvertests.jar:src/tests/planningtests.jar:src/tests/representationtests.jar" -d build/ src/*/*.java
+`javac -cp "src/tests/dataminingtests.jar:src/tests/solvertests.jar:src/tests/planningtests.jar:src/tests/representationtests.jar" -d build/ src/*/*.java`
 
 ### Executer le project :
     
-- java -cp build/ examples.HouseDemo
+`java -cp build/ examples.HouseDemo`
 
 ## Fonctionnement :
 **Ces 4 packages forment une librarie permettant de faire de la programmation par contrainte.** 
