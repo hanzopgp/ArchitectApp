@@ -1,6 +1,7 @@
-# Programmation par contrainte (Fil Rouge IA L3 Informatique) :
+# Programmation par contrainte :
 
 ## Table des matières
+
 1. [Auteurs](#projet-conçu-par-)
 2. [Utilisation](#utilisation-)
 3. [Fonctionnement](#fonctionnement-)
@@ -25,6 +26,7 @@
 `java -cp build/ examples.HouseDemo`
 
 ## Fonctionnement :
+
 **Ces 4 packages forment une librarie permettant de faire de la programmation par contrainte.** 
 
 ### Representation
