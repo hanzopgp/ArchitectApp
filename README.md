@@ -17,11 +17,12 @@
 ## Utilisation :
 
 ### Compiler le projet :
-    - Linux : javac -cp "src/tests/dataminingtests.jar:src/tests/solvertests.jar:src/tests/planningtests.jar:src/tests/representationtests.jar" -d build/ src/*/*.java
-    - Windows : javac -cp "src/tests/dataminingtests.jar;src/tests/planningtests.jar;src/tests/solvertests.jar;src/tests/representationtests.jar" -d build src/*/*.java
+   
+- javac -cp "src/tests/dataminingtests.jar:src/tests/solvertests.jar:src/tests/planningtests.jar:src/tests/representationtests.jar" -d build/ src/*/*.java
 
 ### Executer le project :
-    - Linux / Windows : java -cp build/ examples.HouseDemo
+    
+- java -cp build/ examples.HouseDemo
 
 ## Fonctionnement :
 **Ces 4 packages forment une librarie permettant de faire de la programmation par contrainte.** 
