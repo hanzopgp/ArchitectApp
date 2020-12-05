@@ -49,10 +49,12 @@
 >Le package **datamining** permet, grâce à une liste de solutions, d'extraire des motifs qui se répètent, suivant leurs fréquences.
 
 ### Example :
+
 >Tout commence sur la classe **HouseDemo**. On va d'abord demander à l'utilisateur de renseigner les valeurs qu'il souhaite pour son
 futur plan de maison. Ensuite, on va construire toutes les contraintes de la maison grâce à la méthode `houseRepresentation.>makeAllConstraint()`. Le solver choisi va donc commencer son travail de résolution grâce aux variables et aux contraintes créées précédemment. Une fois les résultats affichés, c'est le package **planning** qui travaille (un peu trop longtemps des fois) pour trouver le plan correspondant à la solution trouvée par solver, et enfin le package **datamining** stocke et affiche les règles trouvées.
 
 ### Tests :
+
 >Nous avons une classe éxécutable dans le package **tests**, il fait appel à toutes les méthodes de tests de la librairie. Si toutes les fonctions testées sont correctes alors "All tests passed" s'affiche. Cependant les tests fonctionnent comme ceci : quelques inputs dont on connait les outputs sont envoyés dans la méthode testée. On ne teste que des valeurs "spéciales" comme un tableau vide par exemple. Il est donc possible que les tests passent alors qu'il y a une erreur de fonctionnement d'une méthode pour certains cas.
 
 ## Autres details :
