@@ -3,7 +3,7 @@
 ## Table des matières
 
 1. [Utilisation](#utilisation-)
-2 [Fonctionnement](#fonctionnement-)
+2. [Fonctionnement](#fonctionnement-)
 3. [Autres details](#autres-details-)
 4. [Liens utiles](#liens-utiles-)
 
