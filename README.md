@@ -2,10 +2,16 @@
 
 ## Table des matières
 
-1. [Utilisation](#utilisation-)
-2. [Fonctionnement](#fonctionnement-)
-3. [Autres details](#autres-details-)
-4. [Liens utiles](#liens-utiles-)
+1. [Presentation](#presentation-)
+2. [Utilisation](#utilisation-)
+3. [Fonctionnement](#fonctionnement-)
+4. [Autres details](#autres-details-)
+5. [Liens utiles](#liens-utiles-)
+
+## Presentation :
+
+Application permettant, à partir de differents types de contraintes, de trouver un plan de maison satisfaisant les contraintes grâce au package **solvers**. Le programme trouve ensuite la suite d'action la plus optimisée à effectuer grâce au package **planning**. On forme alors une BDD de maisons satisfaisants les contraintes puis on extrait les informations interessantes grâce au package **datamining**.<br>
+L3 Informatique, note : 18/20.
 
 ## Utilisation :
 
