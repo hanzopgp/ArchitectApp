@@ -10,6 +10,8 @@
 
 ## Presentation :
 
+<p align="center"><img src="img.png"></p>
+
 Application permettant, à partir de differents types de contraintes, de trouver un plan de maison satisfaisant les contraintes grâce au package **solvers**. Le programme trouve ensuite la suite d'action la plus optimisée à effectuer grâce au package **planning**. On forme alors une BDD de maisons satisfaisants les contraintes puis on extrait les informations interessantes grâce au package **datamining**.<br>
 L3 Informatique, note : 18/20.
 
